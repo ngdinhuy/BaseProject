@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    auth-->
+    <dimen name="text_size_logo_app">60sp</dimen>
+    <dimen name="text_size_general_splash">20sp</dimen>
+    <dimen name="commen_size_splash">10dp</dimen>
+</resources>

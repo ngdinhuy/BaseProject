@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fashion</string>
+
+    <!--    auth-->
+    <string name="txt_login">Log in</string>
+    <string name="txt_content_splash">Explore the new world of clothing</string>
+</resources>
