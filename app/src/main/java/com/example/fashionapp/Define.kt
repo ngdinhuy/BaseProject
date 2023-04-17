@@ -1,5 +1,5 @@
 package com.example.fashionapp
 
 object Define {
-    const val BASE_URL = "http://172.20.10.2:8080/"
+    const val BASE_URL = "https://fakestoreapi.com/"
 }

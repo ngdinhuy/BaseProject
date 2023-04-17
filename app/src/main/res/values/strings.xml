@@ -2,6 +2,12 @@
     <string name="app_name">Fashion</string>
 
     <!--    auth-->
+    <string name="txt_login_uppercase">LOGIN</string>
+    <string name="txt_login_no_space">Login</string>
     <string name="txt_login">Log in</string>
     <string name="txt_content_splash">Explore the new world of clothing</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_password">Password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="login_with_social_account">Or login with social account</string>
 </resources>
