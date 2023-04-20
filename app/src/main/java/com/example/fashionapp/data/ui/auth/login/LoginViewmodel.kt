@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.utils.Prefs
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -35,9 +36,12 @@ class LoginViewmodel @Inject constructor(
                     username = usernmae.value!!
                 )
                 if (loginResponse.token.isNotEmpty()) {
+                    isLoading.value = false
                     stateLogin.value = true
+                    Prefs.setToken(loginResponse.token)
+                } else{
+                    isLoading.value = false
                 }
-                isLoading.value = false
             }
         }
     }

@@ -5,16 +5,28 @@
     <dimen name="text_size_general_splash">20sp</dimen>
     <dimen name="commen_size_splash">10dp</dimen>
     <dimen name="toolbar_size">44dp</dimen>
+    <dimen name="common_size_4dp">4dp</dimen>
     <dimen name="common_size_8dp">8dp</dimen>
     <dimen name="common_size_12dp">12dp</dimen>
     <dimen name="common_size_14dp">14dp</dimen>
     <dimen name="text_size_auth_big">34sp</dimen>
+    <dimen name="text_size_10sp">10sp</dimen>
+    <dimen name="text_size_11sp">11sp</dimen>
     <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_34sp">34sp</dimen>
+    <dimen name="text_size_48sp">48sp</dimen>
     <dimen name="common_size_18dp">18dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="common_size_73dp">73dp</dimen>
+    <dimen name="common_size_5dp">5dp</dimen>
     <dimen name="common_size_7dp">7dp</dimen>
+    <dimen name="commin_size_15dp">15dp</dimen>
+    <dimen name="commin_size_22dp">22dp</dimen>
+
     <dimen name="primary_height_button">48dp</dimen>
     <dimen name="common_size_32dp">32dp</dimen>
+    <dimen name="common_size_33dp">33dp</dimen>
     <dimen name="common_size_43dp">43dp</dimen>
+    <dimen name="common_size_52dp">52dp</dimen>
 </resources>

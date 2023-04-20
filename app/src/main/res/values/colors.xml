@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_app_color">#F9F9F9</color>
     <color name="primary_color">#DB3022</color>
+    <color name="grey">#DADADA</color>
+    <color name="color_star_ratingbar">#FFBA49</color>
 </resources>

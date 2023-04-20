@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.fashionapp.databinding.FrgamentSplashBinding
+import com.example.fashionapp.utils.Prefs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,8 +29,14 @@ class SplashFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Handler().postDelayed(
             {
-            val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-                findNavController().navigate(action)
+                if (Prefs.getToken().isNullOrEmpty()){
+                    val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                } else{
+                    val action = SplashFragmentDirections.actionGlobalFashionFragment()
+                    findNavController().navigate(action)
+                }
+
             },2000
         )
 

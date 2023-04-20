@@ -25,6 +25,9 @@
             android:name="name"
             app:argType="string"
             android:defaultValue='' />
+        <action
+            android:id="@+id/action_loginFragment_to_fashionFragment"
+            app:destination="@id/fashionFragment" />
     </fragment>
     <dialog
         android:id="@+id/loadingFragment"
@@ -32,4 +35,14 @@
         android:label="LoadingFragment"
         tools:layout="@layout/fragment_loading"
         /><action android:id="@+id/action_global_loadingFragment" app:destination="@id/loadingFragment"/>
+    <fragment
+        android:id="@+id/fashionFragment"
+        android:name="com.example.fashionapp.ui.fashion.FashionFragment"
+        android:label="FashionFragment"
+        tools:layout="@layout/fragment_fashion"
+        />
+    <action
+        android:id="@+id/action_global_fashionFragment"
+        app:destination="@id/fashionFragment"
+        app:popUpToInclusive="true" />
 </navigation>

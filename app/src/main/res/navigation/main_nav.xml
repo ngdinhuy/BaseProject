@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.fashionapp.ui.fashion.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.fashionapp.ui.fashion.shop.ShopFragment"
+        android:label="ShopFragment"
+        tools:layout="@layout/fragment_shop"
+        />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.fashionapp.ui.fashion.cart.CartFragment"
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart"
+        />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.fashionapp.ui.fashion.favorites.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"
+        />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.fashionapp.ui.fashion.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"
+        />
 </navigation>

@@ -13,6 +13,8 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fashionapp.databinding.FragmentLoginBinding
+import com.example.fashionapp.ui.fashion.FashionFragment
+import com.example.fashionapp.ui.fashion.FashionFragmentDirections
 import com.example.fashionapp.ui.loading.LoadingFragmentDirections
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +43,8 @@ class LoginFragment : Fragment() {
 
     private fun setUpEvent() {
         loginViewmodel.stateLogin.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+            val action = LoginFragmentDirections.actionLoginFragmentToFashionFragment()
+            findNavController().navigate(action)
         })
         loginViewmodel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it) {
