@@ -10,6 +10,7 @@ import com.example.fashionapp.Define
 import com.example.fashionapp.R
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.ui.fashion.FashionViewmodel
+import com.example.fashionapp.utils.Event
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -28,12 +29,12 @@ class HomeViewmodel @Inject constructor(
     lateinit var fashionViewmodel: FashionViewmodel
     fun getProductByCategory() {
         viewModelScope.launch {
-            fashionViewmodel.isLoading.value = true
+            fashionViewmodel._isLoading.value = Event(true)
             listProductInMenClothes.value =
                 responsitoryImpl.getProductsByCategory(Define.MEN_CLOTHES)
             listProductInWomenClothes.value =
                 responsitoryImpl.getProductsByCategory(Define.WOMEN_CLOTHES)
-            fashionViewmodel.isLoading.value = false
+            fashionViewmodel._isLoading.value = Event(false)
             mapInfo.value = mapOf<String, Any?>(
                 Define.MEN_CLOTHES to listProductInMenClothes.value,
                 Define.WOMEN_CLOTHES to listProductInWomenClothes.value

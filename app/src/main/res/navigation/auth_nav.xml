@@ -40,9 +40,26 @@
         android:name="com.example.fashionapp.ui.fashion.FashionFragment"
         android:label="FashionFragment"
         tools:layout="@layout/fragment_fashion"
-        />
+        >
+        <action
+            android:id="@+id/action_fashionFragment_to_detailProductFragment"
+            app:destination="@id/detailProductFragment" />
+    </fragment>
     <action
         android:id="@+id/action_global_fashionFragment"
         app:destination="@id/fashionFragment"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/detailProductFragment"
+        android:name="com.example.fashionapp.ui.fashion.detail_product.DetailProductFragment"
+        android:label="DetailProductFragment"
+        tools:layout="@layout/fragment_detail_product"
+        >
+        <argument
+            android:name="product"
+            app:argType="com.example.fashionapp.model.Product"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <action android:id="@+id/action_global_detailProductFragment" app:destination="@id/detailProductFragment" />
 </navigation>

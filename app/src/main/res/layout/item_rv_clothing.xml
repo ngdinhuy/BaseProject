@@ -10,8 +10,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginEnd="@dimen/margin_16dp"
         >
         <androidx.cardview.widget.CardView

@@ -7,18 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fashionapp.adapter.HomeAdapter
+import com.example.fashionapp.adapter.HomeItemListAdapter
 import com.example.fashionapp.databinding.FragmentHomeBinding
+import com.example.fashionapp.model.Product
 import com.example.fashionapp.ui.fashion.FashionViewmodel
 import com.example.fashionapp.ui.loading.LoadingFragmentDirections
+import com.example.fashionapp.utils.Event
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeItemListAdapter.GoToDetailEvent {
     lateinit var databinding: FragmentHomeBinding
     val homeViewmodel by viewModels<HomeViewmodel>()
     val fashionViewmodel by viewModels<FashionViewmodel>(ownerProducer = { requireParentFragment().requireParentFragment() })
@@ -49,10 +53,15 @@ class HomeFragment : Fragment() {
 
     private fun setUpEvent() {
         homeViewmodel.mapInfo.observe(viewLifecycleOwner, Observer {
+            var homeAdapter = HomeAdapter(requireContext(), it, this@HomeFragment)
             databinding.rvCategory.apply {
-                adapter = HomeAdapter(requireContext(), it)
+                adapter = homeAdapter
                 layoutManager = LinearLayoutManager(requireContext())
             }
         })
+    }
+
+    override fun goToDetail(product: Product) {
+        fashionViewmodel._goToDetailEvent.value = Event(product)
     }
 }

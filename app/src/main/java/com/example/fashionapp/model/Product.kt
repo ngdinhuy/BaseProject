@@ -14,6 +14,24 @@ class Product(
     val image: String?,
     val rating: Rating?
 ): Parcelable{
+    fun displayRatingFloat() : Float {
+        rating?.let {
+            return rating.rate.toFloat()
+        }
+        val x = 5
+        return x.toFloat()
+    }
+    fun displayRatingCount(): Int? = rating?.count
+
+    fun displayName():String?{
+        title?.let {
+            val listName = it.split(" ")
+            if (listName.size > 1){
+                return listName[0] + " " + listName[1]
+            }
+        }
+        return null
+    }
 }
 @Parcelize
 class Rating(

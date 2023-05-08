@@ -1,6 +1,7 @@
 package com.example.fashionapp.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,8 @@ import com.example.fashionapp.model.Product
 
 class HomeItemListAdapter(val context: Context, val list: ArrayList<Product>) :
     RecyclerView.Adapter<HomeItemListAdapter.HomeItemViewHolder>() {
+    var goToDetailEvent : GoToDetailEvent? = null
+
     class HomeItemViewHolder(val binding: ItemRvClothingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -23,7 +26,14 @@ class HomeItemListAdapter(val context: Context, val list: ArrayList<Product>) :
     override fun onBindViewHolder(holder: HomeItemViewHolder, position: Int) {
         holder.binding.product = list[position]
         Glide.with(context).load(list[position].image).into(holder.binding.ivItem)
+        holder.binding.clItem.setOnClickListener{
+            goToDetailEvent?.goToDetail(list[position])
+        }
     }
 
     override fun getItemCount(): Int = list.size
+
+    interface GoToDetailEvent{
+        fun goToDetail(product: Product)
+    }
 }

@@ -10,6 +10,7 @@ import com.example.fashionapp.R
 
 object Databinding {
     @BindingAdapter("app:loadImage")
+    @JvmStatic
     fun loadImage(view: View, url: String?){
         if (url.isNullOrEmpty()) {
             return

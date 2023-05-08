@@ -17,6 +17,7 @@
     <dimen name="text_size_34sp">34sp</dimen>
     <dimen name="text_size_48sp">48sp</dimen>
     <dimen name="common_size_18dp">18dp</dimen>
+    <dimen name="common_size_24dp">24dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="common_size_73dp">73dp</dimen>
     <dimen name="common_size_5dp">5dp</dimen>
