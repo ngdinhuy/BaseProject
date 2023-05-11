@@ -10,5 +10,6 @@
     <color name="background_app_color">#F9F9F9</color>
     <color name="primary_color">#DB3022</color>
     <color name="grey">#DADADA</color>
+    <color name="grey_9B9B9B">#9B9B9B</color>
     <color name="color_star_ratingbar">#FFBA49</color>
 </resources>

@@ -7,7 +7,7 @@ import java.util.*
 
 interface ApiService {
     @GET("bai1/customers")
-    suspend fun getAllProducts()
+    suspend fun getAllProducts() : List<Product>
 
     @FormUrlEncoded
     @POST("auth/login")
@@ -20,4 +20,7 @@ interface ApiService {
     suspend fun getProductByCategory(
         @Path("cate") category: String
     ): List<Product>
+
+    @GET("products/categories")
+    suspend fun getAllCategories(): List<String>
 }

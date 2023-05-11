@@ -9,7 +9,8 @@ import javax.inject.Inject
 class ShopAppResponsitoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : ShopAppResponsitory {
-    override suspend fun getAllProducts() {
+    override suspend fun getAllProducts() : List<Product> {
+        return apiService.getAllProducts()
     }
 
     override suspend fun login(username: String, password: String): LoginResponse {
@@ -18,5 +19,9 @@ class ShopAppResponsitoryImpl @Inject constructor(
 
     override suspend fun getProductsByCategory(category: String): List<Product> {
         return apiService.getProductByCategory(category)
+    }
+
+    override suspend fun getAllCategories(): List<String> {
+        return apiService.getAllCategories()
     }
 }

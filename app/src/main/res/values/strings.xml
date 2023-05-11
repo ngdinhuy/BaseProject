@@ -23,4 +23,8 @@
     <string name="fashion_sale">Fashion \nsale</string>
     <string name="check">Check</string>
     <string name="view_all">View all</string>
+
+
+    <!--    shop screen-->
+    <string name="categories">Categories</string>
 </resources>

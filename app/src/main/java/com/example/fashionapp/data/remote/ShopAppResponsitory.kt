@@ -5,9 +5,11 @@ import com.example.fashionapp.model.Product
 import java.util.*
 
 interface ShopAppResponsitory {
-    suspend fun getAllProducts()
+    suspend fun getAllProducts(): List<Product>
 
     suspend fun login(username: String, password: String): LoginResponse
 
     suspend fun getProductsByCategory(category: String):List<Product>
+
+    suspend fun getAllCategories(): List<String>
 }

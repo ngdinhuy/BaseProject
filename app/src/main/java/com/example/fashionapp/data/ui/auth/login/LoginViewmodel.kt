@@ -1,6 +1,7 @@
 package com.example.fashionapp.data.ui.auth.login
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
-    @ApplicationContext context: Context
+    @ApplicationContext val context: Context
 ) : ViewModel() {
     val password = MutableLiveData<String>("")
     val usernmae = MutableLiveData<String>("")
@@ -38,7 +39,8 @@ class LoginViewmodel @Inject constructor(
                 if (loginResponse.token.isNotEmpty()) {
                     isLoading.value = false
                     stateLogin.value = true
-                    Prefs.setToken(loginResponse.token)
+                    Prefs.newInstance(context = context).setToken(loginResponse.token)
+                    Log.e("token",Prefs.newInstance(context).getToken().toString())
                 } else{
                     isLoading.value = false
                 }

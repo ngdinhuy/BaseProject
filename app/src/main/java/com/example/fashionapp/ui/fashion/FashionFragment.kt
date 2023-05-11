@@ -35,6 +35,7 @@ class FashionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpNavigation()
         setupEvent()
+        viewmodel.getAllProduct()
     }
 
     private fun setupEvent() {
@@ -49,6 +50,11 @@ class FashionFragment : Fragment() {
 
         viewmodel.goToDetailEvent.observe(this, EventObserver {
             val action = FashionFragmentDirections.actionFashionFragmentToDetailProductFragment(it)
+            findNavController().navigate(action)
+        })
+
+        viewmodel.goToListProductEvent.observe(this, EventObserver{
+            val action = FashionFragmentDirections.actionFashionFragmentToListProductFragment(it)
             findNavController().navigate(action)
         })
     }

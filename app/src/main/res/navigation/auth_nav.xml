@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_fashionFragment_to_detailProductFragment"
             app:destination="@id/detailProductFragment" />
+        <action
+            android:id="@+id/action_fashionFragment_to_listProductFragment"
+            app:destination="@id/listProductFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_fashionFragment"
@@ -62,4 +65,15 @@
             android:defaultValue="@null" />
     </fragment>
     <action android:id="@+id/action_global_detailProductFragment" app:destination="@id/detailProductFragment" />
+    <fragment
+        android:id="@+id/listProductFragment"
+        android:name="com.example.fashionapp.ui.fashion.shop.list_product.ListProductFragment"
+        android:label="ListProductFragment"
+        tools:layout="@layout/fragment_list_product"
+        >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
 </navigation>
