@@ -7,14 +7,19 @@ import android.view.Display
 
 class Prefs {
     fun setToken(token:String){
-        Log.e("editor", editor.toString())
         editor?.putString(PARAM_TOKEN,token)?.apply()
     }
 
     fun getToken(): String? = shared?.getString(PARAM_TOKEN,"")
 
+    fun setUsername(username: String){
+        editor?.putString(PARAM_USERNAME,username)?.apply()
+    }
+
+    fun getUsername(): String? = shared?.getString(PARAM_USERNAME,"")
     companion object{
         const val PARAM_TOKEN = "token"
+        const val PARAM_USERNAME = "USERNAME"
         var shared: SharedPreferences? = null
         var editor : SharedPreferences.Editor? = null
         fun newInstance(context: Context): Prefs{

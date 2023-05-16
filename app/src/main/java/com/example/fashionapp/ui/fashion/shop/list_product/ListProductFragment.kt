@@ -53,6 +53,10 @@ class ListProductFragment : Fragment(), ListProductAdapter.ItemClickEvent {
                 findNavController().popBackStack()
             }
         })
+
+        viewmodel.backEvent.observe(this, EventObserver{
+            findNavController().popBackStack()
+        })
     }
 
     private fun setupAdapter() {

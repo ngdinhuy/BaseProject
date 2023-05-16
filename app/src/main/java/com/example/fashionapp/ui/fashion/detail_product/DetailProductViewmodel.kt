@@ -5,36 +5,62 @@ import android.media.metrics.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.data.local.MyResponsitory
+import com.example.fashionapp.model.Product
+import com.example.fashionapp.utils.Prefs
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailProductViewmodel @Inject constructor(
     @ApplicationContext val context: Context,
-    val shopAppResponsitoryImpl: ShopAppResponsitoryImpl
-): ViewModel() {
+    val shopAppResponsitoryImpl: ShopAppResponsitoryImpl,
+    val myResponsitory: MyResponsitory
+) : ViewModel() {
     private val _amount = MutableLiveData<String>("0")
-    val amount : LiveData<String> = _amount
+    val amount: LiveData<String> = _amount
     private val _eventBack = MutableLiveData<com.example.fashionapp.utils.Event<Unit>>()
-    val eventBack : LiveData<com.example.fashionapp.utils.Event<Unit>> = _eventBack
+    val eventBack: LiveData<com.example.fashionapp.utils.Event<Unit>> = _eventBack
 
-    fun addAmount(){
+    fun addAmount() {
         val mount = amount.value!!.toInt()
         _amount.value = (mount + 1).toString()
     }
 
-    fun subtractAmount(){
+    fun subtractAmount() {
         val mount = amount.value!!.toInt()
-        if (mount == 0){
+        if (mount == 0) {
 
-        }else{
+        } else {
             _amount.value = (mount - 1).toString()
         }
     }
 
-    fun backEvent(){
+    fun backEvent() {
         _eventBack.value = com.example.fashionapp.utils.Event(Unit)
     }
+
+    fun addToCart(product: Product) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (amount.value != "0") {
+                myResponsitory.addProduct(
+                    product,
+                    Prefs.newInstance(context).getUsername()!!,
+                    amount.value!!.toInt()
+                )
+            } else {
+                myResponsitory.addProduct(
+                    product,
+                    Prefs.newInstance(context).getUsername()!!,
+                    1
+                )
+            }
+        }
+    }
+
 }

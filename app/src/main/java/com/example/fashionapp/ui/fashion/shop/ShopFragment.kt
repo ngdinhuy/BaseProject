@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fashionapp.R
 import com.example.fashionapp.adapter.ShopAdapter
@@ -39,6 +40,11 @@ class ShopFragment: Fragment(), ShopAdapter.ItemClickEvent {
         super.onViewCreated(view, savedInstanceState)
         viewmodel.getAllCategories()
         setUpAdapter()
+        setUpEvent()
+    }
+
+    private fun setUpEvent() {
+
     }
 
     private fun setUpAdapter() {

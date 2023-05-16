@@ -16,4 +16,9 @@ class LoadingFragment: DialogFragment() {
     ): View? {
         return layoutInflater.inflate(R.layout.fragment_loading,container,false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        isCancelable = false
+    }
 }

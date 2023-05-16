@@ -30,6 +30,7 @@ class ShopViewmodel @Inject constructor(
                 it._isLoading.value = Event(false)
             }
         }
-
     }
+
+
 }

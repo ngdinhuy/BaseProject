@@ -21,11 +21,17 @@ class ListProductViewmodel @Inject constructor(
     private val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading : LiveData<Event<Boolean>> = _isLoading
     val listProduct = MutableLiveData<List<Product>>()
+    private val _backEvent = MutableLiveData<Event<Unit>>()
+    val backEvent : LiveData<Event<Unit>> = _backEvent
+
     fun getProductInCategory(category: String){
         _isLoading.value = Event(true)
         viewModelScope.launch {
             listProduct.value = responsitoryImpl.getProductsByCategory(category)
             _isLoading.value = Event(false)
         }
+    }
+    fun backToPreviousScreen(){
+        _backEvent.value = Event(Unit)
     }
 }
