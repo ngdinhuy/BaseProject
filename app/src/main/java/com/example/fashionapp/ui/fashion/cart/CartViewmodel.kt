@@ -2,6 +2,7 @@ package com.example.fashionapp.ui.fashion.cart
 
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.Define
 import com.example.fashionapp.adapter.CartAdapter
 import com.example.fashionapp.data.local.MyResponsitory
+import com.example.fashionapp.model.BillModel
 import com.example.fashionapp.model.CartModel
 import com.example.fashionapp.ui.dialog.CustomDialog
 import com.example.fashionapp.utils.Event
@@ -23,6 +25,8 @@ import kotlinx.coroutines.launch
 import vn.zalopay.sdk.ZaloPayError
 import vn.zalopay.sdk.ZaloPaySDK
 import vn.zalopay.sdk.listeners.PayOrderListener
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -43,7 +47,8 @@ class CartViewmodel @Inject constructor(
 
     fun getAllCart() {
         viewModelScope.launch(Dispatchers.IO) {
-            val listCart = myResponsitory.getAllCart()
+            val username = Prefs.newInstance(context).getUsername()
+            val listCart = myResponsitory.getAllCart(username!!, idBill = Define.ITEM_NOT_CHECKOUT_INDEX)
             _listCard.postValue(Event(listCart))
             var total = 0.0
             listCart.forEach {
@@ -72,11 +77,33 @@ class CartViewmodel @Inject constructor(
         _clickCheckoutEvent.value = Event(Unit)
     }
 
+    fun checkout(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val username = Prefs.newInstance(context).getUsername()
+            val listCartModel = myResponsitory.getAllCart(username!!, 0)
+            var total = 0
+            var quantity = 0
+            listCartModel.forEach {
+                if (it.price!=null && it.quantity!=null){
+                    total += it.price!!.toDouble().toInt() * it.quantity!!
+                    quantity = it.quantity!!
+                }
+            }
+            val currentTime = Calendar.getInstance().time
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+            myResponsitory.addBill(BillModel(null,quantity,sdf.format(currentTime),total,username))
+            val countBill = myResponsitory.getAnmountBill(Prefs.newInstance(context).getUsername()!!)
+            myResponsitory.checkout(countBill+1, Prefs.newInstance(context).getUsername()!!)
+            _listCard.postValue(Event(listOf()))
+        }
+    }
+
     override fun clickZalo() {
         _clickPayZalo.value = Event(Unit)
     }
 
     override fun clickMomo() {
-        Toast.makeText(context,"Feature is developing",Toast.LENGTH_SHORT).show()
+        checkout()
     }
 }

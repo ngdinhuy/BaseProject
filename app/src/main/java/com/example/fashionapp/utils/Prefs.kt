@@ -18,8 +18,8 @@ class Prefs {
 
     fun getUsername(): String? = shared?.getString(PARAM_USERNAME,"")
     companion object{
-        const val PARAM_TOKEN = "token"
-        const val PARAM_USERNAME = "USERNAME"
+        private const val PARAM_TOKEN = "token"
+        private const val PARAM_USERNAME = "USERNAME"
         var shared: SharedPreferences? = null
         var editor : SharedPreferences.Editor? = null
         fun newInstance(context: Context): Prefs{

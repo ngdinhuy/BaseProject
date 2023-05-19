@@ -23,7 +23,6 @@
             android:layout_height="364dp"
             app:layout_constraintTop_toTopOf="parent"
             app:loadImage="@{product.image}"
-            android:translationZ="90dp"
             android:padding="10dp"
             />
 

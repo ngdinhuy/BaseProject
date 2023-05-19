@@ -11,10 +11,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fashionapp.R
+import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentFashionBinding
 import com.example.fashionapp.ui.fashion.detail_product.DetailProductFragmentDirections
 import com.example.fashionapp.ui.loading.LoadingFragmentDirections
 import com.example.fashionapp.utils.EventObserver
+import com.example.fashionapp.utils.Prefs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,6 +57,17 @@ class FashionFragment : Fragment() {
 
         viewmodel.goToListProductEvent.observe(this, EventObserver{
             val action = FashionFragmentDirections.actionFashionFragmentToListProductFragment(it)
+            findNavController().navigate(action)
+        })
+
+        viewmodel.logoutEvent.observe(viewLifecycleOwner,EventObserver{
+            Prefs.newInstance(requireContext()).setToken("")
+            val action = SplashFragmentDirections.actionGlobalSplashFragment()
+            findNavController().navigate(action)
+        })
+
+        viewmodel.goToMyOderEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = FashionFragmentDirections.actionFashionFragmentToMyOrderFragment()
             findNavController().navigate(action)
         })
     }

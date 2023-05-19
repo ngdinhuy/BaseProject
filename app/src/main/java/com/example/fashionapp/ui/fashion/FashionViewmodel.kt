@@ -26,10 +26,23 @@ class FashionViewmodel @Inject constructor(
     val goToDetailEvent : LiveData<Event<Product>> = _goToDetailEvent
     val _goToListProductEvent = MutableLiveData<Event<String>>()
     val goToListProductEvent : LiveData<Event<String>> = _goToListProductEvent
+    private val _goToMyOrderEvent = MutableLiveData<Event<Unit>>()
+    val goToMyOderEvent : LiveData<Event<Unit>> = _goToMyOrderEvent
 
     fun getAllProduct(){
         viewModelScope.launch {
             Define.listProduct = responsitoryImpl.getAllProducts()
         }
+    }
+
+    private val _logoutEvent = MutableLiveData<Event<Unit>>()
+    val logoutEvent : LiveData<Event<Unit>> = _logoutEvent
+
+    fun logout(){
+        _logoutEvent.value = Event(Unit)
+    }
+
+    fun goToMyOrder(){
+        _goToMyOrderEvent.value = Event(Unit)
     }
 }

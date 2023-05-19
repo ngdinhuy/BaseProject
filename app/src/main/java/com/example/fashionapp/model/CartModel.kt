@@ -10,6 +10,7 @@ data class CartModel(
     var id: Int? = null,
     var userName : String? = null,
     var idProduct: Int? = null,
+    var idBill: Int? = null,
     var quantity: Int? = null,
     var price: String? = null
 )

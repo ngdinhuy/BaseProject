@@ -40,6 +40,7 @@ class LoginViewmodel @Inject constructor(
                     isLoading.value = false
                     stateLogin.value = true
                     Prefs.newInstance(context = context).setToken(loginResponse.token)
+                    Prefs.newInstance(context = context).setUsername(username = usernmae.value!!)
                     Log.e("token",Prefs.newInstance(context).getToken().toString())
                 } else{
                     isLoading.value = false

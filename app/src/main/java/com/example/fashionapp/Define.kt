@@ -15,8 +15,11 @@ object Define {
 
     var listProduct = listOf<Product>()
 
+    //sql lite
     const val CART_TABLE = "cart"
+    const val BILL_TABLE = "bill"
     const val DATABASE_NAME = "fashion"
+    const val ITEM_NOT_CHECKOUT_INDEX = 0
 
     //zalo pay
     const val APP_ID = 2554

@@ -23,6 +23,8 @@ import vn.zalopay.sdk.Environment
 import vn.zalopay.sdk.ZaloPayError
 import vn.zalopay.sdk.ZaloPaySDK
 import vn.zalopay.sdk.listeners.PayOrderListener
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -47,7 +49,6 @@ class CartFragment: Fragment() {
         setUpAdapter()
         cartViewmodel.getAllCart()
         setUpEvent()
-
         val policy = ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         // ZaloPay SDK Init
@@ -55,7 +56,7 @@ class CartFragment: Fragment() {
     }
 
     fun setUpAdapter(){
-        cartViewmodel.listCard.observe(this, EventObserver{
+        cartViewmodel.listCard.observe(viewLifecycleOwner, EventObserver{
             databinding.rvCart.apply {
                 adapter = CartAdapter(it, requireContext()).apply {
                     passClickEvent(cartViewmodel)
@@ -66,7 +67,7 @@ class CartFragment: Fragment() {
     }
 
     private fun setUpEvent() {
-        cartViewmodel.clickCheckoutEvent.observe(this, EventObserver{
+        cartViewmodel.clickCheckoutEvent.observe(viewLifecycleOwner, EventObserver{
             val customDialog = CustomDialog.newInstancePaymentDialog(requireContext()).apply {
                 passClickPayEvent(cartViewmodel)
             }

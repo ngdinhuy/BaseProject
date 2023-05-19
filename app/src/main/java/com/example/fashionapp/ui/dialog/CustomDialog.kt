@@ -25,10 +25,12 @@ class CustomDialog(context: Context) : Dialog(context) {
 
         flZalo?.setOnClickListener {
             clickPayEvent?.clickZalo()
+            this.dismiss()
         }
 
         flMomo?.setOnClickListener{
             clickPayEvent?.clickMomo()
+            this.dismiss()
         }
     }
     companion object{

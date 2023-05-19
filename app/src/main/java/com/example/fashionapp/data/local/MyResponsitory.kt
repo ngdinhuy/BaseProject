@@ -1,5 +1,6 @@
 package com.example.fashionapp.data.local
 
+import com.example.fashionapp.model.BillModel
 import com.example.fashionapp.model.CartModel
 import com.example.fashionapp.model.Product
 import javax.inject.Inject
@@ -7,7 +8,7 @@ import javax.inject.Inject
 class MyResponsitory @Inject constructor(
     private val myDAO: MyDAO
 ) {
-    suspend fun getAllCart() = myDAO.getAllCart()
+    suspend fun getAllCart(username: String, idBill: Int) = myDAO.getAllCart(username, idBill)
 
     suspend fun insertCart(cartModel: CartModel) = myDAO.insertCart(cartModel)
 
@@ -20,6 +21,7 @@ class MyResponsitory @Inject constructor(
                     null,
                     userName = username,
                     idProduct = product._id,
+                    idBill = 0,
                     quantity = quantity,
                     price = product.price.toString()
                 )
@@ -44,4 +46,13 @@ class MyResponsitory @Inject constructor(
             myDAO.updateQuantityCart(idProduct, quantity - 1)
         }
     }
+
+    suspend fun checkout(idBill: Int, username: String) = myDAO.checkout(idBill, username)
+
+    suspend fun getAllBill(username: String): List<BillModel> = myDAO.getAllBill(username)
+
+    suspend fun getAnmountBill(username: String): Int = myDAO.getAmountill(username)
+
+    suspend fun addBill(billModel: BillModel) = myDAO.addBill(billModel)
+
 }

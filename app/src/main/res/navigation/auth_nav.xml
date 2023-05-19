@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_fashionFragment_to_listProductFragment"
             app:destination="@id/listProductFragment" />
+        <action
+            android:id="@+id/action_fashionFragment_to_myOrderFragment"
+            app:destination="@id/myOrderFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_fashionFragment"
@@ -75,5 +78,11 @@
             android:name="category"
             app:argType="string"
             android:defaultValue="" />
-    </fragment>
+    </fragment><action android:id="@+id/action_global_splashFragment" app:destination="@id/splashFragment"/>
+    <fragment
+        android:id="@+id/myOrderFragment"
+        android:name="com.example.fashionapp.ui.fashion.profile.list_bill.MyOrderFragment"
+        android:label="MyOrderFragment"
+        tools:layout="@layout/fragment_my_order"
+        />
 </navigation>

@@ -33,10 +33,12 @@
         <entry key="app/src/main/res/layout/fragment_list_product.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3637042124730792" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_my_order.xml" value="0.4331792195638021" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.30969909645413257" />
         <entry key="app/src/main/res/layout/fragment_shop.xml" value="0.27224426269531254" />
         <entry key="app/src/main/res/layout/frgament_splash.xml" value="0.26553395589192713" />
         <entry key="app/src/main/res/layout/item_list_product.xml" value="0.5525182088216146" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.4200200398763021" />
         <entry key="app/src/main/res/layout/item_rv_cart.xml" value="0.3732262244591346" />
         <entry key="app/src/main/res/layout/item_rv_clothing.xml" value="0.7380352527637202" />
         <entry key="app/src/main/res/layout/item_rv_home.xml" value="0.3966557820638021" />
