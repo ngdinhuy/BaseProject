@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.fashionapp.Define
+import com.example.fashionapp.R
 import com.example.fashionapp.databinding.FragmentDetailProductBinding
 import com.example.fashionapp.utils.EventObserver
 import dagger.hilt.EntryPoint
@@ -41,6 +43,23 @@ class DetailProductFragment: Fragment() {
     private fun setUpEvent() {
         viewmodel.eventBack.observe(this, EventObserver{
             findNavController().popBackStack()
+        })
+
+        viewmodel.likeEvent.observe(viewLifecycleOwner, EventObserver{
+            if (it){
+                var exist = true
+                Define.listLikeItem.forEach{
+                    if (it == args.product!!._id){
+                        exist = false
+                    }
+                }
+                if (exist){
+                    Define.listLikeItem.add(args.product!!._id!!)
+                }
+                databinding.imgLike.setImageResource(R.drawable.ic_like_product)
+            }else{
+                databinding.imgLike.setImageResource(R.drawable.ic_unlike_product)
+            }
         })
     }
 }

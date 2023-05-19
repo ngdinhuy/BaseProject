@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.Define
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.utils.Prefs
@@ -26,6 +27,9 @@ class DetailProductViewmodel @Inject constructor(
     val amount: LiveData<String> = _amount
     private val _eventBack = MutableLiveData<com.example.fashionapp.utils.Event<Unit>>()
     val eventBack: LiveData<com.example.fashionapp.utils.Event<Unit>> = _eventBack
+    private val _likeEvent = MutableLiveData<com.example.fashionapp.utils.Event<Boolean>>()
+    val likeEvent : MutableLiveData<com.example.fashionapp.utils.Event<Boolean>> = _likeEvent
+    val isLike = MutableLiveData<Boolean>(false)
 
     fun addAmount() {
         val mount = amount.value!!.toInt()
@@ -61,6 +65,17 @@ class DetailProductViewmodel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun likeProduct(){
+        if (isLike.value!=null && !isLike.value!!){
+            isLike.value = true
+            _likeEvent.value = com.example.fashionapp.utils.Event(true)
+        }else{
+            isLike.value = false
+            _likeEvent.value = com.example.fashionapp.utils.Event(false)
+        }
+
     }
 
 }

@@ -14,6 +14,7 @@ object Define {
     const val ELECTRONICS = "electronics"
 
     var listProduct = listOf<Product>()
+    var listLikeItem = ArrayList<Int>()
 
     //sql lite
     const val CART_TABLE = "cart"

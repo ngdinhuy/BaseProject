@@ -46,10 +46,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="55dp"
+            android:onClick="@{()->viewmodel.likeProduct()}"
             android:layout_marginEnd="30dp"
             android:translationZ="90dp"
             >
             <ImageView
+                android:id="@+id/img_like"
                 android:layout_gravity="center"
                 android:layout_width="@dimen/commin_size_22dp"
                 android:layout_height="@dimen/commin_size_22dp"

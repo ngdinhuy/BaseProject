@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/ic_bg_splash.xml" value="0.151" />
         <entry key="app/src/main/res/drawable/ic_black_arrow_back.xml" value="0.2205" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.151" />
+        <entry key="app/src/main/res/drawable/item_favorites.xml" value="0.221" />
         <entry key="app/src/main/res/drawable/item_shop_fragment.xml" value="0.221" />
         <entry key="app/src/main/res/font/font.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26307423909505206" />
@@ -37,6 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.30969909645413257" />
         <entry key="app/src/main/res/layout/fragment_shop.xml" value="0.27224426269531254" />
         <entry key="app/src/main/res/layout/frgament_splash.xml" value="0.26553395589192713" />
+        <entry key="app/src/main/res/layout/item_favorites.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/item_list_product.xml" value="0.5525182088216146" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.4200200398763021" />
         <entry key="app/src/main/res/layout/item_rv_cart.xml" value="0.3732262244591346" />

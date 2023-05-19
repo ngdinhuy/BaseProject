@@ -59,12 +59,13 @@
             android:layout_width="60dp"
             android:padding="7dp"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:src="@drawable/ic_logo_momo"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Momo"
+            android:text="Ship COD"
             android:layout_gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
