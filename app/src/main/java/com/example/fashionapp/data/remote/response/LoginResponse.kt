@@ -1,6 +1,8 @@
 package com.example.fashionapp.data.remote.response
 
+import com.google.gson.annotations.SerializedName
+
 class LoginResponse(
-    val token: String
+    @SerializedName("username") val username: String
 ) {
 }

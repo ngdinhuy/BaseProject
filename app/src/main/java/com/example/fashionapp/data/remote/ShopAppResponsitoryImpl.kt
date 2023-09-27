@@ -1,6 +1,8 @@
 package com.example.shopapp.data.remote
 
 
+import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.LoginResponse
 import com.example.fashionapp.model.Product
 import java.util.*
@@ -13,8 +15,8 @@ class ShopAppResponsitoryImpl @Inject constructor(
         return apiService.getAllProducts()
     }
 
-    override suspend fun login(username: String, password: String): LoginResponse {
-        return apiService.login(username, password)
+    override suspend fun login(username: String, password: String): BaseResponse<LoginResponse> {
+        return apiService.login(LoginRequest(username,password))
     }
 
     override suspend fun getProductsByCategory(category: String): List<Product> {
