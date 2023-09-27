@@ -80,6 +80,7 @@
             </FrameLayout>
 
             <ImageView
+                android:id="@+id/btn_menu"
                 android:layout_width="@dimen/common_size_12dp"
                 android:layout_height="@dimen/common_size_24dp"
                 android:src="@drawable/ic_vertical_menu"

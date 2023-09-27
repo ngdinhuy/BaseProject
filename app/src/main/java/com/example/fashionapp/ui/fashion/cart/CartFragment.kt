@@ -1,8 +1,12 @@
 package com.example.fashionapp.ui.fashion.cart
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
@@ -10,12 +14,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fashionapp.Define
+import com.example.fashionapp.R
 import com.example.fashionapp.adapter.CartAdapter
 import com.example.fashionapp.databinding.FragmentCartBinding
-import com.example.fashionapp.ui.dialog.CustomDialog
+import com.example.fashionapp.main.MainActivity
+import com.example.fashionapp.model.CartModel
+import com.example.fashionapp.utils.dialog.CustomDialog
 import com.example.fashionapp.utils.EventObserver
 import com.example.fashionapp.zalo_payment.Api.CreateOrder
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +40,11 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class CartFragment: Fragment() {
-    lateinit var databinding : FragmentCartBinding
+class CartFragment : Fragment() {
+    lateinit var databinding: FragmentCartBinding
     val cartViewmodel: CartViewmodel by viewModels()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,10 +69,13 @@ class CartFragment: Fragment() {
         ZaloPaySDK.init(2553, Environment.SANDBOX)
     }
 
-    fun setUpAdapter(){
-        cartViewmodel.listCard.observe(viewLifecycleOwner, EventObserver{
+    fun setUpAdapter() {
+        cartViewmodel.listCard.observe(viewLifecycleOwner, EventObserver {
             databinding.rvCart.apply {
-                adapter = CartAdapter(it, requireContext()).apply {
+                adapter = CartAdapter(
+                    it,
+                    requireContext(),
+                    showListPopupWindow = { cartModel, view -> showListPopUpWindow(cartModel, view) }).apply {
                     passClickEvent(cartViewmodel)
                 }
                 layoutManager = LinearLayoutManager(requireContext())
@@ -67,27 +84,70 @@ class CartFragment: Fragment() {
     }
 
     private fun setUpEvent() {
-        cartViewmodel.clickCheckoutEvent.observe(viewLifecycleOwner, EventObserver{
-            val customDialog = CustomDialog.newInstancePaymentDialog(requireContext()).apply {
-                passClickPayEvent(cartViewmodel)
-            }
-            customDialog.show()
+        cartViewmodel.clickCheckoutEvent.observe(viewLifecycleOwner, EventObserver {
+//            val customDialog = CustomDialog.newInstancePaymentDialog(requireContext()).apply {
+//                passClickPayEvent(cartViewmodel)
+//            }
+            CustomDialog.newInstancePaymentDialog(requireContext())
+                .showDialog()
+                .setFlZaloClick {
+                    payZalo()
+                    it.dismiss()
+                }.setShipCodeClick {
+                    cartViewmodel.checkout()
+                    it.dismiss()
+                }
+                .show()
         })
 
-        cartViewmodel.clickPayZalo.observe(this, EventObserver{
+        cartViewmodel.clickPayZalo.observe(viewLifecycleOwner, EventObserver {
             payZalo()
         })
     }
 
-    fun payZalo(){
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    @SuppressLint("MissingInflatedId")
+    fun showListPopUpWindow(cartModel: CartModel, view: View) {
+        activity?.let { it ->
+            val popupView = it.layoutInflater.inflate(R.layout.dialog_pop_up_window, null)
+            val tvAddToFavorite = popupView.findViewById<TextView>(R.id.tv_add_to_favorite)
+            val tvDelte = popupView.findViewById<TextView>(R.id.tv_delete)
+
+            popupView == PopupWindow(
+                popupView,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                isOutsideTouchable = true
+                isFocusable = true
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                showAsDropDown(view)
+            }
+
+            tvAddToFavorite.setOnClickListener {
+                cartModel.idProduct?.let {id ->
+                    Define.listLikeItem.add(id)
+                }
+            }
+
+            tvDelte.setOnClickListener {
+                cartModel.idProduct?.let {
+                    cartViewmodel.deleteItem(it)
+                }
+            }
+        }
+
+    }
+
+    fun payZalo() {
         val orderApi = CreateOrder()
         try {
             val data = orderApi.createOrder("100000")
             val code = data.getString("return_code")
-            Log.e("code",code)
+            Log.e("code", code)
             if (code == "1") {
                 val token = data.getString("zp_trans_token")
-                Log.e("token",token)
+                Log.e("token", token)
 
                 ZaloPaySDK.getInstance().payOrder(
                     requireActivity(),
@@ -141,7 +201,7 @@ class CartFragment: Fragment() {
                                 .setPositiveButton("OK",
                                     DialogInterface.OnClickListener { dialog, which -> })
                                 .setNegativeButton("Cancel", null).show()
-                            Log.e("Code",zaloPayError.name)
+                            Log.e("Code", zaloPayError.name)
                         }
                     })
             }

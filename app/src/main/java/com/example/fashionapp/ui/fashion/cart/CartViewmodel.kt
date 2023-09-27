@@ -13,7 +13,7 @@ import com.example.fashionapp.adapter.CartAdapter
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.model.BillModel
 import com.example.fashionapp.model.CartModel
-import com.example.fashionapp.ui.dialog.CustomDialog
+import com.example.fashionapp.utils.dialog.CustomDialog
 import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.zalo_payment.Api.CreateOrder
@@ -55,6 +55,13 @@ class CartViewmodel @Inject constructor(
                 total += (it.quantity!! * Define.listProduct[it.idProduct!!-1].price!!)
             }
             totalPrice.postValue(total)
+        }
+    }
+
+    fun deleteItem(idProduct: Int){
+        val username = Prefs.newInstance(context).getUsername()
+        viewModelScope.launch(Dispatchers.IO) {
+            myResponsitory.deleteItemInCart(idProduct, username)
         }
     }
 

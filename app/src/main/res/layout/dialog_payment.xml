@@ -18,7 +18,7 @@
         android:layout_marginTop="20dp"/>
 
     <FrameLayout
-        android:id="@+id/fl_zalopay"
+        android:id="@+id/fl_positive_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:backgroundTint="@color/white"
@@ -28,11 +28,13 @@
         android:background="@drawable/bg_radius_payment_5dp"
         android:layout_marginTop="@dimen/margin_16dp">
         <ImageView
+            android:id="@+id/iv_positive"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_logo_zalo_pay"/>
 
         <TextView
+            android:id="@+id/tv_positive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zalo pay"
@@ -43,11 +45,11 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/fl_momo"
+        android:id="@+id/fl_negative_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:backgroundTint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fl_zalopay"
+        app:layout_constraintTop_toBottomOf="@id/fl_positive_button"
         android:layout_marginHorizontal="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
         android:elevation="4dp"
@@ -56,6 +58,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
         <ImageView
+            android:id="@+id/iv_negative"
             android:layout_width="60dp"
             android:padding="7dp"
             android:layout_height="match_parent"
@@ -63,6 +66,7 @@
             android:src="@drawable/ic_logo_momo"/>
 
         <TextView
+            android:id="@+id/tv_negative"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ship COD"

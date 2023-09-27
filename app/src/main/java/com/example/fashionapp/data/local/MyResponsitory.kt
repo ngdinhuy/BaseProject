@@ -47,6 +47,9 @@ class MyResponsitory @Inject constructor(
         }
     }
 
+    suspend fun deleteItemInCart(idProduct: Int, username: String){
+        myDAO.deleteItemCart(idProduct, username)
+    }
     suspend fun checkout(idBill: Int, username: String) = myDAO.checkout(idBill, username)
 
     suspend fun getAllBill(username: String): List<BillModel> = myDAO.getAllBill(username)
