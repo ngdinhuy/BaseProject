@@ -14,7 +14,6 @@ import com.example.fashionapp.adapter.ListProductAdapter
 import com.example.fashionapp.databinding.FragmentListProductBinding
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.ui.fashion.detail_product.DetailProductFragmentDirections
-import com.example.fashionapp.ui.fashion.shop.ShopViewmodel
 import com.example.fashionapp.ui.loading.LoadingFragmentDirections
 import com.example.fashionapp.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint

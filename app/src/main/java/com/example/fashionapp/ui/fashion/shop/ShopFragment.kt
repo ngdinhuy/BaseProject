@@ -48,7 +48,7 @@ class ShopFragment: Fragment(), ShopAdapter.ItemClickEvent {
     }
 
     private fun setUpAdapter() {
-        viewmodel.listCategories.observe(this, EventObserver{
+        viewmodel.listCategories.observe(viewLifecycleOwner, EventObserver{
             databinding.rvShop.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = ShopAdapter(requireContext(), it).apply {
@@ -61,6 +61,5 @@ class ShopFragment: Fragment(), ShopAdapter.ItemClickEvent {
     override fun itemClick(cate: String) {
         fashionViewmodel._goToListProductEvent.value = Event(cate)
     }
-
 
 }

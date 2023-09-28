@@ -1,16 +1,18 @@
 package com.example.shopapp.data.remote
 
 import com.example.fashionapp.data.remote.response.BaseResponse
-import com.example.fashionapp.data.remote.response.LoginResponse
+import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
+import com.example.fashionapp.model.UserModel
 import com.example.fashionapp.model.Product
-import java.util.*
 
 interface ShopAppResponsitory {
-    suspend fun getAllProducts(): List<Product>
+    suspend fun getAllProducts(): BaseResponse<List<Product>>
 
-    suspend fun login(username: String, password: String): BaseResponse<LoginResponse>
+    suspend fun login(username: String, password: String): BaseResponse<UserModel>
 
-    suspend fun getProductsByCategory(category: String):List<Product>
+    suspend fun getProductsByCategory(idCategory: Int):BaseResponse<List<Product>>
 
     suspend fun getAllCategories(): List<String>
+
+    suspend fun getCategoryAndProduct(): BaseResponse<List<CategoryAndProductResponse>>
 }

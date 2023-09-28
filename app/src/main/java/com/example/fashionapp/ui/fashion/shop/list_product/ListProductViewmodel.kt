@@ -27,7 +27,7 @@ class ListProductViewmodel @Inject constructor(
     fun getProductInCategory(category: String){
         _isLoading.value = Event(true)
         viewModelScope.launch {
-            listProduct.value = responsitoryImpl.getProductsByCategory(category)
+//            listProduct.value = responsitoryImpl.getProductsByCategory(category)
             _isLoading.value = Event(false)
         }
     }

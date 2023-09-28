@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fashionapp.Define
 import com.example.fashionapp.databinding.ItemFavoritesBinding
-import com.example.fashionapp.databinding.ItemFavoritesBindingImpl
-import com.example.fashionapp.databinding.ItemListProductBinding
 import com.example.fashionapp.model.Product
 
 class FavoritesAdapter(val context: Context,

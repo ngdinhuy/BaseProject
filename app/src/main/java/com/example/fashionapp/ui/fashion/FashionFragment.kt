@@ -37,7 +37,6 @@ class FashionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpNavigation()
         setupEvent()
-        viewmodel.getAllProduct()
     }
 
     private fun setupEvent() {

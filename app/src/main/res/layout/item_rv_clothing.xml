@@ -66,12 +66,12 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:progressTint="@color/color_star_ratingbar"
                 tools:rating="4"
-                android:rating="@{Float.valueOf(String.valueOf(product.rating.rate))}"/>
+                android:rating="@{Float.valueOf(String.valueOf(product.rate))}"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{"("+product.rating.count+")"}'
+                android:text='@{"("+product.reviewNumber+")"}'
                 tools:text="(10)"
                 android:layout_marginStart="2.5dp"
                 android:textColor="#9B9B9B"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ll_rating"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@{product.title}"
+            android:text="@{product.name}"
             tools:text="BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats"
             android:layout_marginTop="@dimen/common_size_5dp"
             android:textColor="@color/black"

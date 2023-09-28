@@ -1,12 +1,10 @@
 package com.example.fashionapp.ui.fashion.detail_product
 
 import android.content.Context
-import android.media.metrics.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fashionapp.Define
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.utils.Prefs
