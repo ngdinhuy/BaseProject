@@ -19,4 +19,14 @@ object Databinding {
         val option = RequestOptions().centerCrop().placeholder(R.drawable.ic_launcher_background)
         Glide.with(view.context).load(url).apply(option).into(view as ImageView)
     }
+
+    @BindingAdapter("app:isVisible")
+    @JvmStatic
+    fun View.isVisible(isVisible: Boolean){
+        if (isVisible){
+            this.visibility = View.VISIBLE
+        } else {
+            this.visibility = View.GONE
+        }
+    }
 }

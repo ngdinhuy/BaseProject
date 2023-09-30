@@ -31,7 +31,7 @@ class ListProductFragment : Fragment(), ListProductAdapter.ItemClickEvent {
         databinding = FragmentListProductBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             viewmodel = this@ListProductFragment.viewmodel
-            category = args.category
+            category = args.titleCategory
         }
         return databinding.root
     }
@@ -44,7 +44,7 @@ class ListProductFragment : Fragment(), ListProductAdapter.ItemClickEvent {
     }
 
     private fun setUpEvent() {
-        viewmodel.isLoading.observe(this, EventObserver {
+        viewmodel.isLoading.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 val action = LoadingFragmentDirections.actionGlobalLoadingFragment()
                 findNavController().navigate(action)
@@ -53,13 +53,13 @@ class ListProductFragment : Fragment(), ListProductAdapter.ItemClickEvent {
             }
         })
 
-        viewmodel.backEvent.observe(this, EventObserver{
+        viewmodel.backEvent.observe(viewLifecycleOwner, EventObserver{
             findNavController().popBackStack()
         })
     }
 
     private fun setupAdapter() {
-        viewmodel.listProduct.observe(this, Observer{
+        viewmodel.listProduct.observe(viewLifecycleOwner, Observer{
             databinding.rvCategory.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = ListProductAdapter(requireContext(), it).apply {

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fashionapp.model.CategoryModel
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.utils.Event
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
@@ -20,8 +21,8 @@ class FashionViewmodel @Inject constructor(
     val isLoading : LiveData<Event<Boolean>> = _isLoading
     val _goToDetailEvent = MutableLiveData<Event<Product>>()
     val goToDetailEvent : LiveData<Event<Product>> = _goToDetailEvent
-    val _goToListProductEvent = MutableLiveData<Event<String>>()
-    val goToListProductEvent : LiveData<Event<String>> = _goToListProductEvent
+    val _goToListProductEvent = MutableLiveData<Event<CategoryModel>>()
+    val goToListProductEvent : LiveData<Event<CategoryModel>> = _goToListProductEvent
     private val _goToMyOrderEvent = MutableLiveData<Event<Unit>>()
     val goToMyOderEvent : LiveData<Event<Unit>> = _goToMyOrderEvent
 

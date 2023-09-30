@@ -26,4 +26,12 @@ object Define {
     const val APP_ID = 2554
     const val MAC_KEY = "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL"
     const val URL_CREATE_ORDER = "https://sb-openapi.zalopay.vn/v2/create"
+
+    const val SPAN_COUNT_GRIDLAYOUT_CATEGORY = 2
+}
+
+object FilterProduct{
+    const val CUSTOMER_REVIEW = "Customer review"
+    const val PRICE_LOWEST_TO_HIGH = "Price: lowest to high"
+    const val PRICE_HIGHEST_TO_LOW = "Price: highest to low"
 }

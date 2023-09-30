@@ -4,6 +4,7 @@ package com.example.shopapp.data.remote
 import com.example.fashionapp.data.remote.request.LoginRequest
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
+import com.example.fashionapp.model.CategoryModel
 import com.example.fashionapp.model.UserModel
 import com.example.fashionapp.model.Product
 import javax.inject.Inject
@@ -23,13 +24,12 @@ class ShopAppResponsitoryImpl @Inject constructor(
         return apiService.getProductByCategory(idCategory)
     }
 
-    override suspend fun getAllCategories(): List<String> {
+    override suspend fun getAllCategories(): BaseResponse<List<CategoryModel>>{
         return apiService.getAllCategories()
     }
 
     override suspend fun getCategoryAndProduct(): BaseResponse<List<CategoryAndProductResponse>> {
         return apiService.getCategoryAndProduct()
     }
-
 
 }

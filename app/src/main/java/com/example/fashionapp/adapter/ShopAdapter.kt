@@ -5,52 +5,44 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Adapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.fashionapp.Define
 import com.example.fashionapp.R
+import com.example.fashionapp.databinding.ItemRvClothingCategoryBinding
 import com.example.fashionapp.databinding.ItemShopFragmentBinding
+import com.example.fashionapp.model.CategoryModel
+import com.example.fashionapp.model.Product
 import java.util.zip.Inflater
 
 class ShopAdapter(
     val context: Context,
-    val list: List<String>
+    var list: List<Product>
 ) : RecyclerView.Adapter<ShopAdapter.ViewHolder>() {
 
-    var itemClickEvent: ItemClickEvent? = null
+    var goToDetailEvent : GoToDetailEvent? = null
 
-    fun passDataItemClickEvent(itemClickEvent: ItemClickEvent){
-        this.itemClickEvent = itemClickEvent
-    }
-    class ViewHolder(val itemShop: ItemShopFragmentBinding) :
-        RecyclerView.ViewHolder(itemShop.root) {
-
+    class ViewHolder(val binding: ItemRvClothingCategoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val databinding =
-            ItemShopFragmentBinding.inflate(LayoutInflater.from(context), parent, false)
-        return ViewHolder(databinding)
+        val binding = ItemRvClothingCategoryBinding.inflate(LayoutInflater.from(context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemShop.apply {
-            cate = list[position]
-            imgCategory.setImageResource(
-                when (cate) {
-                    Define.MEN_CLOTHES -> R.drawable.ic_men_clothing
-                    Define.WOMEN_CLOTHES -> R.drawable.ic_women_clothing
-                    Define.ELECTRONICS -> R.drawable.ic_electronics
-                    else -> R.drawable.ic_jewelry
-                }
-            )
+        holder.binding.product = list[position]
+        if (list[position].image != null) {
+            Glide.with(context).load(list[position].image).into(holder.binding.ivItem)
         }
-        holder.itemShop.cardView.setOnClickListener{
-            itemClickEvent?.itemClick(list[position])
+        holder.binding.clItem.setOnClickListener{
+            goToDetailEvent?.goToDetail(list[position])
         }
     }
 
     override fun getItemCount(): Int = list.size
 
-    interface ItemClickEvent{
-        fun itemClick(cate:String)
+    interface GoToDetailEvent{
+        fun goToDetail(product: Product)
     }
 }

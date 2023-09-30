@@ -76,6 +76,10 @@
         >
         <argument
             android:name="category"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="titleCategory"
             app:argType="string"
             android:defaultValue="" />
     </fragment><action android:id="@+id/action_global_splashFragment" app:destination="@id/splashFragment"/>

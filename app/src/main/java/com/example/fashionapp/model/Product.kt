@@ -1,6 +1,7 @@
 package com.example.fashionapp.model
 
 import android.os.Parcelable
+import com.example.fashionapp.utils.get2digit
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -11,6 +12,7 @@ class Product(
     val name: String?,
     val price: Double?,
     val description: String?,
+    val discount: Int?,
     val image: String?,
     val rate: Int?,
     val reviewNumber: String?,
@@ -27,5 +29,21 @@ class Product(
 
     fun displayName():String?{
         return name
+    }
+
+    fun displayNewPrice(): Double{
+        if (price != null){
+            return if (discount != null){
+                val oldPrice = price*(100-discount)/100
+                oldPrice.get2digit()
+            } else {
+                price.toDouble()
+            }
+        }
+        return 0.0
+    }
+
+    fun displayDiscount():String{
+        return "-${discount}%"
     }
 }
