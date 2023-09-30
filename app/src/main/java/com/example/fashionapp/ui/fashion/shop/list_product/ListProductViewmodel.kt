@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.utils.Event
+import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,11 +25,16 @@ class ListProductViewmodel @Inject constructor(
     private val _backEvent = MutableLiveData<Event<Unit>>()
     val backEvent : LiveData<Event<Unit>> = _backEvent
 
-    fun getProductInCategory(category: String){
-        _isLoading.value = Event(true)
+    fun getProductInCategory(idCategory: Int){
         viewModelScope.launch {
-//            listProduct.value = responsitoryImpl.getProductsByCategory(category)
-            _isLoading.value = Event(false)
+            responsitoryImpl.getProductsByCategory(idCategory,0).apply {
+                if (this.errors.isEmpty() && this.dataResponse != null){
+                    listProduct.value = this.dataResponse!!
+                } else {
+                    context.makeToast(this.errors[0])
+                }
+
+            }
         }
     }
     fun backToPreviousScreen(){

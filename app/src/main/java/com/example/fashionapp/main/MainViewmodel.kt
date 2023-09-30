@@ -13,4 +13,5 @@ class MainViewmodel @Inject constructor(
     @ApplicationContext val context: Context,
     val responsitoryImpl: ShopAppResponsitoryImpl
 ):ViewModel() {
+
 }

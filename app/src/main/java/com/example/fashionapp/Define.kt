@@ -3,7 +3,7 @@ package com.example.fashionapp
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://10.1.30.182:8080"
+    const val BASE_URL = "http://192.168.0.100:8080"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 
@@ -26,4 +26,8 @@ object Define {
     const val APP_ID = 2554
     const val MAC_KEY = "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL"
     const val URL_CREATE_ORDER = "https://sb-openapi.zalopay.vn/v2/create"
+
+    const val SPAN_COUNT_GRIDLAYOUT_CATEGORY = 2
+
+    val listFilterText = listOf("","Customer review", "Price: lowest to high", "Price: highest to low")
 }

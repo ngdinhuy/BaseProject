@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_radius_34dp_f9f9f9"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_size_6dp"
+            android:layout_marginHorizontal="@dimen/common_size_150dp"
+            android:background="@drawable/bg_radius_29_9b9b9b"
+            android:layout_marginTop="@dimen/commin_size_15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/sort_by"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/commin_size_16dp"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/common_size_32dp"/>
+
+        <include android:id="@+id/option_customer_review"
+            layout="@layout/item_bottom_sheet_filter"/>
+
+        <include android:id="@+id/option_price_lowest_to_high"
+            layout="@layout/item_bottom_sheet_filter" />
+
+        <include android:id="@+id/option_price_highest_to_low"
+            layout="@layout/item_bottom_sheet_filter" />
+
+    </LinearLayout>
+</layout>

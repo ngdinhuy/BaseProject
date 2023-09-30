@@ -27,4 +27,8 @@
 
     <!--    shop screen-->
     <string name="categories">Categories</string>
+    <string name="filter">Filters</string>
+    <string name="sort_by">Sort by</string>
+
+    <string name="price_discount">-%s</string>
 </resources>

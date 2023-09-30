@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_content_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Customer review"
+            android:textColor="@color/filter_text_color"
+            android:background="@color/filter_background_color"
+            android:textSize="@dimen/text_size_16sp"
+            android:paddingVertical="@dimen/commin_size_16dp"
+            android:paddingStart="@dimen/commin_size_16dp" />
+    </FrameLayout>
+</layout>

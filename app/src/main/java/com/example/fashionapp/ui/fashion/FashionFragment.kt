@@ -40,7 +40,7 @@ class FashionFragment : Fragment() {
     }
 
     private fun setupEvent() {
-        viewmodel.isLoading.observe(this, EventObserver {
+        viewmodel.isLoading.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 val action = LoadingFragmentDirections.actionGlobalLoadingFragment()
                 findNavController().navigate(action)
@@ -49,13 +49,13 @@ class FashionFragment : Fragment() {
             }
         })
 
-        viewmodel.goToDetailEvent.observe(this, EventObserver {
+        viewmodel.goToDetailEvent.observe(viewLifecycleOwner, EventObserver {
             val action = FashionFragmentDirections.actionFashionFragmentToDetailProductFragment(it)
             findNavController().navigate(action)
         })
 
-        viewmodel.goToListProductEvent.observe(this, EventObserver{
-            val action = FashionFragmentDirections.actionFashionFragmentToListProductFragment(it)
+        viewmodel.goToListProductEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = FashionFragmentDirections.actionFashionFragmentToListProductFragment(it.id_, it.title)
             findNavController().navigate(action)
         })
 
