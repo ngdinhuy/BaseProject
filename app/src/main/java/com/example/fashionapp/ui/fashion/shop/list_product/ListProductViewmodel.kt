@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.utils.Event
-import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
