@@ -17,8 +17,15 @@ class Prefs {
     }
 
     fun getUsername(): String = shared?.getString(PARAM_USERNAME,"")?: ""
+
+    fun setId(id : Int){
+        editor?.putInt(PARAM_ID,id)?.apply()
+    }
+
+    fun getId(): Int = shared?.getInt(PARAM_ID, 0)?: 0
     companion object{
         private const val PARAM_TOKEN = "token"
+        private const val PARAM_ID = "id"
         private const val PARAM_USERNAME = "USERNAME"
         var shared: SharedPreferences? = null
         var editor : SharedPreferences.Editor? = null

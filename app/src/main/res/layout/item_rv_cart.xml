@@ -6,7 +6,7 @@
     <data>
         <variable
             name="cartModel"
-            type="com.example.fashionapp.model.CartModel" />
+            type="com.example.fashionapp.data.remote.response.CartResponse" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -28,7 +28,7 @@
                 />
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="Pullover"
                 android:textStyle="bold"
@@ -36,6 +36,10 @@
                 android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintEnd_toStartOf="@id/btn_menu"
+                android:layout_marginEnd="@dimen/common_size_5dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="15dp"
                 />
@@ -65,7 +69,7 @@
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:text="@{cartModel.quantity.toString()}"
+                    android:text="@{cartModel.displayQuantity()}"
                     android:textSize="@dimen/text_size_14sp"/>
                 
                 <ImageView
@@ -97,7 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="51$"
                 android:textStyle="bold"
-                android:text='@{cartModel.price+"$"}'
+                android:text='@{cartModel.totalPrice+"$"}'
                 android:layout_marginEnd="11dp"
                 app:layout_constraintTop_toTopOf="@id/fl_adjust"
                 app:layout_constraintBottom_toBottomOf="@id/fl_adjust"

@@ -3,7 +3,7 @@ package com.example.fashionapp
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://192.168.0.100:8080"
+    const val BASE_URL = "http://172.16.1.2:8080"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 

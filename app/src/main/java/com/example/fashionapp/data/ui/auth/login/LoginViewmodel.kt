@@ -42,6 +42,7 @@ class LoginViewmodel @Inject constructor(
                     isLoading.value = false
                     stateLogin.value = true
                     Prefs.newInstance(context = context).setUsername(username = usernmae.value!!)
+                    Prefs.newInstance(context).setId(loginResponse.dataResponse.id?: 0)
                 } else{
                     isLoading.value = false
                     context.makeToast(loginResponse.errors[0])

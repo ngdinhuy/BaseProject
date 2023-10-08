@@ -8,13 +8,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.fashionapp.Define
+import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.databinding.ItemRvCartBinding
 import com.example.fashionapp.model.CartModel
 
 class CartAdapter(
-    val listCart: List<CartModel>,
+    val listCart: List<CartResponse>,
     val context: Context,
-    val showListPopupWindow: (cartModel: CartModel, viewAnchor: View) -> Unit,
+    val showListPopupWindow: (cartModel: CartResponse, viewAnchor: View) -> Unit,
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>(){
     var clickEvent:ClickEvent? = null
 
@@ -23,25 +24,18 @@ class CartAdapter(
     }
 
     inner class ViewHolder(val binding: ItemRvCartBinding):RecyclerView.ViewHolder(binding.root){
-        fun onBind(item: CartModel){
+        fun onBind(item: CartResponse){
             binding.apply {
                 cartModel = item
-                Glide.with(context).load(Define.listProduct[item.idProduct!!-1].image).into(image)
-                tvName.text = Define.listProduct[item.idProduct!!-1].displayName()
+                Glide.with(context).load(item.product.image).into(image)
+                tvName.text = item.product.name
 
                 btnAdd.setOnClickListener{
-                    clickEvent?.addQuantity(item.idProduct!!)
-                    tvQuantity.text = (tvQuantity.text.toString().toInt()+1).toString()
+                    clickEvent?.editQuantity(item._id,1)
                 }
 
                 btnSubtract.setOnClickListener{
-                    clickEvent?.subtractQuantity(item.idProduct!!,tvQuantity.text.toString().toInt())
-                    if (tvQuantity.text.toString().toInt() == 1){
-                        (listCart as ArrayList).removeAt(position)
-                        notifyItemRemoved(position)
-                    }else{
-                        tvQuantity.text = (tvQuantity.text.toString().toInt()-1).toString()
-                    }
+                    clickEvent?.editQuantity(item._id, -1)
                 }
 
                 btnMenu.setOnClickListener {
@@ -62,8 +56,6 @@ class CartAdapter(
     override fun getItemCount(): Int = listCart.size
 
     interface ClickEvent{
-        fun addQuantity(idProduct:Int)
-
-        fun subtractQuantity(idProduct: Int,currentQuantity: Int)
+        fun editQuantity(idProduct:Int, quantityChange:Int)
     }
 }

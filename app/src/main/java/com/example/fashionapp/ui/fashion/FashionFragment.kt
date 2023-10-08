@@ -61,6 +61,7 @@ class FashionFragment : Fragment() {
 
         viewmodel.logoutEvent.observe(viewLifecycleOwner,EventObserver{
             Prefs.newInstance(requireContext()).setToken("")
+            Prefs.newInstance(requireContext()).setId(0)
             val action = SplashFragmentDirections.actionGlobalSplashFragment()
             findNavController().navigate(action)
         })

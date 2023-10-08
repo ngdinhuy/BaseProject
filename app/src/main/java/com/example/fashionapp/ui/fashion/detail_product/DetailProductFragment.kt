@@ -41,7 +41,7 @@ class DetailProductFragment: Fragment() {
     }
 
     private fun setUpEvent() {
-        viewmodel.eventBack.observe(this, EventObserver{
+        viewmodel.eventBack.observe(viewLifecycleOwner, EventObserver{
             findNavController().popBackStack()
         })
 

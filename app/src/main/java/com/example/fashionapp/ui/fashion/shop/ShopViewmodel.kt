@@ -51,6 +51,7 @@ class ShopViewmodel @Inject constructor(
                 if (this.errors.isEmpty()) {
                     _listProduct.value = this.dataResponse?: listOf()
                 } else {
+                    _listProduct.value = listOf()
                     context.makeToast(errors[0])
                 }
             }

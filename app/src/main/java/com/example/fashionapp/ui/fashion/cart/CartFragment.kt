@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fashionapp.Define
 import com.example.fashionapp.R
 import com.example.fashionapp.adapter.CartAdapter
+import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.databinding.FragmentCartBinding
 import com.example.fashionapp.main.MainActivity
 import com.example.fashionapp.model.CartModel
@@ -43,7 +44,6 @@ import java.util.*
 class CartFragment : Fragment() {
     lateinit var databinding: FragmentCartBinding
     val cartViewmodel: CartViewmodel by viewModels()
-
 
 
     override fun onCreateView(
@@ -70,12 +70,17 @@ class CartFragment : Fragment() {
     }
 
     fun setUpAdapter() {
-        cartViewmodel.listCard.observe(viewLifecycleOwner, EventObserver {
+        cartViewmodel.listCart.observe(viewLifecycleOwner, EventObserver {
             databinding.rvCart.apply {
                 adapter = CartAdapter(
                     it,
                     requireContext(),
-                    showListPopupWindow = { cartModel, view -> showListPopUpWindow(cartModel, view) }).apply {
+                    showListPopupWindow = { cartModel, view ->
+                        showListPopUpWindow(
+                            cartModel,
+                            view
+                        )
+                    }).apply {
                     passClickEvent(cartViewmodel)
                 }
                 layoutManager = LinearLayoutManager(requireContext())
@@ -107,13 +112,13 @@ class CartFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     @SuppressLint("MissingInflatedId")
-    fun showListPopUpWindow(cartModel: CartModel, view: View) {
+    fun showListPopUpWindow(cartModel: CartResponse, view: View) {
         activity?.let { it ->
             val popupView = it.layoutInflater.inflate(R.layout.dialog_pop_up_window, null)
             val tvAddToFavorite = popupView.findViewById<TextView>(R.id.tv_add_to_favorite)
             val tvDelte = popupView.findViewById<TextView>(R.id.tv_delete)
 
-            popupView == PopupWindow(
+            val popupWindow = PopupWindow(
                 popupView,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -125,15 +130,11 @@ class CartFragment : Fragment() {
             }
 
             tvAddToFavorite.setOnClickListener {
-                cartModel.idProduct?.let {id ->
-                    Define.listLikeItem.add(id)
-                }
             }
 
             tvDelte.setOnClickListener {
-                cartModel.idProduct?.let {
-                    cartViewmodel.deleteItem(it)
-                }
+                cartViewmodel.deleteItem(cartModel._id)
+                popupWindow.dismiss()
             }
         }
 

@@ -11,11 +11,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.Define
 import com.example.fashionapp.adapter.CartAdapter
 import com.example.fashionapp.data.local.MyResponsitory
+import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.model.BillModel
 import com.example.fashionapp.model.CartModel
 import com.example.fashionapp.utils.dialog.CustomDialog
 import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
+import com.example.fashionapp.utils.makeToast
 import com.example.fashionapp.zalo_payment.Api.CreateOrder
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,8 +38,8 @@ class CartViewmodel @Inject constructor(
     val myResponsitory: MyResponsitory,
     @ApplicationContext val context: Context,
 ) : ViewModel(), CartAdapter.ClickEvent, CustomDialog.ClickPayEvent {
-    private val _listCard = MutableLiveData<Event<List<CartModel>>>()
-    val listCard: LiveData<Event<List<CartModel>>> = _listCard
+    private val _listCart = MutableLiveData<Event<List<CartResponse>>>()
+    val listCart: LiveData<Event<List<CartResponse>>> = _listCart
     private val _clickCheckoutEvent = MutableLiveData<Event<Unit>>()
     val clickCheckoutEvent : LiveData<Event<Unit>> = _clickCheckoutEvent
     private val _clickPayZalo = MutableLiveData<Event<Unit>>()
@@ -46,37 +48,50 @@ class CartViewmodel @Inject constructor(
 
 
     fun getAllCart() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val username = Prefs.newInstance(context).getUsername()
-            val listCart = myResponsitory.getAllCart(username!!, idBill = Define.ITEM_NOT_CHECKOUT_INDEX)
-            _listCard.postValue(Event(listCart))
-            var total = 0.0
-            listCart.forEach {
-                total += (it.quantity!! * Define.listProduct[it.idProduct!!-1].price!!)
+        viewModelScope.launch {
+            val idUser = Prefs.newInstance(context).getId()
+            responsitoryImpl.getAllCart(idUser).apply {
+                if (errors.isEmpty()){
+                    updateListCart(this.dataResponse)
+                } else {
+                    context.makeToast(errors[0])
+                }
             }
-            totalPrice.postValue(total)
         }
     }
 
-    fun deleteItem(idProduct: Int){
-        val username = Prefs.newInstance(context).getUsername()
-        viewModelScope.launch(Dispatchers.IO) {
-            myResponsitory.deleteItemInCart(idProduct, username)
+    private fun updateListCart(listCart: List<CartResponse>){
+        _listCart.value = Event(listCart)
+        var total = 0.0
+        listCart.forEach{
+            total += it.totalPrice
+        }
+        totalPrice.value = total
+    }
+
+    fun deleteItem(idCartItem: Int){
+        val idUser = Prefs.newInstance(context).getId()
+        viewModelScope.launch {
+            responsitoryImpl.deleteCartItem(idCartItem, idUser).apply {
+                if (this.errors.isEmpty()){
+                    updateListCart(this.dataResponse)
+                } else {
+                    context.makeToast(errors[0])
+                }
+            }
         }
     }
 
-    override fun addQuantity(idProduct: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            myResponsitory.addProduct(Define.listProduct[idProduct-1],
-                Prefs.newInstance(context = context).getUsername()!!, 1)
-            totalPrice.postValue(totalPrice.value!! + Define.listProduct[idProduct-1].price!!)
-        }
-    }
-
-    override fun subtractQuantity(idProduct: Int, currentQuantity: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            myResponsitory.subtractOneQuantity(idProduct, Prefs.newInstance(context = context).getUsername()!!)
-            totalPrice.postValue(totalPrice.value!! - Define.listProduct[idProduct-1].price!!)
+    override fun editQuantity(idCartItem: Int, quantityChange:Int) {
+        val idUser = Prefs.newInstance(context).getId()
+        viewModelScope.launch {
+            responsitoryImpl.updateCart(idCartItem,quantityChange, idUser).apply {
+                if (this.errors.isEmpty()){
+                    updateListCart(this.dataResponse)
+                } else {
+                    context.makeToast(errors[0])
+                }
+            }
         }
     }
 
@@ -85,25 +100,25 @@ class CartViewmodel @Inject constructor(
     }
 
     fun checkout(){
-        viewModelScope.launch(Dispatchers.IO) {
-            val username = Prefs.newInstance(context).getUsername()
-            val listCartModel = myResponsitory.getAllCart(username!!, 0)
-            var total = 0
-            var quantity = 0
-            listCartModel.forEach {
-                if (it.price!=null && it.quantity!=null){
-                    total += it.price!!.toDouble().toInt() * it.quantity!!
-                    quantity = it.quantity!!
-                }
-            }
-            val currentTime = Calendar.getInstance().time
-            val sdf = SimpleDateFormat("yyyy-MM-dd")
-
-            myResponsitory.addBill(BillModel(null,quantity,sdf.format(currentTime),total,username))
-            val countBill = myResponsitory.getAnmountBill(Prefs.newInstance(context).getUsername()!!)
-            myResponsitory.checkout(countBill+1, Prefs.newInstance(context).getUsername()!!)
-            _listCard.postValue(Event(listOf()))
-        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val username = Prefs.newInstance(context).getUsername()
+//            val listCartModel = myResponsitory.getAllCart(username!!, 0)
+//            var total = 0
+//            var quantity = 0
+//            listCartModel.forEach {
+//                if (it.price!=null && it.quantity!=null){
+//                    total += it.price!!.toDouble().toInt() * it.quantity!!
+//                    quantity = it.quantity!!
+//                }
+//            }
+//            val currentTime = Calendar.getInstance().time
+//            val sdf = SimpleDateFormat("yyyy-MM-dd")
+//
+//            myResponsitory.addBill(BillModel(null,quantity,sdf.format(currentTime),total,username))
+//            val countBill = myResponsitory.getAnmountBill(Prefs.newInstance(context).getUsername()!!)
+//            myResponsitory.checkout(countBill+1, Prefs.newInstance(context).getUsername()!!)
+//            _listCart.postValue(Event(listOf()))
+//        }
     }
 
     override fun clickZalo() {

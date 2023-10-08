@@ -29,7 +29,7 @@ class SplashFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Handler().postDelayed(
             {
-                if (Prefs.newInstance(requireContext()).getToken().isNullOrBlank()){
+                if (Prefs.newInstance(requireContext()).getId() == 0){
                     val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                     findNavController().navigate(action)
                 } else{
