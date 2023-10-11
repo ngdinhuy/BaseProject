@@ -5,6 +5,7 @@ import com.example.fashionapp.data.remote.request.LoginRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
+import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.CategoryModel
 import com.example.fashionapp.model.UserModel
 import com.example.fashionapp.model.Product
@@ -62,5 +63,10 @@ class ShopAppResponsitoryImpl @Inject constructor(
     ): BaseResponse<List<CartResponse>> {
         return apiService.deleteCartItem(idCartItem, idUser)
     }
+
+    override suspend fun getUserInfo(idUser: Int): BaseResponse<UserInfoResponse> {
+        return apiService.getInfoUser(idUser)
+    }
+
 
 }

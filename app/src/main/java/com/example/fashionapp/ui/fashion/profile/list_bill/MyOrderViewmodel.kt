@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyOrderViewmodel @Inject constructor(
-    val myResponsitory: MyResponsitory,
     val shopAppResponsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context
 ): ViewModel() {
@@ -26,8 +25,6 @@ class MyOrderViewmodel @Inject constructor(
     val listOrder : LiveData<Event<List<BillModel>>> = _listOrder
 
     fun getListOrderFromServer(){
-        viewModelScope.launch(Dispatchers.IO) {
-            _listOrder.postValue(Event(myResponsitory.getAllBill(Prefs.newInstance(context).getUsername()!!)))
-        }
+
     }
 }

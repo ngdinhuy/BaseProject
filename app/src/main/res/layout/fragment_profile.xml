@@ -7,6 +7,10 @@
         <variable
             name="viewmodel"
             type="com.example.fashionapp.ui.fashion.profile.ProfileViewmodel" />
+
+        <variable
+            name="userInfo"
+            type="com.example.fashionapp.data.remote.response.UserInfoResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,6 +50,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
+            android:text="@{userInfo.name}"
             app:layout_constraintTop_toBottomOf="@id/tv_profile"
             android:layout_marginTop="@dimen/common_size_24dp"
             app:layout_constraintStart_toEndOf="@id/avatar"
@@ -57,6 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="matildabrown@mail.com"
             app:layout_constraintStart_toEndOf="@id/avatar"
+            android:text="@{userInfo.email}"
             android:layout_marginStart="@dimen/margin_16dp"
             android:textColor="@color/grey_9B9B9B"
             android:textSize="@dimen/text_size_14sp"
@@ -84,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{"Already have " + viewmodel.countBill.toString() + " orders"}'
+                android:text='@{userInfo.displayNumberOrder()}'
                 tools:text="Already have 12 orders"
                 android:textColor="@color/grey_9B9B9B"
                 android:layout_marginTop="@dimen/common_size_43dp"

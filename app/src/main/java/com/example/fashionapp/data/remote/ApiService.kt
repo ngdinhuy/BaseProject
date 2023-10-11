@@ -4,6 +4,7 @@ import com.example.fashionapp.data.remote.request.LoginRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
+import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.CategoryModel
 import com.example.fashionapp.model.UserModel
 import com.example.fashionapp.model.Product
@@ -57,4 +58,9 @@ interface ApiService {
         @Query("id_cart_item") idCartItem: Int,
         @Query("id_user") idUser: Int
     ): BaseResponse<List<CartResponse>>
+
+    @GET("user/{id}")
+    suspend fun getInfoUser(
+        @Path("id") idUser: Int
+    ): BaseResponse<UserInfoResponse>
 }

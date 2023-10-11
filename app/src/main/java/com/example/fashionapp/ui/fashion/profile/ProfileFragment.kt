@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentProfileBinding
@@ -36,11 +37,13 @@ class ProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewmodel.getInfoUser()
         setUpEvent()
-        viewmodel.getCountBillFromLocal()
     }
 
     private fun setUpEvent() {
-
+        viewmodel.userInfoResponse.observe(viewLifecycleOwner, Observer {
+            databinding.userInfo = it
+        })
     }
 }

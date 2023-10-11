@@ -3,6 +3,7 @@ package com.example.shopapp.data.remote
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
+import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.CategoryModel
 import com.example.fashionapp.model.UserModel
 import com.example.fashionapp.model.Product
@@ -32,4 +33,8 @@ interface ShopAppResponsitory {
         idCartItem: Int,
         idUser: Int
     ): BaseResponse<List<CartResponse>>
+
+    suspend fun getUserInfo(
+        idUser: Int
+    ): BaseResponse<UserInfoResponse>
 }
