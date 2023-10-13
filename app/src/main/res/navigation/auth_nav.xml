@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_fashionFragment_to_myOrderFragment"
             app:destination="@id/myOrderFragment" />
+        <action
+            android:id="@+id/action_fashionFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_fashionFragment"
@@ -88,5 +91,25 @@
         android:name="com.example.fashionapp.ui.fashion.profile.list_bill.MyOrderFragment"
         android:label="MyOrderFragment"
         tools:layout="@layout/fragment_my_order"
-        />
+        >
+        <action
+            android:id="@+id/action_myOrderFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.fashionapp.ui.fashion.profile.order_detail.OrderDetailFragment"
+        android:label="OrderDetailFragment"
+        tools:layout="@layout/fragment_order_detail">
+        <argument
+            android:name="orderModel"
+            app:argType="com.example.fashionapp.model.OrderModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.fashionapp.ui.fashion.profile.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"/>
 </navigation>

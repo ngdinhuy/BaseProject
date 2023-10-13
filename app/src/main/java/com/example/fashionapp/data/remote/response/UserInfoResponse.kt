@@ -11,7 +11,8 @@ class UserInfoResponse(
     val password: String? = "",
     val role: Int? = 0,
     val avatar: String? = "",
-    val totalOrder: Int = 0
+    val totalOrder: Int = 0,
+    val dob: String? = ""
 ) {
     fun displayNumberOrder(): String{
         return "Already have $totalOrder orders"

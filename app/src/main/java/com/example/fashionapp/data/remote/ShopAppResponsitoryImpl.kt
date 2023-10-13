@@ -2,13 +2,12 @@ package com.example.shopapp.data.remote
 
 
 import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
-import com.example.fashionapp.model.CategoryModel
-import com.example.fashionapp.model.UserModel
-import com.example.fashionapp.model.Product
+import com.example.fashionapp.model.*
 import javax.inject.Inject
 
 class ShopAppResponsitoryImpl @Inject constructor(
@@ -68,5 +67,19 @@ class ShopAppResponsitoryImpl @Inject constructor(
         return apiService.getInfoUser(idUser)
     }
 
+    override suspend fun getUserOrder(idUser: Int): BaseResponse<List<OrderModel>> {
+        return apiService.getAllUserOrder(idUser)
+    }
 
+    override suspend fun getAllOrderItem(idOrder: Int): BaseResponse<List<OrderItemDetail>> {
+        return apiService.getAllOrderItem(idOrder)
+    }
+
+    override suspend fun updateInfoUser(idUser: Int, request: UpdateUserInfoRequest): BaseResponse<UserInfoResponse> {
+        return apiService.updateInfoUser(idUser, request)
+    }
+
+    override suspend fun updatePassword(idUser: Int, newPassword: String, oldPassword: String):BaseResponse<UserInfoResponse> {
+        return apiService.updatePassword(idUser, newPassword, oldPassword)
+    }
 }

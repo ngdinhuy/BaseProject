@@ -1,13 +1,12 @@
 package com.example.shopapp.data.remote
 
 import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
-import com.example.fashionapp.model.CategoryModel
-import com.example.fashionapp.model.UserModel
-import com.example.fashionapp.model.Product
+import com.example.fashionapp.model.*
 import retrofit2.http.*
 import java.util.*
 
@@ -62,5 +61,29 @@ interface ApiService {
     @GET("user/{id}")
     suspend fun getInfoUser(
         @Path("id") idUser: Int
+    ): BaseResponse<UserInfoResponse>
+
+    @GET("order/all")
+    suspend fun getAllUserOrder(
+        @Query("id_user") idUser: Int
+    ): BaseResponse<List<OrderModel>>
+
+    @GET("order/detail")
+    suspend fun getAllOrderItem(
+        @Query("id_order") idOrder: Int
+    ): BaseResponse<List<OrderItemDetail>>
+
+    @PUT("user/{id}")
+    suspend fun updateInfoUser(
+        @Path("id") idUser : Int,
+        @Body updateUserInfo: UpdateUserInfoRequest
+    ): BaseResponse<UserInfoResponse>
+
+    @POST("auth/change_password")
+    @FormUrlEncoded
+    suspend fun updatePassword(
+        @Field("id_user") idUser: Int,
+        @Field("new_password") newPassword: String,
+        @Field("old_password") oldPassword: String
     ): BaseResponse<UserInfoResponse>
 }

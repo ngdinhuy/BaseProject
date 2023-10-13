@@ -1,12 +1,12 @@
 package com.example.shopapp.data.remote
 
+import androidx.room.Index.Order
+import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
-import com.example.fashionapp.model.CategoryModel
-import com.example.fashionapp.model.UserModel
-import com.example.fashionapp.model.Product
+import com.example.fashionapp.model.*
 
 interface ShopAppResponsitory {
     suspend fun getAllProducts(): BaseResponse<List<Product>>
@@ -36,5 +36,24 @@ interface ShopAppResponsitory {
 
     suspend fun getUserInfo(
         idUser: Int
+    ): BaseResponse<UserInfoResponse>
+
+    suspend fun getUserOrder(
+        idUser: Int
+    ): BaseResponse<List<OrderModel>>
+
+    suspend fun getAllOrderItem(
+        idOrder: Int
+    ): BaseResponse<List<OrderItemDetail>>
+
+    suspend fun updateInfoUser(
+        idUser: Int,
+        request: UpdateUserInfoRequest
+    ): BaseResponse<UserInfoResponse>
+
+    suspend fun updatePassword(
+        idUser: Int,
+        newPassword: String,
+        oldPassword: String
     ): BaseResponse<UserInfoResponse>
 }
