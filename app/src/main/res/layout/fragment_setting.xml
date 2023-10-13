@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.fashionapp.ui.fashion.profile.setting.SettingViewmodel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_app_color"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/commin_size_16dp">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="@dimen/common_size_24dp"
+                android:layout_height="@dimen/common_size_24dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_back_button_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="34dp"
+                android:text="Settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_34sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_back" />
+
+            <TextView
+                android:id="@+id/tv_personal_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/commin_size_16dp"
+                android:layout_marginTop="@dimen/common_size_24dp"
+                android:text="Personal Information"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_settings" />
+
+            <EditText
+                android:id="@+id/et_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_radius_4dp_ffffff"
+                android:hint="Full name"
+                android:paddingVertical="@dimen/commin_size_22dp"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:text="@={viewmodel.fullName}"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_personal_info" />
+
+            <EditText
+                android:id="@+id/et_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_radius_4dp_ffffff"
+                android:hint="dd/mm/yyyy"
+                android:text="@={viewmodel.dob}"
+                android:paddingVertical="@dimen/commin_size_22dp"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/et_fullname" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_radius_4dp_ffffff"
+                android:hint="Email"
+                android:paddingVertical="@dimen/commin_size_22dp"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:text="@={viewmodel.email}"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/et_dob" />
+
+            <EditText
+                android:id="@+id/et_phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_radius_4dp_ffffff"
+                android:hint="Phone Number"
+                android:paddingVertical="@dimen/commin_size_22dp"
+                android:paddingStart="20dp"
+                android:text="@={viewmodel.phoneNumber}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/et_email" />
+
+            <TextView
+                android:id="@+id/tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/commin_size_16dp"
+                android:layout_marginTop="@dimen/common_size_24dp"
+                android:text="Password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_phonenumber" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/commin_size_16dp"
+                android:text="Change"
+                android:textColor="@color/grey_9B9B9B"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_password"
+                android:onClick="@{()->viewmodel.clickChangePassword()}"/>
+
+            <LinearLayout
+                android:id="@+id/ll_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                android:layout_marginTop="@dimen/commin_size_16dp"
+                android:background="@drawable/bg_radius_4dp_ffffff"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tv_password">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Password"
+                    android:textColor="@color/grey_9B9B9B"
+                    android:textSize="@dimen/text_size_11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/common_size_5dp"
+                    android:layout_marginBottom="14dp"
+                    android:textColor="@color/black"
+                    android:text="@={viewmodel.password}"
+                    android:textSize="14sp"
+                    tools:text="123456" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:background="@drawable/bg_btn_primary_enable"
+                app:layout_constraintTop_toBottomOf="@id/ll_password"
+                android:paddingVertical="@dimen/common_size_14dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14sp"
+                android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                android:onClick="@{() -> viewmodel.updateUserInfo()}"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/commin_size_16dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

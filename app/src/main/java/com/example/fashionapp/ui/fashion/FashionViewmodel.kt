@@ -19,12 +19,15 @@ class FashionViewmodel @Inject constructor(
 ): ViewModel() {
     val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading : LiveData<Event<Boolean>> = _isLoading
+
     val _goToDetailEvent = MutableLiveData<Event<Product>>()
     val goToDetailEvent : LiveData<Event<Product>> = _goToDetailEvent
     val _goToListProductEvent = MutableLiveData<Event<CategoryModel>>()
     val goToListProductEvent : LiveData<Event<CategoryModel>> = _goToListProductEvent
     private val _goToMyOrderEvent = MutableLiveData<Event<Unit>>()
     val goToMyOderEvent : LiveData<Event<Unit>> = _goToMyOrderEvent
+    private val _goToSettingEvent = MutableLiveData<Event<Unit>>()
+    val goToSettingEvent : LiveData<Event<Unit>> = _goToSettingEvent
 
     var filter = 0
 
@@ -37,5 +40,9 @@ class FashionViewmodel @Inject constructor(
 
     fun goToMyOrder(){
         _goToMyOrderEvent.value = Event(Unit)
+    }
+
+    fun goToSetting(){
+        _goToSettingEvent.value = Event(Unit)
     }
 }

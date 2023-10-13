@@ -6,8 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fashionapp.databinding.ItemOrderBinding
 import com.example.fashionapp.model.BillModel
+import com.example.fashionapp.model.OrderModel
 
-class OrderAdapter(val context: Context, val listBill : List<BillModel>) : RecyclerView.Adapter<OrderAdapter.ViewHolder>(){
+class OrderAdapter(val context: Context,
+                   var listBill : List<OrderModel>,
+                    val onItemClick: (orderModel:OrderModel) -> Unit)
+    : RecyclerView.Adapter<OrderAdapter.ViewHolder>(){
 
 
     inner class ViewHolder(val databinding: ItemOrderBinding ):RecyclerView.ViewHolder(databinding.root){
@@ -25,6 +29,9 @@ class OrderAdapter(val context: Context, val listBill : List<BillModel>) : Recyc
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.databinding.apply {
             order = listBill[position]
+            root.setOnClickListener {
+                onItemClick(listBill[position])
+            }
         }
     }
 

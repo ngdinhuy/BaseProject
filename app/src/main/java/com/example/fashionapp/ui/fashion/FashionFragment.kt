@@ -70,6 +70,11 @@ class FashionFragment : Fragment() {
             val action = FashionFragmentDirections.actionFashionFragmentToMyOrderFragment()
             findNavController().navigate(action)
         })
+
+        viewmodel.goToSettingEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = FashionFragmentDirections.actionFashionFragmentToSettingFragment()
+            findNavController().navigate(action)
+        })
     }
 
     private fun setUpNavigation() {

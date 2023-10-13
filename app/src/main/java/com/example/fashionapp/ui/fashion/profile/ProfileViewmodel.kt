@@ -36,6 +36,10 @@ class ProfileViewmodel @Inject constructor(
         fashionViewmodel.goToMyOrder()
     }
 
+    fun goToSetting(){
+        fashionViewmodel.goToSetting()
+    }
+
     fun getInfoUser(){
         val idUser = Prefs.newInstance(context).getId()
         viewModelScope.launch {

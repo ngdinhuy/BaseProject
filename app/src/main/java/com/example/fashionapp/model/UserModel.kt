@@ -11,6 +11,7 @@ class UserModel(
     @SerializedName("phoneNumber") val phoneNumber: String?,
     @SerializedName("username") val username: String?,
     @SerializedName("password") val password: String?,
-    @SerializedName("avatar") val avatar: String?
+    @SerializedName("avatar") val avatar: String?,
+    @SerializedName("dob") val dob: String? = ""
 ) : Parcelable{
 }

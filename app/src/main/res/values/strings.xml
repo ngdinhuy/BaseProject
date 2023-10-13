@@ -31,4 +31,6 @@
     <string name="sort_by">Sort by</string>
 
     <string name="price_discount">-%s</string>
+
+    <string name="order_detail">Order Details</string>
 </resources>
