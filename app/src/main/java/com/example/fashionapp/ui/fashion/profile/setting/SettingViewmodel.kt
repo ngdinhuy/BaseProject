@@ -23,13 +23,14 @@ import javax.inject.Inject
 class SettingViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context
-) : ViewModel(){
+) : ViewModel(), ClickEvent{
     val fullName = MutableLiveData<String>()
     val dob = MutableLiveData<String>()
     val email = MutableLiveData<String>()
     val phoneNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
+    val clickChangePasswordEvent = MutableLiveData<Event<Unit>>()
 
     fun getInfo() {
         val idUser = Prefs.newInstance(context).getId();
@@ -71,4 +72,29 @@ class SettingViewmodel @Inject constructor(
         }
     }
 
+    fun clickChangePassword(){
+        clickChangePasswordEvent.value = Event(Unit)
+    }
+    private fun updatePassword(oldPassword: String, newPassword: String){
+        val idUser = Prefs.newInstance(context).getId()
+        viewModelScope.launch {
+            viewModelScope.launch {
+                responsitoryImpl.updatePassword(idUser, newPassword, oldPassword).apply {
+                    if (this.errors.isEmpty()) {
+                        val data = this.dataResponse ?: UserInfoResponse()
+                        password.value = data.password ?: ""
+                        context.makeToast("Update Success")
+                    } else {
+                        context.makeToast(errors[0])
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    override fun clickSave(oldPassword: String, newPassword: String) {
+        updatePassword(oldPassword, newPassword)
+    }
 }

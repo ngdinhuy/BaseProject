@@ -40,6 +40,11 @@ class SettingFragment:Fragment(), DatePickerDialog.OnDateSetListener{
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun setUpEvent() {
+        viewmodel.clickChangePasswordEvent.observe(viewLifecycleOwner, Observer {
+            val changePasswordBottomSheetDialog = ChangePasswordBottomSheetDialog().apply {
+                this.clickEvent = viewmodel
+            }.show(activity?.supportFragmentManager!!, "")
+        })
 
         databinding.etDob.setOnClickListener {
             showDatePickerDialog(viewmodel.dob.value)
