@@ -3,9 +3,11 @@ package com.example.fashionapp.data.ui.auth.login
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
@@ -24,6 +26,9 @@ class LoginViewmodel @Inject constructor(
     val enableButton = MutableLiveData<Boolean>(false)
     val stateLogin = MutableLiveData<Boolean>()
     val isLoading = MutableLiveData<Boolean>()
+
+    private val _goToRegisterEvent = MutableLiveData<Event<Unit>>()
+    val goToRegisterEvent : LiveData<Event<Unit>> = _goToRegisterEvent
     fun validate() {
         enableButton.value = !(password.value.isNullOrBlank() || password.value!!.length < 6 ||
                 usernmae.value.isNullOrBlank())
@@ -49,6 +54,10 @@ class LoginViewmodel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun goToRegister(){
+        _goToRegisterEvent.value = Event(Unit)
     }
 
 }

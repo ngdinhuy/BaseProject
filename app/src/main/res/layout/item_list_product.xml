@@ -32,7 +32,7 @@
                     android:layout_height="104dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:loadImage="@{product.image}"/>
+                    app:loadImage="@{product.image[0]}"/>
 
                 <LinearLayout
                     android:layout_width="0dp"

@@ -1,6 +1,7 @@
 package com.example.shopapp.data.remote
 
 import androidx.room.Index.Order
+import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
@@ -56,4 +57,8 @@ interface ShopAppResponsitory {
         newPassword: String,
         oldPassword: String
     ): BaseResponse<UserInfoResponse>
+
+    suspend fun signUp(
+        request: SignUpRequest
+    ): BaseResponse<UserModel>
 }

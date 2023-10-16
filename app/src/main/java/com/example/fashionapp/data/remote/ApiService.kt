@@ -1,6 +1,7 @@
 package com.example.shopapp.data.remote
 
 import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
@@ -86,4 +87,9 @@ interface ApiService {
         @Field("new_password") newPassword: String,
         @Field("old_password") oldPassword: String
     ): BaseResponse<UserInfoResponse>
+
+    @POST("auth/register")
+    suspend fun signUp(
+        @Body request: SignUpRequest
+    ): BaseResponse<UserModel>
 }

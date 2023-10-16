@@ -3,6 +3,7 @@ package com.example.fashionapp.binding
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -28,5 +29,11 @@ object Databinding {
         } else {
             this.visibility = View.GONE
         }
+    }
+
+    @BindingAdapter("app:selected")
+    @JvmStatic
+    fun TextView.isSelected(isSelected: Boolean){
+        this.isSelected = isSelected
     }
 }

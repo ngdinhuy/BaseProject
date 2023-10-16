@@ -27,7 +27,9 @@ class CartAdapter(
         fun onBind(item: CartResponse){
             binding.apply {
                 cartModel = item
-                Glide.with(context).load(item.product.image).into(image)
+                if (!item.product.image.isNullOrEmpty()){
+                    Glide.with(context).load(item.product.image[0]).into(image)
+                }
                 tvName.text = item.product.name
 
                 btnAdd.setOnClickListener{

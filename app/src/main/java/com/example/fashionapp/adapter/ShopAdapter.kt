@@ -32,8 +32,8 @@ class ShopAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.product = list[position]
-        if (list[position].image != null) {
-            Glide.with(context).load(list[position].image).into(holder.binding.ivItem)
+        if (!list[position].image.isNullOrEmpty()) {
+            Glide.with(context).load(list[position].image?.get(0)).into(holder.binding.ivItem)
         }
         holder.binding.clItem.setOnClickListener{
             goToDetailEvent?.goToDetail(list[position])

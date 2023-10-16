@@ -21,41 +21,23 @@
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/commin_size_16dp">
 
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="@dimen/common_size_24dp"
-                android:layout_height="@dimen/common_size_24dp"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_back_button_black"
-                app:layout_constraintStart_toStartOf="parent"
+            <com.example.fashionapp.component.ToolbarCustom
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginTop="34dp"
-                android:text="Settings"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_34sp"
-                android:textStyle="bold"
+                android:text="Setting Infomation"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_back" />
-
-            <TextView
-                android:id="@+id/tv_personal_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/commin_size_16dp"
-                android:layout_marginTop="@dimen/common_size_24dp"
-                android:text="Personal Information"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_settings" />
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/et_fullname"
@@ -70,7 +52,7 @@
                 android:textColor="@color/black"
                 android:text="@={viewmodel.fullName}"
                 android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@id/tv_personal_info" />
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
             <EditText
                 android:id="@+id/et_dob"
@@ -112,74 +94,19 @@
                 android:hint="Phone Number"
                 android:paddingVertical="@dimen/commin_size_22dp"
                 android:paddingStart="20dp"
+                android:inputType="phone"
                 android:text="@={viewmodel.phoneNumber}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@id/et_email" />
 
-            <TextView
-                android:id="@+id/tv_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/commin_size_16dp"
-                android:layout_marginTop="@dimen/common_size_24dp"
-                android:text="Password"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_phonenumber" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/commin_size_16dp"
-                android:text="Change"
-                android:textColor="@color/grey_9B9B9B"
-                android:textSize="@dimen/text_size_14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/tv_password"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_password"
-                android:onClick="@{()->viewmodel.clickChangePassword()}"/>
-
-            <LinearLayout
-                android:id="@+id/ll_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/commin_size_16dp"
-                android:layout_marginTop="@dimen/commin_size_16dp"
-                android:background="@drawable/bg_radius_4dp_ffffff"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/tv_password">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="14dp"
-                    android:text="Password"
-                    android:textColor="@color/grey_9B9B9B"
-                    android:textSize="@dimen/text_size_11sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/common_size_5dp"
-                    android:layout_marginBottom="14dp"
-                    android:textColor="@color/black"
-                    android:text="@={viewmodel.password}"
-                    android:textSize="14sp"
-                    tools:text="123456" />
-            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save"
                 android:background="@drawable/bg_btn_primary_enable"
-                app:layout_constraintTop_toBottomOf="@id/ll_password"
+                app:layout_constraintTop_toBottomOf="@id/et_phonenumber"
                 android:paddingVertical="@dimen/common_size_14dp"
                 android:gravity="center"
                 android:textColor="@color/white"

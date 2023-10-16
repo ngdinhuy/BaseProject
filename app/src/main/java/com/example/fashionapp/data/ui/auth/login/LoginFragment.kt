@@ -1,6 +1,10 @@
 package com.example.fashionapp.data.ui.auth.login
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.fashionapp.R
 import com.example.fashionapp.databinding.FragmentLoginBinding
 import com.example.fashionapp.ui.fashion.FashionFragment
 import com.example.fashionapp.ui.fashion.FashionFragmentDirections
@@ -38,6 +43,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val text = getText(R.string.have_account)
+        val content = SpannableString(text)
+        content.setSpan(UnderlineSpan(), 18, text.length, 0)
+        content.setSpan(ForegroundColorSpan(Color.RED), 18, text.length, 0)
+        databinding.tvRegister.text = content
         setUpEvent()
     }
 
@@ -53,6 +63,10 @@ class LoginFragment : Fragment() {
             } else {
                 findNavController().popBackStack()
             }
+        })
+        loginViewmodel.goToRegisterEvent.observe(viewLifecycleOwner, Observer {
+            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+            findNavController().navigate(action)
         })
     }
 }

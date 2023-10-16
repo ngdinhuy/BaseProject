@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.component.ClickEvent
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.ui.fashion.FashionViewmodel
@@ -24,9 +25,11 @@ class ProfileViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context,
     val myResponsitory: MyResponsitory
-): ViewModel() {
+): ViewModel(), ClickEvent {
     lateinit var fashionViewmodel : FashionViewmodel
     val userInfoResponse = MutableLiveData<UserInfoResponse>()
+    val clickChangePasswordEvent = MutableLiveData<Event<Unit>>()
+
 
     fun logout(){
         fashionViewmodel.logout()
@@ -52,4 +55,29 @@ class ProfileViewmodel @Inject constructor(
             }
         }
     }
+
+    fun clickChangePassword(){
+        clickChangePasswordEvent.value = Event(Unit)
+    }
+
+    override fun clickSave(oldPassword: String, newPassword: String) {
+        updatePassword(oldPassword, newPassword)
+    }
+
+    private fun updatePassword(oldPassword: String, newPassword: String){
+        val idUser = Prefs.newInstance(context).getId()
+        viewModelScope.launch {
+            viewModelScope.launch {
+                responsitoryImpl.updatePassword(idUser, newPassword, oldPassword).apply {
+                    if (this.errors.isEmpty()) {
+                        val data = this.dataResponse ?: UserInfoResponse()
+                        context.makeToast("Update success: new password: ${data.password}")
+                    } else {
+                        context.makeToast(errors[0])
+                    }
+                }
+            }
+        }
+    }
+
 }

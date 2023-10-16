@@ -33,4 +33,5 @@
     <string name="price_discount">-%s</string>
 
     <string name="order_detail">Order Details</string>
+    <string name="have_account">Not a member yet? Register</string>
 </resources>

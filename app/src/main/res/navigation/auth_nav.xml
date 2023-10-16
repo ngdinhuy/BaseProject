@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_loginFragment_to_fashionFragment"
             app:destination="@id/fashionFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <dialog
         android:id="@+id/loadingFragment"
@@ -112,4 +115,9 @@
         android:name="com.example.fashionapp.ui.fashion.profile.setting.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting"/>
+    <fragment
+        android:id="@+id/registerFragment"
+        tools:layout="@layout/fragment_register"
+        android:name="com.example.fashionapp.data.ui.auth.register.RegisterFragment"
+        android:label="RegisterFragment" />
 </navigation>

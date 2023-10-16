@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:translationZ="0dp"
-        android:background="@color/white"
+        android:background="@color/background_app_color"
         >
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_item"
@@ -28,7 +28,7 @@
                 android:id="@+id/iv_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 tools:src="@drawable/ic_sample_clothing"
                 android:background="@drawable/bg_image_radius_8dp"
                 />
@@ -112,7 +112,7 @@
             android:textSize="@dimen/text_size_16sp"
             android:lines="2"
             />
-        
+
         <TextView
             android:id="@+id/tv_old_price"
             android:layout_width="wrap_content"

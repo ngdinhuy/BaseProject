@@ -2,6 +2,7 @@ package com.example.shopapp.data.remote
 
 
 import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.data.remote.response.BaseResponse
@@ -81,5 +82,9 @@ class ShopAppResponsitoryImpl @Inject constructor(
 
     override suspend fun updatePassword(idUser: Int, newPassword: String, oldPassword: String):BaseResponse<UserInfoResponse> {
         return apiService.updatePassword(idUser, newPassword, oldPassword)
+    }
+
+    override suspend fun signUp(request: SignUpRequest): BaseResponse<UserModel> {
+        return apiService.signUp(request)
     }
 }

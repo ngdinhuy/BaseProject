@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.fashionapp.component.ChangePasswordBottomSheetDialog
 import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentProfileBinding
 import com.example.fashionapp.ui.fashion.FashionViewmodel
@@ -45,5 +46,12 @@ class ProfileFragment: Fragment() {
         viewmodel.userInfoResponse.observe(viewLifecycleOwner, Observer {
             databinding.userInfo = it
         })
+
+        viewmodel.clickChangePasswordEvent.observe(viewLifecycleOwner, EventObserver {
+            val changePasswordBottomSheetDialog = ChangePasswordBottomSheetDialog().apply {
+                this.clickEvent = viewmodel
+            }.show(activity?.supportFragmentManager!!, "")
+        })
+
     }
 }

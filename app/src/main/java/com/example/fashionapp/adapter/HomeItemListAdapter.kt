@@ -1,10 +1,16 @@
 package com.example.fashionapp.adapter
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
+import android.view.RoundedCorner
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.fashionapp.databinding.ItemRvClothingBinding
 import com.example.fashionapp.model.Product
 
@@ -24,7 +30,11 @@ class HomeItemListAdapter(val context: Context, val list: ArrayList<Product>) :
 
     override fun onBindViewHolder(holder: HomeItemViewHolder, position: Int) {
         holder.binding.product = list[position]
-        Glide.with(context).load(list[position].image).into(holder.binding.ivItem)
+        if (!list[position].image.isNullOrEmpty()){
+            Glide.with(context)
+                .load(list[position].image?.get(0))
+                .into(holder.binding.ivItem)
+        }
         holder.binding.clItem.setOnClickListener{
             goToDetailEvent?.goToDetail(list[position])
         }

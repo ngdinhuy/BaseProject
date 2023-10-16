@@ -13,7 +13,7 @@ class Product(
     val price: Double?,
     val description: String?,
     val discount: Int?,
-    val image: String?,
+    val image: List<String>?,
     val rate: Int?,
     val reviewNumber: String?,
     @SerializedName("idSeller") val user:UserModel?
