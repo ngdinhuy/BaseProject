@@ -36,9 +36,13 @@ class ProfileFragment: Fragment() {
         return databinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewmodel.getInfoUser()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewmodel.getInfoUser()
         setUpEvent()
     }
 

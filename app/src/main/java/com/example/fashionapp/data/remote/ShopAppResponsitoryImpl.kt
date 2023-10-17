@@ -1,6 +1,7 @@
 package com.example.shopapp.data.remote
 
 
+import android.net.Uri
 import com.example.fashionapp.data.remote.request.LoginRequest
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
@@ -9,6 +10,9 @@ import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.*
+import okhttp3.MultipartBody
+import vn.zalopay.sdk.analytic.network.http.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 class ShopAppResponsitoryImpl @Inject constructor(
@@ -80,11 +84,19 @@ class ShopAppResponsitoryImpl @Inject constructor(
         return apiService.updateInfoUser(idUser, request)
     }
 
-    override suspend fun updatePassword(idUser: Int, newPassword: String, oldPassword: String):BaseResponse<UserInfoResponse> {
+    override suspend fun updatePassword(
+        idUser: Int,
+        newPassword: String,
+        oldPassword: String
+    ): BaseResponse<UserInfoResponse> {
         return apiService.updatePassword(idUser, newPassword, oldPassword)
     }
 
     override suspend fun signUp(request: SignUpRequest): BaseResponse<UserModel> {
         return apiService.signUp(request)
+    }
+
+    override suspend fun changeAvatar(idUser: Int, multipartBody: MultipartBody.Part): BaseResponse<UserModel> {
+        return apiService.changeAvatar(idUser, multipartBody)
     }
 }

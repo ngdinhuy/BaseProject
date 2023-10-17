@@ -1,9 +1,10 @@
 package com.example.fashionapp
 
+import android.Manifest
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://192.168.0.100:8080"
+    const val BASE_URL = "http://10.1.30.182:8080"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 
@@ -29,5 +30,15 @@ object Define {
 
     const val SPAN_COUNT_GRIDLAYOUT_CATEGORY = 2
 
+    const val HTTP = "http"
+
     val listFilterText = listOf("","Customer review", "Price: lowest to high", "Price: highest to low")
+
+    val listPermission = listOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+
 }

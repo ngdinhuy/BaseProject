@@ -1,5 +1,6 @@
 package com.example.shopapp.data.remote
 
+import android.net.Uri
 import androidx.room.Index.Order
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
@@ -8,6 +9,7 @@ import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.*
+import okhttp3.MultipartBody
 
 interface ShopAppResponsitory {
     suspend fun getAllProducts(): BaseResponse<List<Product>>
@@ -61,4 +63,6 @@ interface ShopAppResponsitory {
     suspend fun signUp(
         request: SignUpRequest
     ): BaseResponse<UserModel>
+
+    suspend fun changeAvatar(idUser: Int, multipartBody: MultipartBody.Part): BaseResponse<UserModel>
 }

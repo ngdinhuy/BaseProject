@@ -8,6 +8,7 @@ import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.*
+import okhttp3.MultipartBody
 import retrofit2.http.*
 import java.util.*
 
@@ -91,5 +92,12 @@ interface ApiService {
     @POST("auth/register")
     suspend fun signUp(
         @Body request: SignUpRequest
+    ): BaseResponse<UserModel>
+
+    @Multipart
+    @POST("user/change_avatar/{id}")
+    suspend fun changeAvatar(
+        @Path("id") id: Int,
+        @Part multipartFile: MultipartBody.Part
     ): BaseResponse<UserModel>
 }
