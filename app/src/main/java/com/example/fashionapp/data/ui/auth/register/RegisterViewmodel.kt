@@ -26,7 +26,7 @@ class RegisterViewmodel @Inject constructor(
     val role = MutableLiveData(0)
     val enableButton = MutableLiveData<Boolean>(false)
 
-    val goToFashion = MutableLiveData<Event<Unit>>()
+    val loginSuccessEvent = MutableLiveData<Event<Int>>()
 
     fun validate() {
         if (name.value.isNullOrBlank()
@@ -58,7 +58,8 @@ class RegisterViewmodel @Inject constructor(
                 if (this.errors.isEmpty()){
                     val response = this.dataResponse
                     Prefs.newInstance(context).setId(response.id?:0)
-                    goToFashion.value = Event(Unit)
+                    Prefs.newInstance(context).setRole(response.role?: -1)
+                    loginSuccessEvent.value = Event(response.role?: -1)
                 } else {
                     context.makeToast(errors[0])
                 }

@@ -1,6 +1,7 @@
 package com.example.shopapp.data.remote
 
 import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.request.RequestProduct
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
@@ -100,4 +101,38 @@ interface ApiService {
         @Path("id") id: Int,
         @Part multipartFile: MultipartBody.Part
     ): BaseResponse<UserModel>
+
+    @GET("product/seller/{id}")
+    suspend fun getListProductBySellerId(
+        @Path("id")idSeller : Int
+    ): BaseResponse<kotlin.collections.List<Product>>
+
+    @Multipart
+    @POST("product/insert")
+    suspend fun insertProduct(
+        @Part("requestProduct") requestProduct: RequestProduct,
+        @Part multipartFiles: List<MultipartBody.Part>
+    ): BaseResponse<Any>
+
+    @POST("order/insert")
+    @FormUrlEncoded
+    suspend fun checkouut(
+        @Field("idUser")idUser: Int
+    ): BaseResponse<Any>
+
+    @GET("statistic/monthly_income")
+    suspend fun getStatisMonthly(
+        @Query("idSeller") idSeller: Int
+    ): BaseResponse<Map<String, Double>>
+
+    @GET("statistic/statistic_current_month")
+    suspend fun getCurrentStatistic(
+        @Query("idSeller") idSeller: Int,
+        @Query("type") type: Int
+    ): BaseResponse<Double>
+
+    @GET("product/detail")
+    suspend fun getProductById(
+        @Query("id") id: Int
+    ): BaseResponse<Product>
 }

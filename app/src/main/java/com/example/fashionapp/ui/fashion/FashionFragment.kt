@@ -50,7 +50,7 @@ class FashionFragment : Fragment() {
         })
 
         viewmodel.goToDetailEvent.observe(viewLifecycleOwner, EventObserver {
-            val action = FashionFragmentDirections.actionFashionFragmentToDetailProductFragment(it)
+            val action = FashionFragmentDirections.actionFashionFragmentToDetailProductFragment(it._id ?: 0)
             findNavController().navigate(action)
         })
 

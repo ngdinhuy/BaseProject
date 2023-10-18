@@ -14,6 +14,15 @@ plugins {
     id 'com.google.dagger.hilt.android' version '2.44' apply false
     id 'androidx.navigation.safeargs' version '2.5.3' apply false
 }
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -74,11 +74,12 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/avatar"
             android:orientation="vertical"
+            android:layout_marginTop="46dp"
             >
             <FrameLayout
+                android:id="@+id/fl_my_order"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:layout_marginTop="46dp"
                 android:onClick="@{()->viewmodel.goToMyOrder()}"
                 >
                 <TextView
@@ -180,7 +181,6 @@
                     android:layout_marginEnd="@dimen/common_size_14dp"
                     android:src="@drawable/ic_arrow_forward"/>
             </FrameLayout>
-
         </LinearLayout>
         <TextView
             android:id="@+id/btn_logout"

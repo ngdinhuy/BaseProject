@@ -12,7 +12,9 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.fashionapp.Define
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 
@@ -42,18 +44,39 @@ class Utils {
 
         fun checkListPermission(context: Context, permissions: List<String>): Boolean {
             permissions.forEach {
-                if (ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(
+                        context,
+                        it
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     return false
                 }
             }
             return true
         }
 
-        fun getImageUri(context: Context, image: Bitmap) : String{
+        fun getImageUri(context: Context, image: Bitmap): String {
             val bytes = ByteArrayOutputStream()
-            image.compress(Bitmap.CompressFormat.PNG,100,bytes)
-            val uri = MediaStore.Images.Media.insertImage(context!!.contentResolver,image,"IMG_"+ Calendar.getInstance().time,null)
+            image.compress(Bitmap.CompressFormat.PNG, 100, bytes)
+            val uri = MediaStore.Images.Media.insertImage(
+                context!!.contentResolver,
+                image,
+                "IMG_" + Calendar.getInstance().time,
+                null
+            )
             return uri
+        }
+
+        fun getCurrentMonth(): String? {
+            return (Calendar.getInstance()[Calendar.MONTH] + 1).toString() + "/" + Calendar.getInstance()[Calendar.YEAR]
+        }
+
+        fun getMapStatistic(map: Map<String, Double>): MutableMap<String, Double> {
+            var result = mutableMapOf<String, Double>()
+            Define.listMonthOfYear.forEach {
+                result[it] = map[it] ?: 0.0
+            }
+            return result
         }
 
         fun getPathFromUri(context: Context, uri: Uri): String? {
@@ -64,7 +87,8 @@ class Utils {
                 // ExternalStorageProvider
                 if (isExternalStorageDocument(uri)) {
                     val docId = DocumentsContract.getDocumentId(uri)
-                    val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                    val split =
+                        docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                     val type = split[0]
                     if ("primary".equals(type, ignoreCase = true)) {
                         return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
@@ -74,12 +98,14 @@ class Utils {
                 } else if (isDownloadsDocument(uri)) {
                     val id = DocumentsContract.getDocumentId(uri)
                     val contentUri: Uri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
+                        Uri.parse("content://downloads/public_downloads"),
+                        java.lang.Long.valueOf(id)
                     )
                     return getDataColumn(context, contentUri, null, null)
                 } else if (isMediaDocument(uri)) {
                     val docId = DocumentsContract.getDocumentId(uri)
-                    val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                    val split =
+                        docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                     val type = split[0]
                     var contentUri: Uri? = null
                     if ("image" == type) {
@@ -98,7 +124,12 @@ class Utils {
             } else if ("content".equals(uri.getScheme(), ignoreCase = true)) {
 
                 // Return the remote address
-                return if (isGooglePhotosUri(uri)) uri.getLastPathSegment() else getDataColumn(context, uri, null, null)
+                return if (isGooglePhotosUri(uri)) uri.getLastPathSegment() else getDataColumn(
+                    context,
+                    uri,
+                    null,
+                    null
+                )
             } else if ("file".equals(uri.getScheme(), ignoreCase = true)) {
                 return uri.getPath()
             }

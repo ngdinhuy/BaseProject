@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.fashionapp.Role
+import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentRegisterBinding
 import com.example.fashionapp.ui.fashion.FashionFragmentDirections
+import com.example.fashionapp.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,9 +34,14 @@ class RegisterFragment: Fragment() {
     }
 
     private fun setUpEvent() {
-        registerViewmodel.goToFashion.observe(viewLifecycleOwner, Observer {
-            val action = FashionFragmentDirections.actionGlobalFashionFragment()
-            findNavController().navigate(action)
+        registerViewmodel.loginSuccessEvent.observe(viewLifecycleOwner, EventObserver {
+            if (it == Role.SELLER){
+                val action = SplashFragmentDirections.actionGlobalSellerFragment()
+                findNavController().navigate(action)
+            } else {
+                val action = SplashFragmentDirections.actionGlobalFashionFragment()
+                findNavController().navigate(action)
+            }
         })
     }
 }

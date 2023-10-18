@@ -70,7 +70,7 @@ class ListProductFragment : Fragment(), ListProductAdapter.ItemClickEvent {
     }
 
     override fun goToProductDetail(product: Product) {
-        val action = DetailProductFragmentDirections.actionGlobalDetailProductFragment(product)
+        val action = DetailProductFragmentDirections.actionGlobalDetailProductFragment(product._id ?: 0)
         findNavController().navigate(action)
     }
 }

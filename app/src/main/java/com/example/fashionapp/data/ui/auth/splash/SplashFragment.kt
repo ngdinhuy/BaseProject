@@ -1,4 +1,4 @@
-package com.example.fashionapp.data.ui.auth.splash
+ package com.example.fashionapp.data.ui.auth.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.fashionapp.Role
 import com.example.fashionapp.databinding.FrgamentSplashBinding
 import com.example.fashionapp.utils.Prefs
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,8 +34,13 @@ class SplashFragment:Fragment() {
                     val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                     findNavController().navigate(action)
                 } else{
-                    val action = SplashFragmentDirections.actionGlobalFashionFragment()
-                    findNavController().navigate(action)
+                    if (Prefs.newInstance(requireContext()).getRole() == Role.SELLER){
+                        val action = SplashFragmentDirections.actionGlobalSellerFragment()
+                        findNavController().navigate(action)
+                    } else {
+                        val action = SplashFragmentDirections.actionGlobalFashionFragment()
+                        findNavController().navigate(action)
+                    }
                 }
 
             },2000

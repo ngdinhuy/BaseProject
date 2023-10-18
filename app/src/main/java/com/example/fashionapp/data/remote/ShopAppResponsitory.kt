@@ -2,6 +2,7 @@ package com.example.shopapp.data.remote
 
 import android.net.Uri
 import androidx.room.Index.Order
+import com.example.fashionapp.data.remote.request.RequestProduct
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
@@ -65,4 +66,16 @@ interface ShopAppResponsitory {
     ): BaseResponse<UserModel>
 
     suspend fun changeAvatar(idUser: Int, multipartBody: MultipartBody.Part): BaseResponse<UserModel>
+
+    suspend fun getListProductBySellerId(idUser: Int): BaseResponse<List<Product>>
+
+    suspend fun insertProduct(request: RequestProduct, list: List<MultipartBody.Part>): BaseResponse<Any>
+
+    suspend fun checkout(idUser: Int): BaseResponse<Any>
+
+    suspend fun getStatisticMonthly(idSeller: Int): BaseResponse<Map<String, Double>>
+
+    suspend fun getCurrentStatistic(idSeller: Int, type: Int): BaseResponse<Double>
+
+    suspend fun getProductById(id: Int): BaseResponse<Product>
 }
