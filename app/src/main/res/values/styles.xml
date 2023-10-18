@@ -5,6 +5,11 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="radius8dpImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet</item>
