@@ -16,6 +16,7 @@ class Product(
     val image: List<String>?,
     val rate: Int?,
     val reviewNumber: String?,
+    val quantity: Int? =  0,
     @SerializedName("idSeller") val user:UserModel?
 ): Parcelable{
     fun displayRatingFloat() : Float {
@@ -45,5 +46,9 @@ class Product(
 
     fun displayDiscount():String{
         return "-${discount}%"
+    }
+
+    fun displayQuantity(): String{
+        return "Qty: $quantity"
     }
 }

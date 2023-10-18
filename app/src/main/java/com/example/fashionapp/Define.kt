@@ -40,5 +40,9 @@ object Define {
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
-
+}
+object Role{
+    const val ADMIN = 0
+    const val SELLER = 1
+    const val CUSTOMER = 2
 }

@@ -99,4 +99,8 @@ class ShopAppResponsitoryImpl @Inject constructor(
     override suspend fun changeAvatar(idUser: Int, multipartBody: MultipartBody.Part): BaseResponse<UserModel> {
         return apiService.changeAvatar(idUser, multipartBody)
     }
+
+    override suspend fun getListProductBySellerId(idUser: Int): BaseResponse<List<Product>> {
+        return apiService.getListProductBySellerId(idUser)
+    }
 }

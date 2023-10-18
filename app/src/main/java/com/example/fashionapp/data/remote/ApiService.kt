@@ -100,4 +100,9 @@ interface ApiService {
         @Path("id") id: Int,
         @Part multipartFile: MultipartBody.Part
     ): BaseResponse<UserModel>
+
+    @GET("product/seller/{id}")
+    suspend fun getListProductBySellerId(
+        @Path("id")idSeller : Int
+    ): BaseResponse<kotlin.collections.List<Product>>
 }

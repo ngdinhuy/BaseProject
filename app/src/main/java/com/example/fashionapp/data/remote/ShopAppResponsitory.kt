@@ -65,4 +65,6 @@ interface ShopAppResponsitory {
     ): BaseResponse<UserModel>
 
     suspend fun changeAvatar(idUser: Int, multipartBody: MultipartBody.Part): BaseResponse<UserModel>
+
+    suspend fun getListProductBySellerId(idUser: Int): BaseResponse<List<Product>>
 }
