@@ -100,25 +100,17 @@ class CartViewmodel @Inject constructor(
     }
 
     fun checkout(){
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val username = Prefs.newInstance(context).getUsername()
-//            val listCartModel = myResponsitory.getAllCart(username!!, 0)
-//            var total = 0
-//            var quantity = 0
-//            listCartModel.forEach {
-//                if (it.price!=null && it.quantity!=null){
-//                    total += it.price!!.toDouble().toInt() * it.quantity!!
-//                    quantity = it.quantity!!
-//                }
-//            }
-//            val currentTime = Calendar.getInstance().time
-//            val sdf = SimpleDateFormat("yyyy-MM-dd")
-//
-//            myResponsitory.addBill(BillModel(null,quantity,sdf.format(currentTime),total,username))
-//            val countBill = myResponsitory.getAnmountBill(Prefs.newInstance(context).getUsername()!!)
-//            myResponsitory.checkout(countBill+1, Prefs.newInstance(context).getUsername()!!)
-//            _listCart.postValue(Event(listOf()))
-//        }
+        val idUser = Prefs.newInstance(context).getId()
+        viewModelScope.launch{
+            responsitoryImpl.checkout(idUser).apply {
+                if (errors.isEmpty()){
+                    context.makeToast("Checkout success")
+                    updateListCart(listOf())
+                } else {
+                    context.makeToast(errors[0])
+                }
+            }
+        }
     }
 
     override fun clickZalo() {

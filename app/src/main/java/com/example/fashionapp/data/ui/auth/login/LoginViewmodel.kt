@@ -24,7 +24,7 @@ class LoginViewmodel @Inject constructor(
     val password = MutableLiveData<String>("")
     val usernmae = MutableLiveData<String>("")
     val enableButton = MutableLiveData<Boolean>(false)
-    val stateLogin = MutableLiveData<Boolean>()
+    val stateLogin = MutableLiveData<Event<Int>>()
     val isLoading = MutableLiveData<Boolean>()
 
     private val _goToRegisterEvent = MutableLiveData<Event<Unit>>()
@@ -44,10 +44,11 @@ class LoginViewmodel @Inject constructor(
                     username = usernmae.value!!
                 )
                 if (loginResponse.errors.isEmpty()) {
-                    isLoading.value = false
-                    stateLogin.value = true
                     Prefs.newInstance(context = context).setUsername(username = usernmae.value!!)
                     Prefs.newInstance(context).setId(loginResponse.dataResponse.id?: 0)
+                    Prefs.newInstance(context).setRole(loginResponse.dataResponse.role?: -1)
+                    isLoading.value = false
+                    stateLogin.value = Event(loginResponse.dataResponse.role?: -1)
                 } else{
                     isLoading.value = false
                     context.makeToast(loginResponse.errors[0])

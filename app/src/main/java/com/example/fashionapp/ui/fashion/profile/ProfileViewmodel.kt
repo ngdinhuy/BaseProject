@@ -6,10 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.Role
 import com.example.fashionapp.component.ClickEvent
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.ui.fashion.FashionViewmodel
+import com.example.fashionapp.ui.seller.SellerViewmodel
 import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.makeToast
@@ -27,12 +29,19 @@ class ProfileViewmodel @Inject constructor(
     val myResponsitory: MyResponsitory
 ): ViewModel(), ClickEvent {
     lateinit var fashionViewmodel : FashionViewmodel
+    var sellerViewmodel : SellerViewmodel? = null
     val userInfoResponse = MutableLiveData<UserInfoResponse>()
     val clickChangePasswordEvent = MutableLiveData<Event<Unit>>()
 
 
     fun logout(){
-        fashionViewmodel.logout()
+        if (Prefs.newInstance(context).getRole() == Role.CUSTOMER){
+            fashionViewmodel.logout()
+        } else {
+            sellerViewmodel?.let {
+                it.logout()
+            }
+        }
     }
 
     fun goToMyOrder(){
@@ -40,7 +49,11 @@ class ProfileViewmodel @Inject constructor(
     }
 
     fun goToSetting(){
-        fashionViewmodel.goToSetting()
+        if (Prefs.newInstance(context).getRole() == Role.CUSTOMER) {
+            fashionViewmodel.goToSetting()
+        } else {
+            sellerViewmodel?.goToSetting()
+        }
     }
 
     fun getInfoUser(){

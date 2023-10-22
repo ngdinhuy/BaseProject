@@ -5,10 +5,6 @@
 
     <data>
         <variable
-            name="product"
-            type="com.example.fashionapp.model.Product" />
-
-        <variable
             name="viewmodel"
             type="com.example.fashionapp.ui.fashion.detail_product.DetailProductViewmodel" />
     </data>
@@ -28,6 +24,18 @@
             android:layout_marginTop="30dp"
             android:translationZ="90dp"
             android:onClick="@{()->viewmodel.backEvent()}"
+            />
+
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="@dimen/common_size_24dp"
+            android:layout_height="@dimen/common_size_24dp"
+            android:src="@drawable/ic_edit"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:translationZ="90dp"
             />
 
         <androidx.core.widget.NestedScrollView
@@ -86,14 +94,14 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="30dp"
                         app:layout_constraintEnd_toStartOf="@id/tv_Price"
-                        android:text="@{product.displayName()}"
+                        android:text="@{viewmodel.product.displayName()}"
                         />
 
                     <TextView
                         android:id="@+id/tv_Price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text='@{product.price.toString()+"$"}'
+                        android:text='@{viewmodel.product.price.toString()+"$"}'
                         tools:text="48.00$"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/tv_name"
@@ -113,7 +121,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_Price"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="30dp"
-                        android:rating="@{product.displayRatingFloat()}"
+                        android:rating="@{viewmodel.product.displayRatingFloat()}"
                         android:layout_marginTop="10dp"
                         />
 
@@ -126,7 +134,7 @@
                         app:layout_constraintBottom_toBottomOf="@id/rating_bar"
                         android:layout_marginStart="9dp"
                         tools:text="(20)"
-                        android:text='@{"("+product.displayRatingCount()+")"}'
+                        android:text='@{"("+viewmodel.product.displayRatingCount()+")"}'
                         android:textSize="@dimen/text_size_10sp"
                         android:textColor="#9B9B9B"
                         />
@@ -185,14 +193,96 @@
                         android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/tv_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{product.description}"
+                        android:text="@{viewmodel.product.description}"
                         app:layout_constraintTop_toBottomOf="@id/tv_title_description"
                         tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...detail"
                         android:layout_marginTop="5dp"
-                        android:paddingBottom="20dp"
                         android:layout_marginHorizontal="30dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/info_product_seller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:visibility="gone"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="@dimen/commin_size_16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_description">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Details"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+                        <FrameLayout
+                            android:layout_marginTop="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Category"
+                                android:textSize="12sp"
+                                android:textColor="@color/grey_9B9B9B"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.product.categoryName}"
+                                android:textStyle="bold"
+                                tools:text="Clothes"
+                                android:textSize="12sp"
+                                android:layout_gravity="end"
+                                android:textColor="@color/black"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_marginTop="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Quantity"
+                                android:textSize="12sp"
+                                android:textColor="@color/grey_9B9B9B"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.product.quantity.toString()}"
+                                android:textStyle="bold"
+                                tools:text="10"
+                                android:textSize="12sp"
+                                android:layout_gravity="end"
+                                android:textColor="@color/black"/>
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_marginTop="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Discount"
+                                android:textSize="12sp"
+                                android:textColor="@color/grey_9B9B9B"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text='@{viewmodel.product.discount.toString() + "%"}'
+                                android:textStyle="bold"
+                                tools:text="10%"
+                                android:textSize="12sp"
+                                android:layout_gravity="end"
+                                android:textColor="@color/black"/>
+                        </FrameLayout>
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -205,7 +295,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_marginBottom="20dp"
-            android:onClick="@{()->viewmodel.addToCart(product)}"
+            android:onClick="@{()->viewmodel.addToCart(viewmodel.product)}"
             android:background="@drawable/bg_btn_primary_enable">
             <ImageView
                 android:layout_width="@dimen/common_size_24dp"

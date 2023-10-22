@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.fashionapp.Role
 import com.example.fashionapp.component.ChangePasswordBottomSheetDialog
 import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentProfileBinding
 import com.example.fashionapp.ui.fashion.FashionViewmodel
+import com.example.fashionapp.ui.seller.SellerViewmodel
+import com.example.fashionapp.ui.seller.home.SellerHomeViewmodel
 import com.example.fashionapp.utils.EventObserver
 import com.example.fashionapp.utils.Prefs
 import dagger.hilt.EntryPoint
@@ -22,6 +26,7 @@ class ProfileFragment: Fragment() {
     lateinit var databinding: FragmentProfileBinding
     val viewmodel by viewModels<ProfileViewmodel> ()
     val fashionViewmodel_ by viewModels<FashionViewmodel>(ownerProducer = { requireParentFragment().requireParentFragment() })
+    val sellerViewmodel by viewModels<SellerViewmodel>(ownerProducer = { requireParentFragment().requireParentFragment() })
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +36,7 @@ class ProfileFragment: Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewmodel = this@ProfileFragment.viewmodel.apply {
                 fashionViewmodel = fashionViewmodel_
+                sellerViewmodel = this@ProfileFragment.sellerViewmodel
             }
         }
         return databinding.root
@@ -43,6 +49,7 @@ class ProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpView()
         setUpEvent()
     }
 
@@ -56,6 +63,10 @@ class ProfileFragment: Fragment() {
                 this.clickEvent = viewmodel
             }.show(activity?.supportFragmentManager!!, "")
         })
+    }
 
+
+    private fun setUpView() {
+        databinding.flMyOrder.isVisible = Prefs.newInstance(requireContext()).getRole() == Role.CUSTOMER
     }
 }

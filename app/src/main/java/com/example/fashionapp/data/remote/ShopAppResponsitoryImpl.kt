@@ -3,6 +3,7 @@ package com.example.shopapp.data.remote
 
 import android.net.Uri
 import com.example.fashionapp.data.remote.request.LoginRequest
+import com.example.fashionapp.data.remote.request.RequestProduct
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
 import com.example.fashionapp.data.remote.response.CartResponse
@@ -98,5 +99,29 @@ class ShopAppResponsitoryImpl @Inject constructor(
 
     override suspend fun changeAvatar(idUser: Int, multipartBody: MultipartBody.Part): BaseResponse<UserModel> {
         return apiService.changeAvatar(idUser, multipartBody)
+    }
+
+    override suspend fun getListProductBySellerId(idUser: Int): BaseResponse<List<Product>> {
+        return apiService.getListProductBySellerId(idUser)
+    }
+
+    override suspend fun insertProduct(request: RequestProduct, list: List<MultipartBody.Part>): BaseResponse<Any> {
+        return apiService.insertProduct(request, list)
+    }
+
+    override suspend fun checkout(idUser: Int): BaseResponse<Any> {
+        return apiService.checkouut(idUser)
+    }
+
+    override suspend fun getStatisticMonthly(idSeller: Int): BaseResponse<Map<String, Double>> {
+        return apiService.getStatisMonthly(idSeller)
+    }
+
+    override suspend fun getCurrentStatistic(idSeller: Int, type: Int): BaseResponse<Double> {
+        return apiService.getCurrentStatistic(idSeller, type)
+    }
+
+    override suspend fun getProductById(id: Int): BaseResponse<Product> {
+        return apiService.getProductById(id)
     }
 }

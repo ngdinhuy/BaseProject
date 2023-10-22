@@ -8,15 +8,17 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class Product(
     @SerializedName("id")
-    val _id: Int?,
-    val name: String?,
-    val price: Double?,
-    val description: String?,
-    val discount: Int?,
-    val image: List<String>?,
-    val rate: Int?,
-    val reviewNumber: String?,
-    @SerializedName("idSeller") val user:UserModel?
+    val _id: Int? = 0,
+    val name: String? = "",
+    val price: Double? = 0.0,
+    val description: String? = "",
+    val discount: Int? = 0,
+    val image: List<String>? = listOf(),
+    val rate: Int? = 0,
+    val reviewNumber: String? = "",
+    val quantity: Int? =  0,
+    val categoryName: String? = "",
+    @SerializedName("idSeller") val user:UserModel? = UserModel()
 ): Parcelable{
     fun displayRatingFloat() : Float {
         rate?.let {
@@ -45,5 +47,9 @@ class Product(
 
     fun displayDiscount():String{
         return "-${discount}%"
+    }
+
+    fun displayQuantity(): String{
+        return "Qty: $quantity"
     }
 }

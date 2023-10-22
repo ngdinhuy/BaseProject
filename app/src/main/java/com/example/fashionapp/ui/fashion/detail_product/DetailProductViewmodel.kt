@@ -30,6 +30,21 @@ class DetailProductViewmodel @Inject constructor(
     val likeEvent: MutableLiveData<com.example.fashionapp.utils.Event<Boolean>> = _likeEvent
     val isLike = MutableLiveData<Boolean>(false)
 
+    val product = MutableLiveData<Product>()
+    var idProduct = 0
+
+    fun getProductById(){
+        viewModelScope.launch {
+            shopAppResponsitoryImpl.getProductById(idProduct).apply {
+                if (errors.isEmpty()){
+                    product.value = dataResponse ?: Product()
+                } else {
+                    context.makeToast(errors[0])
+                }
+            }
+        }
+    }
+
     fun addAmount() {
         val mount = amount.value!!.toInt()
         _amount.value = (mount + 1).toString()
@@ -90,7 +105,6 @@ class DetailProductViewmodel @Inject constructor(
             isLike.value = false
             _likeEvent.value = com.example.fashionapp.utils.Event(false)
         }
-
     }
 
 }

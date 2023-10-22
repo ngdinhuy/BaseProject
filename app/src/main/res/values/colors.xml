@@ -14,4 +14,16 @@
     <color name="red_DB3022">#DB3022</color>
     <color name="color_star_ratingbar">#FFBA49</color>
     <color name="color_2AA952">#2AA952</color>
+
+    <color name="colorTextHint">#182a39</color>
+    <color name="transparent">#00000000</color>
+    <color name="register_text_hint">#7d8c9a</color>
+    <color name="color_7d8c9a">#7d8c9a</color>
+    <color name="colorStrokeGray">#eeeeee</color>
+    <dimen name="height_input_field_register">50dp</dimen>
+    <color name="color_182a39">#182a39</color>
+    <color name="colorPrimary">#0e89f5</color>
+    <color name="color_0e89f5">#0e89f5</color>
+    <color name="colorAccent">#2d5394</color>
+
 </resources>

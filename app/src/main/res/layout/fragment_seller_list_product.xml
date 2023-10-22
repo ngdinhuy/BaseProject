@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.fashionapp.ui.seller.list_product.ListProductViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/background_app_color"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Products"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/tv_add_product"
+                android:layout_width="@dimen/common_size_24dp"
+                android:layout_height="@dimen/common_size_24dp"
+                android:src="@drawable/ic_add"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="16dp"/>
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/background_app_color">
+                <TextView
+                    android:id="@+id/tv_num_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="50 Products"
+                    android:textColor="@color/grey_9B9B9B"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:text="@{viewmodel.quantity}"
+                    android:layout_marginTop="@dimen/commin_size_16dp"
+                    android:layout_marginHorizontal="@dimen/commin_size_16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_num_product"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                    android:layout_marginTop="16dp"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
