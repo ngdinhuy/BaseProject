@@ -30,7 +30,7 @@ import javax.inject.Inject
 class SettingViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context
-) : ViewModel(){
+) : ViewModel() {
     val fullName = MutableLiveData<String>()
     val dob = MutableLiveData<String>()
     val email = MutableLiveData<String>()
@@ -49,11 +49,11 @@ class SettingViewmodel @Inject constructor(
                 if (this.errors.isEmpty()) {
                     val data = this.dataResponse ?: UserInfoResponse()
                     fullName.value = data.name ?: ""
-                    dob.value = data.dob?: ""
+                    dob.value = data.dob ?: ""
                     email.value = data.email ?: ""
                     phoneNumber.value = data.phoneNumber ?: ""
                     password.value = data.password ?: ""
-                    avatar.value = data.avatar?: ""
+                    avatar.value = data.avatar ?: ""
                 } else {
                     context.makeToast(errors[0])
                 }
@@ -64,30 +64,34 @@ class SettingViewmodel @Inject constructor(
     fun updateUserInfo() {
         val idUser = Prefs.newInstance(context).getId();
         viewModelScope.launch {
-            val updateInfoDeferred = async {  responsitoryImpl.updateInfoUser(
+            responsitoryImpl.updateInfoUser(
                 idUser,
                 UpdateUserInfoRequest(fullName.value, phoneNumber.value, email.value, dob.value)
-            )}
-
-            val file = File(avatar.value)
-            val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-            val imagePart = MultipartBody.Part.createFormData("multipartFile",file.name, requestBody)
-            val updateAvatarDeferred = async {
-                responsitoryImpl.changeAvatar(idUser, imagePart)
+            ).apply {
+                if (errors.isEmpty()){
+                    updateAvatar()
+                } else {
+                    context.makeToast(errors[0])
+                }
             }
 
-            val response = awaitAll(updateInfoDeferred, updateAvatarDeferred)
-
-            val updateInfoResponse = response[0] as? BaseResponse<UserModel>
-            val updateAvatarResponse = response[0] as? BaseResponse<UserModel>
-
-            if (updateAvatarResponse?.errors.isNullOrEmpty() && updateInfoResponse?.errors.isNullOrEmpty()){
-                _backEvent.value = Event(Unit)
-                context.makeToast("Update success")
-            } else {
-                context.makeToast(updateAvatarResponse?.errors?.get(0) ?: "Not sucess")
-            }
         }
     }
 
+    fun updateAvatar() {
+        val idUser = Prefs.newInstance(context).getId();
+        viewModelScope.launch {
+            val file = File(avatar.value)
+            val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+            val imagePart =
+                MultipartBody.Part.createFormData("multipartFile", file.name, requestBody)
+            responsitoryImpl.changeAvatar(idUser, imagePart).apply {
+                if (errors.isEmpty()){
+                    _backEvent.value = Event(Unit)
+                } else {
+                    context.makeToast(errors[0])
+                }
+            }
+        }
+    }
 }
