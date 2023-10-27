@@ -211,4 +211,8 @@ class CartFragment : Fragment() {
         }
     }
 
+    fun setUpPayPal(){
+
+    }
+
 }

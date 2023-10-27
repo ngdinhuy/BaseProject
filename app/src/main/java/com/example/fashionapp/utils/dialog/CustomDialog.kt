@@ -7,11 +7,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.FrameLayout
 import com.example.fashionapp.R
+import com.paypal.checkout.paymentbutton.PaymentButtonContainer
 
 class CustomDialog(context: Context) : Dialog(context) {
 
     lateinit var flZalo : FrameLayout
     lateinit var flMomo : FrameLayout
+    lateinit var paymentButtonContainer: PaymentButtonContainer
     var clickPayEvent: ClickPayEvent? = null
 
     fun passClickPayEvent(clickPayEvent: ClickPayEvent){
@@ -24,6 +26,7 @@ class CustomDialog(context: Context) : Dialog(context) {
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         flZalo = findViewById(R.id.fl_positive_button)
         flMomo = findViewById(R.id.fl_negative_button)
+        paymentButtonContainer = findViewById(R.id.payment_button_container)
 
 //        flZalo.setOnClickListener {
 //            clickPayEvent?.clickZalo()

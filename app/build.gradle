@@ -18,12 +18,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.fashionapp"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -112,4 +112,7 @@ dependencies {
     //zalo pay
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation("commons-codec:commons-codec:1.14")
+
+    //paypal
+    implementation('com.paypal.checkout:android-sdk:1.1.0')
 }
