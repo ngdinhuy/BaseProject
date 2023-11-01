@@ -4,7 +4,7 @@ import android.Manifest
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://192.168.0.100:8080"
+    const val BASE_URL = "http://192.168.1.15:8080"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 
@@ -27,6 +27,9 @@ object Define {
     const val APP_ID = 2554
     const val MAC_KEY = "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL"
     const val URL_CREATE_ORDER = "https://sb-openapi.zalopay.vn/v2/create"
+
+    //paypal pay
+    const val CLIENT_KEY = "AWC3WiwnQ4HQAmvLqlXehCbmG4S0PTnZ1_7BpuDMQ5r595i0-HGEesLHw1j0gSK7_VH-sepTyyEbQA19"
 
     const val SPAN_COUNT_GRIDLAYOUT_CATEGORY = 2
 
