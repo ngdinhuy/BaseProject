@@ -17,7 +17,7 @@ class FashionApplication:Application() {
             application = this,
             clientId = Define.CLIENT_KEY,
             environment = Environment.SANDBOX,
-            returnUrl = "${BuildConfig.APPLICATION_ID}://paypalpay",
+            returnUrl = "com.example.fashionapp://paypalpay",
             currencyCode = CurrencyCode.USD,
             userAction = UserAction.PAY_NOW,
             settingsConfig = SettingsConfig(
