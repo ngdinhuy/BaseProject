@@ -8,36 +8,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.androidplot.xy.BarFormatter
-import com.androidplot.xy.CatmullRomInterpolator
-import com.androidplot.xy.LineAndPointFormatter
-import com.androidplot.xy.PanZoom
-import com.androidplot.xy.SimpleXYSeries
-import com.androidplot.xy.XYGraphWidget
-import com.androidplot.xy.XYSeries
 import com.example.fashionapp.R
 import com.example.fashionapp.databinding.FragmentSellerHomeBinding
+import com.example.fashionapp.ui.seller.SellerViewmodel
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.FieldPosition
-import java.text.Format
-import java.text.ParsePosition
-import java.util.Arrays
 
 @AndroidEntryPoint
 class SellerHomeFragment : Fragment(){
     lateinit var databinding : FragmentSellerHomeBinding
     val viewmodel by viewModels<SellerHomeViewmodel> ()
-
+    val sellerViewmodel by viewModels<SellerViewmodel>(ownerProducer = { requireParentFragment().requireParentFragment() })
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +30,9 @@ class SellerHomeFragment : Fragment(){
     ): View? {
         databinding = FragmentSellerHomeBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
-            viewmodel = this@SellerHomeFragment.viewmodel
+            viewmodel = this@SellerHomeFragment.viewmodel.apply {
+                sellerViewmodel = this@SellerHomeFragment.sellerViewmodel
+            }
         }
         return databinding.root
     }

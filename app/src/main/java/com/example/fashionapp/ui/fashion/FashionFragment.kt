@@ -75,6 +75,14 @@ class FashionFragment : Fragment() {
             val action = FashionFragmentDirections.actionFashionFragmentToSettingFragment()
             findNavController().navigate(action)
         })
+
+        viewmodel.goToChatEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = FashionFragmentDirections.actionGlobalChatFragment(
+                it.idUser?: 0,
+                it.name?: ""
+            )
+            findNavController().navigate(action)
+        })
     }
 
     private fun setUpNavigation() {

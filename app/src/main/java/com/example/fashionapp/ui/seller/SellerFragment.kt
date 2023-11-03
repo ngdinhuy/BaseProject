@@ -55,6 +55,11 @@ class SellerFragment : Fragment() {
             val action = SellerFragmentDirections.actionGlobalSplashFragment()
             findNavController().navigate(action)
         })
+
+        viewmodel.goToChatListEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = SellerFragmentDirections.actionSellerFragmentToFavoriteFragment2()
+            findNavController().navigate(action)
+        })
     }
 
     private fun setUpNavigation() {

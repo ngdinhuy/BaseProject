@@ -17,8 +17,8 @@
 
     <item
         android:id="@+id/favoriteFragment"
-        android:title="@string/bottom_nav_favorite"
-        android:icon="@drawable/ic_favorite_bottom_bar"/>
+        android:title="Messages"
+        android:icon="@drawable/ic_message"/>
 
     <item
         android:id="@+id/profileFragment"

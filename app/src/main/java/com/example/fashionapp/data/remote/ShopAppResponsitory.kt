@@ -5,10 +5,7 @@ import androidx.room.Index.Order
 import com.example.fashionapp.data.remote.request.RequestProduct
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
-import com.example.fashionapp.data.remote.response.CartResponse
-import com.example.fashionapp.data.remote.response.BaseResponse
-import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
-import com.example.fashionapp.data.remote.response.UserInfoResponse
+import com.example.fashionapp.data.remote.response.*
 import com.example.fashionapp.model.*
 import okhttp3.MultipartBody
 
@@ -78,4 +75,12 @@ interface ShopAppResponsitory {
     suspend fun getCurrentStatistic(idSeller: Int, type: Int): BaseResponse<Double>
 
     suspend fun getProductById(id: Int): BaseResponse<Product>
+
+    suspend fun getChatList(id:Int): BaseResponse<List<ChatListResponse>>
+
+    suspend fun getChatListDetail(
+        idUser: Int,
+        idPartner: Int,
+        offset: Int
+    ): PagingBaseResponse<ArrayList<ChatDetailResponse>>
 }

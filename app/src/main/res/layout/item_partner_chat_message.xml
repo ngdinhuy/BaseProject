@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="messageContent"
+            type="String" />
+
+        <variable
+            name="formatDate"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline">
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_size_8dp"
+                android:layout_gravity="start"
+                android:background="@drawable/msg_bg_white"
+                android:gravity="start|center_vertical"
+                android:paddingVertical="@dimen/common_size_8dp"
+                android:paddingEnd="@dimen/common_size_8dp"
+                android:paddingStart="13dp"
+                android:text="@{messageContent}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="Hello everyone " />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/common_size_4dp"
+            android:text="@{formatDate}"
+            android:textColor="@color/color_7d8c9a"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_content"
+            tools:text="11:00" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

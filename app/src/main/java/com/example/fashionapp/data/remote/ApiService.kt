@@ -1,17 +1,16 @@
 package com.example.shopapp.data.remote
 
+import androidx.compose.ui.unit.DpOffset
 import com.example.fashionapp.data.remote.request.LoginRequest
 import com.example.fashionapp.data.remote.request.RequestProduct
 import com.example.fashionapp.data.remote.request.SignUpRequest
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
-import com.example.fashionapp.data.remote.response.CartResponse
-import com.example.fashionapp.data.remote.response.BaseResponse
-import com.example.fashionapp.data.remote.response.CategoryAndProductResponse
-import com.example.fashionapp.data.remote.response.UserInfoResponse
+import com.example.fashionapp.data.remote.response.*
 import com.example.fashionapp.model.*
 import okhttp3.MultipartBody
 import retrofit2.http.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface ApiService {
     @GET("product/all")
@@ -135,4 +134,16 @@ interface ApiService {
     suspend fun getProductById(
         @Query("id") id: Int
     ): BaseResponse<Product>
+
+    @GET("chat/list/{id}")
+    suspend fun getChatList(
+        @Path("id") id: Int
+    ): BaseResponse<List<ChatListResponse>>
+
+    @GET("chat/message")
+    suspend fun getChatDetail(
+        @Query("id_user") idSender: Int,
+        @Query("id_partner") idReceiver: Int,
+        @Query("offset") offset: Int
+    ): PagingBaseResponse<ArrayList<ChatDetailResponse>>
 }
