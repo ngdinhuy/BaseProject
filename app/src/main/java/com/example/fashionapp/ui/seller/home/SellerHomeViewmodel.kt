@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.StatisticType
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.model.UserModel
+import com.example.fashionapp.ui.seller.SellerViewmodel
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.Utils
 import com.example.fashionapp.utils.makeToast
@@ -25,6 +26,7 @@ class SellerHomeViewmodel @Inject constructor(
     var statisticIncome = MutableLiveData<String>()
     var statisticOrder = MutableLiveData<String>()
     val statisticRate = MutableLiveData<String>()
+    var sellerViewmodel : SellerViewmodel? = null
     fun getInfoUser(){
         val idUser = Prefs.newInstance(context).getId()
         viewModelScope.launch {
@@ -71,5 +73,9 @@ class SellerHomeViewmodel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun goToChatList(){
+        sellerViewmodel?.goToChatList()
     }
 }

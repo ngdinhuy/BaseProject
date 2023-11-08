@@ -4,7 +4,8 @@ import android.Manifest
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://192.168.1.15:8080"
+    const val BASE_URL = "http://10.1.30.182:8080"
+    const val SOCKET_URL = "http://10.1.30.182:8085"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 
@@ -46,6 +47,9 @@ object Define {
     val listMonthOfYear = listOf<String>(
         "1/2023","2/2023","3/2023", "4/2023", "5/2023", "6/2023", "7/2023", "8/2023", "9/2023", "10/2023", "11/2023", "12/2023"
     )
+
+    //Socket event
+    const val RECEIVE_MESSAGE_EVENT = "get_message"
 }
 object Role{
     const val ADMIN = 0
@@ -56,4 +60,9 @@ object Role{
 object StatisticType {
     const val ORDER_CURRENT_MONTH = 1
     const val RATE_CURRENT_MONTH = 2
+}
+
+object TypeChat{
+    const val MY_CHAT = 0
+    const val PARTNER_CHAT = 1
 }

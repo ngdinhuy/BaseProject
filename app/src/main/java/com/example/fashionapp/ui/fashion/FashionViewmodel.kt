@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fashionapp.data.remote.response.ChatListResponse
 import com.example.fashionapp.model.CategoryModel
 import com.example.fashionapp.model.Product
 import com.example.fashionapp.utils.Event
@@ -28,6 +29,8 @@ class FashionViewmodel @Inject constructor(
     val goToMyOderEvent : LiveData<Event<Unit>> = _goToMyOrderEvent
     private val _goToSettingEvent = MutableLiveData<Event<Unit>>()
     val goToSettingEvent : LiveData<Event<Unit>> = _goToSettingEvent
+    private val _goToChatEvent = MutableLiveData<Event<ChatListResponse>>()
+    val goToChatEvent : LiveData<Event<ChatListResponse>> = _goToChatEvent
 
     var filter = 0
 
@@ -44,5 +47,9 @@ class FashionViewmodel @Inject constructor(
 
     fun goToSetting(){
         _goToSettingEvent.value = Event(Unit)
+    }
+
+    fun goToChatDetail(chatListResponse: ChatListResponse){
+        _goToChatEvent.value = Event(chatListResponse)
     }
 }

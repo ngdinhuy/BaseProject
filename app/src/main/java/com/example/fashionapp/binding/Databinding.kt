@@ -1,5 +1,6 @@
 package com.example.fashionapp.binding
 
+import android.graphics.Typeface
 import android.net.Uri
 import android.util.Log
 import android.view.View
@@ -51,5 +52,15 @@ object Databinding {
     @JvmStatic
     fun TextView.isSelected(isSelected: Boolean){
         this.isSelected = isSelected
+    }
+
+    @BindingAdapter("app:isBold")
+    @JvmStatic
+    fun TextView.isBold(isBold: Boolean){
+        if (isBold){
+            this.setTypeface(null, Typeface.BOLD)
+        } else {
+            this.setTypeface(null, Typeface.NORMAL)
+        }
     }
 }

@@ -130,6 +130,9 @@
         <action
             android:id="@+id/action_sellerFragment_to_addProductFragment"
             app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_sellerFragment_to_favoriteFragment2"
+            app:destination="@id/favoriteFragment2" />
     </fragment>
     <action android:id="@+id/action_global_sellerFragment" app:destination="@id/sellerFragment" />
     <fragment
@@ -138,4 +141,23 @@
         android:label="AddProductFragment"
         tools:layout="@layout/fragment_seller_add_product"/>
     <action android:id="@+id/action_global_settingFragment" app:destination="@id/settingFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment2"
+        android:name="com.example.fashionapp.ui.fashion.favorites.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"/>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.fashionapp.ui.fashion.chat.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="idPartner"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="namePartner"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment><action android:id="@+id/action_global_chatFragment" app:destination="@id/chatFragment"/>
 </navigation>

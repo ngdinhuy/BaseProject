@@ -1,11 +1,10 @@
-package com.example.fashionapp.ui.fashion.favorites
+package com.example.fashionapp.ui.fashion.chat
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fashionapp.data.remote.response.ChatListResponse
-import com.example.fashionapp.utils.Event
+import com.example.fashionapp.data.remote.response.ChatDetailResponse
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
@@ -15,22 +14,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteViewmodel @Inject constructor(
+class ChatViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context
-): ViewModel() {
-    val listChat = MutableLiveData<Event<List<ChatListResponse>>>()
-    val chatResponse = MutableLiveData<Event<ChatListResponse>>()
-    fun getListChat(){
+) : ViewModel() {
+    var namePartner = ""
+    var idPartner = 0
+    var offset = 0
+    val listMessageDetail = MutableLiveData<ArrayList<ChatDetailResponse>>()
+    var listMessage = ArrayList<ChatDetailResponse>()
+    fun loadMessage(){
         val idUser = Prefs.newInstance(context).getId()
         viewModelScope.launch {
-            responsitoryImpl.getChatList(idUser).apply {
+            responsitoryImpl.getChatListDetail(idUser, idPartner, offset).apply {
                 if (errors.isEmpty()){
-                    listChat.value = Event(dataResponse)
+                    val response = dataResponse
+                    response.addAll(response.size, listMessage)
+                    listMessage = dataResponse
+                    listMessageDetail.value = listMessage
+                    this@ChatViewmodel.offset = offset
                 } else {
                     context.makeToast(errors[0])
                 }
             }
         }
     }
+
 }

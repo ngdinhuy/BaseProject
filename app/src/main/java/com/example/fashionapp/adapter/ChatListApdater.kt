@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fashionapp.Define
+import com.example.fashionapp.data.remote.response.ChatListResponse
 import com.example.fashionapp.databinding.ItemFavoritesBinding
 import com.example.fashionapp.model.Product
 
-class FavoritesAdapter(val context: Context,
-                         val list: List<Int>) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>(){
+class ChatListApdater(val context: Context,
+                      val list: List<ChatListResponse>) : RecyclerView.Adapter<ChatListApdater.ViewHolder>(){
     var itemClickEvent:ItemClickEvent? = null
     fun passValueItemClickEvent(itemClickEvent: ItemClickEvent){
         this.itemClickEvent = itemClickEvent
@@ -20,9 +20,9 @@ class FavoritesAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.databinding.apply {
-            product = Define.listProduct[list[position]-1]
-            clItem.setOnClickListener {
-//                itemClickEvent?.goToProductDetail(list[position])
+            chatListResponse = list[position]
+            root.setOnClickListener {
+                itemClickEvent?.goToProductDetail(list[position])
             }
         }
     }
@@ -34,6 +34,6 @@ class FavoritesAdapter(val context: Context,
     }
 
     interface ItemClickEvent{
-        fun goToProductDetail(product: Product)
+        fun goToProductDetail(chatMessageResponse: ChatListResponse)
     }
 }

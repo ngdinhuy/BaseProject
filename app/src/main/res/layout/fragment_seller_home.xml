@@ -79,6 +79,7 @@
                 android:layout_height="@dimen/common_size_24dp"
                 android:src="@drawable/ic_has_message"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="@{()-> viewmodel.goToChatList()}"
                 app:layout_constraintTop_toTopOf="@id/ll_info" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
