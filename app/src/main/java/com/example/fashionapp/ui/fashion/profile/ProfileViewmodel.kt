@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.Role
 import com.example.fashionapp.component.ClickEvent
+import com.example.fashionapp.component.WithdrawEvent
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.data.remote.response.UserInfoResponse
 import com.example.fashionapp.ui.fashion.FashionViewmodel
@@ -27,7 +28,7 @@ class ProfileViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context,
     val myResponsitory: MyResponsitory
-): ViewModel(), ClickEvent {
+): ViewModel(), ClickEvent, WithdrawEvent {
     lateinit var fashionViewmodel : FashionViewmodel
     var sellerViewmodel : SellerViewmodel? = null
     val userInfoResponse = MutableLiveData<UserInfoResponse>()
@@ -88,6 +89,25 @@ class ProfileViewmodel @Inject constructor(
                     } else {
                         context.makeToast(errors[0])
                     }
+                }
+            }
+        }
+    }
+
+    override fun withdraw(
+        money: String,
+        mailPaypal: String,
+        password: String,
+        isSaveAccount: Boolean
+    ) {
+        viewModelScope.launch {
+            val idUser = Prefs.newInstance(context).getId()
+            responsitoryImpl.sellerWithdraw(idUser, money.toDouble(), mailPaypal, password, isSaveAccount).apply {
+                if (errors.isEmpty()){
+                    userInfoResponse.value = dataResponse?: UserInfoResponse()
+                    context.makeToast("Withdraw is success")
+                } else {
+                    context.makeToast(errors[0])
                 }
             }
         }

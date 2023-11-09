@@ -13,6 +13,6 @@ class UserModel(
     @SerializedName("password") val password: String? = "",
     @SerializedName("avatar") val avatar: String? = "",
     @SerializedName("dob") val dob: String? = "",
-    @SerializedName("role") val role: Int? = -1
+    @SerializedName("role") val role: Int? = -1,
 ) : Parcelable{
 }

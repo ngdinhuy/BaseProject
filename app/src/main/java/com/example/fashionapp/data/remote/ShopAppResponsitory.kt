@@ -83,4 +83,12 @@ interface ShopAppResponsitory {
         idPartner: Int,
         offset: Int
     ): PagingBaseResponse<ArrayList<ChatDetailResponse>>
+
+    suspend fun sellerWithdraw(
+        idUser: Int,
+        money: Double,
+        mailPaypal: String,
+        password: String,
+        isSaveMailPaypal: Boolean
+    ): BaseResponse<UserInfoResponse>
 }

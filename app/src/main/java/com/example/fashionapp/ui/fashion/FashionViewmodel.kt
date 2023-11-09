@@ -17,7 +17,7 @@ import javax.inject.Inject
 class FashionViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext context: Context
-): ViewModel() {
+): ViewModel(){
     val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading : LiveData<Event<Boolean>> = _isLoading
 
