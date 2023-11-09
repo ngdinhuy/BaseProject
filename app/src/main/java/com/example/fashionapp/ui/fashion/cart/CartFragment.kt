@@ -23,6 +23,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fashionapp.Define
 import com.example.fashionapp.R
+import com.example.fashionapp.StatusPayment
 import com.example.fashionapp.adapter.CartAdapter
 import com.example.fashionapp.data.remote.response.CartResponse
 import com.example.fashionapp.databinding.FragmentCartBinding
@@ -93,13 +94,16 @@ class CartFragment : Fragment() {
 //            val customDialog = CustomDialog.newInstancePaymentDialog(requireContext()).apply {
 //                passClickPayEvent(cartViewmodel)
 //            }
-            CustomDialog.newInstancePaymentDialog(requireContext())
+            CustomDialog.newInstancePaymentDialog(requireContext(), cartViewmodel.totalPrice.value ?: 0.0 )
                 .showDialog()
                 .setFlZaloClick {
                     payZalo()
                     it.dismiss()
                 }.setShipCodeClick {
-                    cartViewmodel.checkout()
+                    cartViewmodel.checkout(StatusPayment.NOT_PAY)
+                    it.dismiss()
+                }.setPaypalClick {
+                    cartViewmodel.checkout(StatusPayment.PAYED)
                     it.dismiss()
                 }
                 .show()

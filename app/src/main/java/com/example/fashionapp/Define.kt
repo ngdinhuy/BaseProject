@@ -50,6 +50,7 @@ object Define {
 
     //Socket event
     const val RECEIVE_MESSAGE_EVENT = "get_message"
+    const val DISCONNECT = "user_disconnect"
 }
 object Role{
     const val ADMIN = 0
@@ -65,4 +66,9 @@ object StatisticType {
 object TypeChat{
     const val MY_CHAT = 0
     const val PARTNER_CHAT = 1
+}
+
+object StatusPayment{
+    const val NOT_PAY = 0
+    const val PAYED = 1
 }

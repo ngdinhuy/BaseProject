@@ -106,8 +106,8 @@ class ShopAppResponsitoryImpl @Inject constructor(
         return apiService.insertProduct(request, list)
     }
 
-    override suspend fun checkout(idUser: Int): BaseResponse<Any> {
-        return apiService.checkouut(idUser)
+    override suspend fun checkout(idUser: Int, statePayment: Int): BaseResponse<Any> {
+        return apiService.checkouut(idUser, statePayment)
     }
 
     override suspend fun getStatisticMonthly(idSeller: Int): BaseResponse<Map<String, Double>> {

@@ -18,6 +18,7 @@
         android:layout_marginTop="20dp"/>
 
     <FrameLayout
+        android:visibility="gone"
         android:id="@+id/fl_positive_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
