@@ -116,7 +116,8 @@ interface ApiService {
     @POST("order/insert")
     @FormUrlEncoded
     suspend fun checkouut(
-        @Field("idUser")idUser: Int
+        @Field("idUser")idUser: Int,
+        @Field("state_payment") statePayment : Int
     ): BaseResponse<Any>
 
     @GET("statistic/monthly_income")

@@ -99,10 +99,10 @@ class CartViewmodel @Inject constructor(
         _clickCheckoutEvent.value = Event(Unit)
     }
 
-    fun checkout(){
+    fun checkout(statePayment: Int){
         val idUser = Prefs.newInstance(context).getId()
         viewModelScope.launch{
-            responsitoryImpl.checkout(idUser).apply {
+            responsitoryImpl.checkout(idUser, statePayment).apply {
                 if (errors.isEmpty()){
                     context.makeToast("Checkout success")
                     updateListCart(listOf())
@@ -118,6 +118,5 @@ class CartViewmodel @Inject constructor(
     }
 
     override fun clickMomo() {
-        checkout()
     }
 }

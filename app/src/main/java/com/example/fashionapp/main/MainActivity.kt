@@ -10,6 +10,7 @@ import android.view.View
 import androidx.activity.viewModels
 import com.example.fashionapp.Define
 import com.example.fashionapp.R
+import com.example.fashionapp.utils.Prefs
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
 import io.socket.client.IO
@@ -26,8 +27,56 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    override fun onResume() {
+        super.onResume()
+        setUpUserOnline()
+    }
+
+    private fun setUpUserOnline() {
+        try {
+            val myID = Prefs.newInstance(this).getId()
+            if (myID ==0 ) return
+            val options = IO.Options().apply {
+                forceNew = true
+                reconnectionAttempts = Integer.MAX_VALUE
+                reconnection = true
+                query = "id_user=$myID"
+            }
+            mSocket = IO.socket(Define.SOCKET_URL, options)
+            mSocket?.on(Socket.EVENT_CONNECT){
+                Log.e("Socket: ","Connect succees: id_user=$myID")
+            }
+
+            mSocket?.on(Socket.EVENT_DISCONNECT){
+                Log.e("Socket: ", "Disconnect")
+            }
+
+            mSocket?.on(Socket.EVENT_CONNECT_ERROR){
+                Log.e("Socket: ", "Error ${it[0].toString()}")
+            }
+
+//            mSocket?.on(Define.DISCONNECT, Emitter.Listener {
+//                val json = it[0] as? JsonObject
+//                Log.e("Socket event:", json.toString())
+//            })
+
+            mSocket?.connect()
+        } catch (e: Exception){
+            Log.e("Socket error", e.message.toString())
+        }
+    }
+
     protected override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         ZaloPaySDK.getInstance().onResult(intent)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val myID = Prefs.newInstance(this).getId()
+        if (myID ==0 ) return
+        mSocket?.emit(Define.DISCONNECT, myID.toString())
+        mSocket?.disconnect()
+        mSocket?.off(Define.DISCONNECT)
     }
 }

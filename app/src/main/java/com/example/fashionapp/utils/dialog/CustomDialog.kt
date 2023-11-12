@@ -25,6 +25,7 @@ class CustomDialog(context: Context) : Dialog(context) {
     lateinit var flMomo : FrameLayout
     lateinit var paymentButtonContainer: PaymentButtonContainer
     var clickPayEvent: ClickPayEvent? = null
+    var moneyPayment: Double? = null
 
     fun passClickPayEvent(clickPayEvent: ClickPayEvent){
         this.clickPayEvent = clickPayEvent
@@ -48,30 +49,7 @@ class CustomDialog(context: Context) : Dialog(context) {
 //            this.dismiss()
 //        }
 
-        paymentButtonContainer.setup(
-            createOrder =
-            CreateOrder { createOrderActions ->
-                val order =
-                    OrderRequest(
-                        intent = OrderIntent.CAPTURE,
-                        appContext = AppContext(userAction = UserAction.PAY_NOW),
-                        purchaseUnitList =
-                        listOf(
-                            PurchaseUnit(
-                                amount =
-                                Amount(currencyCode = CurrencyCode.USD, value = "10.00")
-                            )
-                        )
-                    )
-                createOrderActions.create(order)
-            },
-            onApprove =
-            OnApprove { approval ->
-                approval.orderActions.capture { captureOrderResult ->
-                    Log.i("CaptureOrder", "CaptureOrderResult: $captureOrderResult")
-                }
-            }
-        )
+
     }
 
     fun setFlZaloClick(zaloClick: (CustomDialog) -> Unit): CustomDialog {
@@ -88,6 +66,35 @@ class CustomDialog(context: Context) : Dialog(context) {
         return this
     }
 
+    fun setPaypalClick(shipPaypalClick: (CustomDialog) -> Unit): CustomDialog{
+        paymentButtonContainer.setup(
+            createOrder =
+            CreateOrder { createOrderActions ->
+                val order =
+                    OrderRequest(
+                        intent = OrderIntent.CAPTURE,
+                        appContext = AppContext(userAction = UserAction.PAY_NOW),
+                        purchaseUnitList =
+                        listOf(
+                            PurchaseUnit(
+                                amount =
+                                Amount(currencyCode = CurrencyCode.USD, value = "$moneyPayment")
+                            )
+                        )
+                    )
+                createOrderActions.create(order)
+            },
+            onApprove =
+            OnApprove { approval ->
+                approval.orderActions.capture { captureOrderResult ->
+                    Log.i("CaptureOrder", "CaptureOrderResult: $captureOrderResult")
+                    shipPaypalClick(this)
+                }
+            }
+        )
+        return this
+    }
+
     fun showDialog() : CustomDialog {
         if (!isShowing){
             this.show()
@@ -95,8 +102,10 @@ class CustomDialog(context: Context) : Dialog(context) {
         return this
     }
     companion object{
-        fun newInstancePaymentDialog(context: Context): CustomDialog {
-            val dialog = CustomDialog(context)
+        fun newInstancePaymentDialog(context: Context, money: Double): CustomDialog {
+            val dialog = CustomDialog(context).apply {
+                moneyPayment = money
+            }
             return dialog
         }
     }

@@ -68,7 +68,7 @@ interface ShopAppResponsitory {
 
     suspend fun insertProduct(request: RequestProduct, list: List<MultipartBody.Part>): BaseResponse<Any>
 
-    suspend fun checkout(idUser: Int): BaseResponse<Any>
+    suspend fun checkout(idUser: Int, statePayment: Int): BaseResponse<Any>
 
     suspend fun getStatisticMonthly(idSeller: Int): BaseResponse<Map<String, Double>>
 
