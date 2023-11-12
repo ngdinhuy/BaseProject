@@ -12,9 +12,15 @@ class UserInfoResponse(
     val role: Int? = 0,
     val avatar: String? = "",
     val totalOrder: Int = 0,
-    val dob: String? = ""
+    val dob: String? = "",
+    val mailPaypal: String? = "",
+    val property: String? = ""
 ) {
     fun displayNumberOrder(): String{
         return "Already have $totalOrder orders"
+    }
+
+    fun displayMoney(): String{
+        return "$property$"
     }
 }

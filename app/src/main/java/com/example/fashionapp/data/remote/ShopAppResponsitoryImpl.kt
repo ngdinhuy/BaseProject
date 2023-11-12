@@ -129,4 +129,14 @@ class ShopAppResponsitoryImpl @Inject constructor(
     override suspend fun getChatListDetail(idUser: Int, idPartner: Int, offset: Int): PagingBaseResponse<ArrayList<ChatDetailResponse>> {
         return apiService.getChatDetail(idUser, idPartner, offset)
     }
+
+    override suspend fun sellerWithdraw(
+        idUser: Int,
+        money: Double,
+        mailPaypal: String,
+        password: String,
+        isSaveMailPaypal: Boolean
+    ): BaseResponse<UserInfoResponse> {
+        return apiService.sellerWithdraw(idUser, money, mailPaypal, password,isSaveMailPaypal)
+    }
 }

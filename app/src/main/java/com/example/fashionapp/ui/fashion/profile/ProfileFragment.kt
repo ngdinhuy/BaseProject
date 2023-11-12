@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.fashionapp.Role
 import com.example.fashionapp.component.ChangePasswordBottomSheetDialog
+import com.example.fashionapp.component.WithDrawBottomSheetDialog
+import com.example.fashionapp.component.WithdrawEvent
 import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentProfileBinding
 import com.example.fashionapp.ui.fashion.FashionViewmodel
@@ -22,7 +24,7 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment: Fragment() {
+class ProfileFragment: Fragment(){
     lateinit var databinding: FragmentProfileBinding
     val viewmodel by viewModels<ProfileViewmodel> ()
     val fashionViewmodel_ by viewModels<FashionViewmodel>(ownerProducer = { requireParentFragment().requireParentFragment() })
@@ -63,10 +65,23 @@ class ProfileFragment: Fragment() {
                 this.clickEvent = viewmodel
             }.show(activity?.supportFragmentManager!!, "")
         })
+
+        databinding.flMoney.setOnClickListener {
+            WithDrawBottomSheetDialog().apply {
+                viewmodel.userInfoResponse.value?.let {
+                    money = it.property
+                    mailAcccountPaypal = it.mailPaypal
+                    clickEvent = viewmodel
+                }
+            }.show(activity?.supportFragmentManager!!,"")
+        }
     }
 
 
     private fun setUpView() {
-        databinding.flMyOrder.isVisible = Prefs.newInstance(requireContext()).getRole() == Role.CUSTOMER
+        val isSeller = Prefs.newInstance(requireContext()).getRole() == Role.SELLER
+        databinding.flMyOrder.isVisible = !isSeller
+        databinding.viewSeparateOrder.isVisible = !isSeller
+        databinding.flMoney.isVisible = isSeller
     }
 }

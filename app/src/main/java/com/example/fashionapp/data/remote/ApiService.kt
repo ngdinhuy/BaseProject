@@ -147,4 +147,13 @@ interface ApiService {
         @Query("id_partner") idReceiver: Int,
         @Query("offset") offset: Int
     ): PagingBaseResponse<ArrayList<ChatDetailResponse>>
+
+    @GET("user/withdraw")
+    suspend fun sellerWithdraw(
+        @Query("id_user") idUser: Int,
+        @Query("money") money: Double,
+        @Query("mail_paypal") mailPaypal: String,
+        @Query("password") password: String,
+        @Query("is_save_mail_paypal") isSaveMailPaypal: Boolean
+    ):BaseResponse<UserInfoResponse>
 }
