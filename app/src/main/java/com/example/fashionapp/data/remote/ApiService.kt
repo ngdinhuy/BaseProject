@@ -77,7 +77,7 @@ interface ApiService {
 
     @PUT("user/{id}")
     suspend fun updateInfoUser(
-        @Path("id") idUser : Int,
+        @Path("id") idUser: Int,
         @Body updateUserInfo: UpdateUserInfoRequest
     ): BaseResponse<UserInfoResponse>
 
@@ -103,7 +103,7 @@ interface ApiService {
 
     @GET("product/seller/{id}")
     suspend fun getListProductBySellerId(
-        @Path("id")idSeller : Int
+        @Path("id") idSeller: Int
     ): BaseResponse<kotlin.collections.List<Product>>
 
     @Multipart
@@ -116,8 +116,8 @@ interface ApiService {
     @POST("order/insert")
     @FormUrlEncoded
     suspend fun checkouut(
-        @Field("idUser")idUser: Int,
-        @Field("state_payment") statePayment : Int
+        @Field("idUser") idUser: Int,
+        @Field("state_payment") statePayment: Int
     ): BaseResponse<Any>
 
     @GET("statistic/monthly_income")
@@ -155,5 +155,22 @@ interface ApiService {
         @Query("mail_paypal") mailPaypal: String,
         @Query("password") password: String,
         @Query("is_save_mail_paypal") isSaveMailPaypal: Boolean
-    ):BaseResponse<UserInfoResponse>
+    ): BaseResponse<UserInfoResponse>
+
+    @GET("product/seller_category_product")
+    suspend fun getSellerCategoryProduct(
+        @Query("idUser") idUser: Int
+    ): BaseResponse<List<CategoryAndProductResponse>>
+
+    @GET("order_item/detail")
+    suspend fun getOrderItemDetail(
+        @Query("id") idOrderItem: Int
+    ): BaseResponse<OrderItemDetail>
+
+    @FormUrlEncoded
+    @POST("product/rate")
+    suspend fun rateProduct(
+        @Field("id_order_item") idOrderItem: Int,
+        @Field("rate") rate: Int
+    ): BaseResponse<OrderItemDetail>
 }

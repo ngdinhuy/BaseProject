@@ -111,6 +111,9 @@
             app:argType="com.example.fashionapp.model.OrderModel"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -160,4 +163,25 @@
             app:argType="string"
             android:defaultValue="" />
     </fragment><action android:id="@+id/action_global_chatFragment" app:destination="@id/chatFragment"/>
+    <fragment
+        android:id="@+id/sellerShopFragment"
+        android:name="com.example.fashionapp.ui.fashion.seller_shop.SellerShopFragment"
+        android:label="SellerShopFragment"
+        tools:layout="@layout/fragment_seller_shop">
+        <argument
+            android:name="idSeller"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <action android:id="@+id/action_global_sellerShopFragment" app:destination="@id/sellerShopFragment" />
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.example.fashionapp.ui.fashion.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review">
+        <argument
+            android:name="id_order_item"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

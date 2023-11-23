@@ -91,4 +91,10 @@ interface ShopAppResponsitory {
         password: String,
         isSaveMailPaypal: Boolean
     ): BaseResponse<UserInfoResponse>
+
+    suspend fun getSellerCategoryAndProduct(idUser: Int): BaseResponse<List<CategoryAndProductResponse>>
+
+    suspend fun getOrderItemDetail(idOrderItem: Int): BaseResponse<OrderItemDetail>
+
+    suspend fun rateProduct(idOrderItem: Int, rate: Int): BaseResponse<OrderItemDetail>
 }

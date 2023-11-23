@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fashionapp.databinding.FragmentOrderDetailBinding
 import com.example.fashionapp.ui.fashion.profile.list_bill.MyOrderViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderDetailFragment : Fragment() {
+class OrderDetailFragment : Fragment(), EventClick {
     lateinit var databinding: FragmentOrderDetailBinding
     val viewmodel: OrderDetailViewmodel by viewModels()
     val args: OrderDetailFragmentArgs by navArgs()
@@ -44,7 +45,19 @@ class OrderDetailFragment : Fragment() {
     private fun setUpAdapter() {
         adapter = OrderDetailAdapter(listOf(), requireContext())
         databinding.rvOrderItem.apply {
-            adapter = this@OrderDetailFragment.adapter
+            adapter = this@OrderDetailFragment.adapter.apply {
+                eventClick = this@OrderDetailFragment
+            }
         }
+    }
+
+    override fun clickOpenDetailProduct(idProduct: Int) {
+        val action = OrderDetailFragmentDirections.actionGlobalDetailProductFragment(idProduct)
+        findNavController().navigate(action)
+    }
+
+    override fun clickOpenReview(idOrderItem: Int) {
+        val action = OrderDetailFragmentDirections.actionOrderDetailFragmentToReviewFragment(idOrderItem)
+        findNavController().navigate(action)
     }
 }

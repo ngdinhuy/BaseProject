@@ -32,7 +32,7 @@ class ShopViewmodel @Inject constructor(
 
     val textFilter = MutableLiveData<String>("")
     var filter = 0
-    var category = 0
+    var category = 1
     fun getAllCategories() {
         viewModelScope.launch {
             responsitoryImpl.getAllCategories().apply {

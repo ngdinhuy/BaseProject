@@ -14,7 +14,7 @@
         android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:translationZ="0dp"
-        android:background="@color/white"
+        android:background="@color/background_app_color"
         android:layout_marginEnd="@dimen/margin_16dp"
         >
         <androidx.cardview.widget.CardView
@@ -28,7 +28,7 @@
                 android:id="@+id/iv_item"
                 android:layout_width="148dp"
                 android:layout_height="184dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@drawable/bg_image_radius_8dp"
                 />
         </androidx.cardview.widget.CardView>
@@ -59,6 +59,7 @@
             app:layout_constraintEnd_toEndOf="@id/cv_item"
             android:layout_marginTop="-18dp"
             android:translationZ="90dp"
+            android:visibility="gone"
             >
             <ImageView
                 android:layout_width="13dp"

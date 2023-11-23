@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.data.local.MyResponsitory
 import com.example.fashionapp.model.Product
+import com.example.fashionapp.model.UserModel
+import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
@@ -30,6 +32,9 @@ class DetailProductViewmodel @Inject constructor(
     val likeEvent: MutableLiveData<com.example.fashionapp.utils.Event<Boolean>> = _likeEvent
     val isLike = MutableLiveData<Boolean>(false)
 
+    val goToSellerShopEvent = MutableLiveData<Event<UserModel>>()
+    val messageEvent = MutableLiveData<Event<UserModel>>()
+
     val product = MutableLiveData<Product>()
     var idProduct = 0
 
@@ -50,6 +55,10 @@ class DetailProductViewmodel @Inject constructor(
         _amount.value = (mount + 1).toString()
     }
 
+    fun goToSellerShopEvent(){
+        goToSellerShopEvent.value = Event(product.value?.user?: UserModel())
+    }
+
     fun subtractAmount() {
         val mount = amount.value!!.toInt()
         if (mount == 0) {
@@ -63,23 +72,11 @@ class DetailProductViewmodel @Inject constructor(
         _eventBack.value = com.example.fashionapp.utils.Event(Unit)
     }
 
-    fun addToCart(product: Product) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            if (amount.value != "0") {
-//                myResponsitory.addProduct(
-//                    product,
-//                    Prefs.newInstance(context).getUsername()!!,
-//                    amount.value!!.toInt()
-//                )
-//            } else {
-//                myResponsitory.addProduct(
-//                    product,
-//                    Prefs.newInstance(context).getUsername()!!,
-//                    1
-//                )
-//            }
-//        }
+    fun messageEvent(){
+        messageEvent.value = Event(product.value?.user?: UserModel())
+    }
 
+    fun addToCart(product: Product) {
         viewModelScope.launch {
             val idUser = Prefs.newInstance(context).getId()
             val response = shopAppResponsitoryImpl.addToCart(

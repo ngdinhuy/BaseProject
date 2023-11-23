@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.fashionapp.ui.fashion.review.ReviewViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_marginVertical="@dimen/commin_size_16dp"
+                android:layout_marginStart="16dp"
+                android:drawableStart="@drawable/ic_back_button_black"
+                android:gravity="center"
+                android:text="Back"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/btn_checkout"
+            android:layout_marginBottom="@dimen/common_size_8dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/ll_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                    android:layout_marginTop="@dimen/common_size_24dp"
+                    android:background="@drawable/bg_radius_12_b0d8b2"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/margin_16dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/purchase_complete"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_size_8dp"
+                        android:gravity="center"
+                        android:text="@string/explain_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14" />
+                </LinearLayout>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginBottom="-12dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_verify_24"
+                    app:layout_constraintBottom_toBottomOf="@id/ll_intro"
+                    app:layout_constraintEnd_toEndOf="@id/ll_intro"
+                    app:layout_constraintStart_toStartOf="@id/ll_intro"
+                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
+
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_size_14dp"
+                    android:layout_marginTop="@dimen/common_size_24dp"
+                    android:text="Rating"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_intro" />
+
+                <RatingBar
+                    android:id="@+id/rating_bar"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:isIndicator="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_size_8dp"
+                    android:progressTint="@color/color_star_ratingbar"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75"
+                    android:stepSize="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_rating"
+                    tools:rating="4" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/commin_size_16dp"
+                    android:layout_marginTop="@dimen/commin_size_16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/rating_bar">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Information product:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="@dimen/commin_size_16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_sample_clothing"
+                        app:loadImage="@{viewmodel.orderItemDetail.product.image[0]}"
+                        app:shapeAppearanceOverlay="@style/radius8dpImageView" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Name: Clothing"
+                        android:textSize="12sp"
+                        android:text='@{"Name: " + viewmodel.orderItemDetail.product.name}'
+                        android:layout_marginTop="@dimen/common_size_8dp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Quantity: 12"
+                        android:textSize="12sp"
+                        android:text='@{"Name: " + viewmodel.orderItemDetail.quantity}'
+                        android:layout_marginTop="@dimen/common_size_8dp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Price: 12$"
+                        android:textSize="12sp"
+                        android:text='@{"Quantity: " + viewmodel.orderItemDetail.price + "$"}'
+                        android:layout_marginTop="@dimen/common_size_8dp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Description: "
+                        android:text='@{"Description: " + viewmodel.orderItemDetail.product.description}'
+                        android:textSize="12sp"
+                        android:layout_marginTop="@dimen/common_size_8dp"
+                        android:textColor="@color/black"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btn_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:background="@drawable/bg_btn_primary_enable"
+            android:text="Review"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/commin_size_22dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

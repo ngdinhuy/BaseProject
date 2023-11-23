@@ -34,4 +34,8 @@
 
     <string name="order_detail">Order Details</string>
     <string name="have_account">Not a member yet? Register</string>
+
+    <string name="purchase_complete">Purchase complete🎉</string>
+
+    <string name="explain_text">"Please let us know your \nfeedback ,the shop sincerely appreciates it.</string>
 </resources>
