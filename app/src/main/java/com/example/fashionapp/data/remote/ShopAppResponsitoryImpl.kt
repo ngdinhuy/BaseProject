@@ -139,4 +139,16 @@ class ShopAppResponsitoryImpl @Inject constructor(
     ): BaseResponse<UserInfoResponse> {
         return apiService.sellerWithdraw(idUser, money, mailPaypal, password,isSaveMailPaypal)
     }
+
+    override suspend fun getSellerCategoryAndProduct(idUser: Int): BaseResponse<List<CategoryAndProductResponse>> {
+        return apiService.getSellerCategoryProduct(idUser)
+    }
+
+    override suspend fun getOrderItemDetail(idOrderItem: Int): BaseResponse<OrderItemDetail> {
+        return apiService.getOrderItemDetail(idOrderItem)
+    }
+
+    override suspend fun rateProduct(idOrderItem: Int, rate: Int): BaseResponse<OrderItemDetail> {
+        return apiService.rateProduct(idOrderItem, rate)
+    }
 }

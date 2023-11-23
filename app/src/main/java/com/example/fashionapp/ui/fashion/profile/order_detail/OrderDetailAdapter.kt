@@ -1,6 +1,7 @@
 package com.example.fashionapp.ui.fashion.profile.order_detail
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ class OrderDetailAdapter(
     val context: Context,
 //    val onItemClick: ((idProduct: Product) -> Unit)?
 ): RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>() {
+
+    var eventClick: EventClick? = null
 
     inner class ViewHolder(val binding:ItemRvOrderDetailBinding): RecyclerView.ViewHolder(binding.root){
 
@@ -30,6 +33,18 @@ class OrderDetailAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             orderItem = listOrderDetail[position]
+            tvReview.setOnClickListener {
+                eventClick?.clickOpenReview(listOrderDetail[position]._id ?: 0)
+            }
+            image.setOnClickListener {
+                eventClick?.clickOpenDetailProduct(listOrderDetail[position].product?._id ?: 0)
+            }
         }
     }
+}
+
+interface EventClick{
+    fun clickOpenDetailProduct(idProduct: Int)
+
+    fun clickOpenReview(idOrderItem: Int)
 }

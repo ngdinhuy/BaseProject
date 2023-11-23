@@ -14,6 +14,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fashionapp.Role
 import com.example.fashionapp.databinding.FragmentDetailProductBinding
+import com.example.fashionapp.ui.fashion.chat.ChatFragment
+import com.example.fashionapp.ui.fashion.chat.ChatFragmentDirections
+import com.example.fashionapp.ui.fashion.seller_shop.SellerShopFragmentDirections
 import com.example.fashionapp.utils.EventObserver
 import com.example.fashionapp.utils.Prefs
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +60,16 @@ class DetailProductFragment : Fragment() {
     private fun setUpEvent() {
         viewmodel.eventBack.observe(viewLifecycleOwner, EventObserver {
             findNavController().popBackStack()
+        })
+
+        viewmodel.messageEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = ChatFragmentDirections.actionGlobalChatFragment(it.id ?: 0, it.name ?: "")
+            findNavController().navigate(action)
+        })
+
+        viewmodel.goToSellerShopEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = DetailProductFragmentDirections.actionGlobalSellerShopFragment(it.id ?: 0)
+            findNavController().navigate(action)
         })
     }
 

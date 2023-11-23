@@ -18,7 +18,7 @@ class Product(
     val reviewNumber: String? = "",
     val quantity: Int? =  0,
     val categoryName: String? = "",
-    @SerializedName("idSeller") val user:UserModel? = UserModel()
+    @SerializedName("sellerid") val user:UserModel? = UserModel()
 ): Parcelable{
     fun displayRatingFloat() : Float {
         rate?.let {

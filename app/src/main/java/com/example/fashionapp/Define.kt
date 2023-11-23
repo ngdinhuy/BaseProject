@@ -4,8 +4,8 @@ import android.Manifest
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://192.168.0.100:8080"
-    const val SOCKET_URL = "http://192.168.0.100:8085"
+    const val BASE_URL = "http://10.1.30.182:8080"
+    const val SOCKET_URL = "http://10.1.30.182:8085"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 
@@ -36,7 +36,7 @@ object Define {
 
     const val HTTP = "http"
 
-    val listFilterText = listOf("","Customer review", "Price: lowest to high", "Price: highest to low")
+    val listFilterText = listOf("","Customer review",  "Price: highest to low", "Price: lowest to high")
 
     val listPermission = listOf(
         Manifest.permission.CAMERA,

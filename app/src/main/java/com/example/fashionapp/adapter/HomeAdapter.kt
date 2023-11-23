@@ -3,6 +3,7 @@ package com.example.fashionapp.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fashionapp.Define
@@ -13,8 +14,9 @@ import com.example.fashionapp.model.Product
 class HomeAdapter(
     val context: Context,
     val listInfo: List<CategoryAndProductResponse>,
-    val event : HomeItemListAdapter.GoToDetailEvent
-): RecyclerView.Adapter<HomeAdapter.HomeItemViewHolder>() {
+    val event : HomeItemListAdapter.GoToDetailEvent,
+    val isShowViewAll: Boolean? = true,
+    ): RecyclerView.Adapter<HomeAdapter.HomeItemViewHolder>() {
     var adapterHomeItemListAdapter : HomeItemListAdapter? = null
 
     class HomeItemViewHolder(val binding: ItemRvHomeBinding)
@@ -52,6 +54,7 @@ class HomeAdapter(
             quotes = listInfo[position].descriptionCategory
             adapterHomeItemListAdapter = HomeItemListAdapter(context, listInfo[position].products as ArrayList<Product>)
             adapterHomeItemListAdapter?.goToDetailEvent = event
+            tvViewAll.isVisible = isShowViewAll ?: true
             rvItem.apply {
                 adapter = adapterHomeItemListAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
