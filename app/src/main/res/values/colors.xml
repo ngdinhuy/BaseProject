@@ -25,5 +25,6 @@
     <color name="colorPrimary">#0e89f5</color>
     <color name="color_0e89f5">#0e89f5</color>
     <color name="colorAccent">#2d5394</color>
-
+    <color name="color_green_429F53">#429F53</color>
+    <color name="color_red_C01525">#C01525</color>
 </resources>

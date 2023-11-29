@@ -80,8 +80,6 @@ class ProfileFragment: Fragment(){
 
     private fun setUpView() {
         val isSeller = Prefs.newInstance(requireContext()).getRole() == Role.SELLER
-        databinding.flMyOrder.isVisible = !isSeller
-        databinding.viewSeparateOrder.isVisible = !isSeller
         databinding.flMoney.isVisible = isSeller
     }
 }

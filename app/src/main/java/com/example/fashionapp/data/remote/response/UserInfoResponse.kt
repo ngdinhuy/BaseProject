@@ -1,5 +1,6 @@
 package com.example.fashionapp.data.remote.response
 
+import com.example.fashionapp.Role
 import com.google.gson.annotations.SerializedName
 
 class UserInfoResponse(
@@ -12,12 +13,13 @@ class UserInfoResponse(
     val role: Int? = 0,
     val avatar: String? = "",
     val totalOrder: Int = 0,
+    val totalOrderSeller: Int? = 0,
     val dob: String? = "",
     val mailPaypal: String? = "",
-    val property: String? = ""
+    val property: String? = "",
 ) {
     fun displayNumberOrder(): String{
-        return "Already have $totalOrder orders"
+        return "Already have ${if (role == Role.CUSTOMER) totalOrder else totalOrderSeller} orders"
     }
 
     fun displayMoney(): String{

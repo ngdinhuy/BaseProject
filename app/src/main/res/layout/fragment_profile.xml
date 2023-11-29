@@ -40,6 +40,7 @@
             android:background="@drawable/bg_round"
             android:src="@drawable/ic_avatar"
             app:loadImage="@{viewmodel.userInfoResponse.avatar}"
+            app:isCacheUrl="@{true}"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             />
 

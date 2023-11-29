@@ -42,6 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_goneMarginTop="24dp"
                 app:loadImage="@{viewmodel.userInfo.avatar}"
+                app:isCacheUrl="@{true}"
                 app:shapeAppearanceOverlay="@style/radius8dpImageView" />
 
             <LinearLayout
@@ -134,10 +135,11 @@
             android:id="@+id/barchart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            android:layout_marginTop="@dimen/common_size_8dp"
             android:layout_marginHorizontal="@dimen/commin_size_16dp"
-            app:layout_constraintTop_toBottomOf="@id/analystic"/>
+            android:layout_marginTop="@dimen/common_size_8dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toBottomOf="@id/analystic"
+            tools:layout_editor_absoluteX="-25dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

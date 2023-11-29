@@ -17,6 +17,7 @@ import com.example.fashionapp.databinding.FragmentDetailProductBinding
 import com.example.fashionapp.ui.fashion.chat.ChatFragment
 import com.example.fashionapp.ui.fashion.chat.ChatFragmentDirections
 import com.example.fashionapp.ui.fashion.seller_shop.SellerShopFragmentDirections
+import com.example.fashionapp.ui.seller.add_product.AddProductFragmentDirections
 import com.example.fashionapp.utils.EventObserver
 import com.example.fashionapp.utils.Prefs
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,9 +41,13 @@ class DetailProductFragment : Fragment() {
         return databinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewmodel.getProductById()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewmodel.getProductById()
         setUpEvent()
         setUpViewPager()
         setUpUIFollowRole()
@@ -71,12 +76,17 @@ class DetailProductFragment : Fragment() {
             val action = DetailProductFragmentDirections.actionGlobalSellerShopFragment(it.id ?: 0)
             findNavController().navigate(action)
         })
+
+        viewmodel.goToEditProductEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = AddProductFragmentDirections.actionGlobalAddProductFragment(it)
+            findNavController().navigate(action)
+        })
     }
 
     private fun setUpUIFollowRole() {
         val isSeller = Prefs.newInstance(requireContext()).getRole() == Role.SELLER
         databinding.llAdjust.isVisible = !isSeller
-        databinding.llAddToCart.isVisible = !isSeller
+        databinding.llBottom.isVisible = !isSeller
         databinding.infoProductSeller.isVisible = isSeller
         databinding.ivEdit.isVisible = isSeller
     }

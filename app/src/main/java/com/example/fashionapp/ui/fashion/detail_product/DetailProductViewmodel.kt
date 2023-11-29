@@ -34,6 +34,7 @@ class DetailProductViewmodel @Inject constructor(
 
     val goToSellerShopEvent = MutableLiveData<Event<UserModel>>()
     val messageEvent = MutableLiveData<Event<UserModel>>()
+    val goToEditProductEvent = MutableLiveData<Event<Int>>()
 
     val product = MutableLiveData<Product>()
     var idProduct = 0
@@ -104,4 +105,7 @@ class DetailProductViewmodel @Inject constructor(
         }
     }
 
+    fun goToEditProduct(){
+        goToEditProductEvent.value = Event(product.value?._id ?: 0)
+    }
 }

@@ -136,13 +136,21 @@
         <action
             android:id="@+id/action_sellerFragment_to_favoriteFragment2"
             app:destination="@id/favoriteFragment2" />
+        <action
+            android:id="@+id/action_sellerFragment_to_listOrderSellerFragment"
+            app:destination="@id/listOrderSellerFragment" />
     </fragment>
     <action android:id="@+id/action_global_sellerFragment" app:destination="@id/sellerFragment" />
     <fragment
         android:id="@+id/addProductFragment"
         android:name="com.example.fashionapp.ui.seller.add_product.AddProductFragment"
         android:label="AddProductFragment"
-        tools:layout="@layout/fragment_seller_add_product"/>
+        tools:layout="@layout/fragment_seller_add_product">
+        <argument
+            android:name="idProduct"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <action android:id="@+id/action_global_settingFragment" app:destination="@id/settingFragment" />
     <fragment
         android:id="@+id/favoriteFragment2"
@@ -184,4 +192,10 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+    <action android:id="@+id/action_global_addProductFragment" app:destination="@id/addProductFragment" />
+    <fragment
+        android:id="@+id/listOrderSellerFragment"
+        android:name="com.example.fashionapp.ui.seller.list_order.ListOrderSellerFragment"
+        android:label="ListOrderSellerFragment"
+        tools:layout="@layout/fragment_list_order_seller"/>
 </navigation>

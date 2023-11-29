@@ -1,24 +1,21 @@
 package com.example.fashionapp.ui.fashion.profile.setting
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fashionapp.Define
 import com.example.fashionapp.data.remote.request.UpdateUserInfoRequest
-import com.example.fashionapp.data.remote.response.BaseResponse
 import com.example.fashionapp.data.remote.response.UserInfoResponse
-import com.example.fashionapp.model.UserModel
 import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -68,8 +65,15 @@ class SettingViewmodel @Inject constructor(
                 idUser,
                 UpdateUserInfoRequest(fullName.value, phoneNumber.value, email.value, dob.value)
             ).apply {
-                if (errors.isEmpty()){
-                    updateAvatar()
+                if (errors.isEmpty()) {
+                    avatar.value?.let {
+                        if (it.isNotBlank() && !it.contains(Define.HTTP)) {
+                            updateAvatar()
+                        } else {
+                            context.makeToast("Success")
+                            _backEvent.value = Event(Unit)
+                        }
+                    }
                 } else {
                     context.makeToast(errors[0])
                 }
@@ -81,16 +85,21 @@ class SettingViewmodel @Inject constructor(
     fun updateAvatar() {
         val idUser = Prefs.newInstance(context).getId();
         viewModelScope.launch {
-            val file = File(avatar.value)
-            val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-            val imagePart =
-                MultipartBody.Part.createFormData("multipartFile", file.name, requestBody)
-            responsitoryImpl.changeAvatar(idUser, imagePart).apply {
-                if (errors.isEmpty()){
-                    _backEvent.value = Event(Unit)
-                } else {
-                    context.makeToast(errors[0])
+            try {
+                val file = File(avatar.value)
+                val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                val imagePart =
+                    MultipartBody.Part.createFormData("multipartFile", file.name, requestBody)
+                responsitoryImpl.changeAvatar(idUser, imagePart).apply {
+                    if (errors.isEmpty()) {
+                        context.makeToast("Success")
+                        _backEvent.value = Event(Unit)
+                    } else {
+                        context.makeToast(errors[0])
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e("Error Up load avatar ", e.message.toString())
             }
         }
     }

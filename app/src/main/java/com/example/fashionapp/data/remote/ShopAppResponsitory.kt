@@ -97,4 +97,8 @@ interface ShopAppResponsitory {
     suspend fun getOrderItemDetail(idOrderItem: Int): BaseResponse<OrderItemDetail>
 
     suspend fun rateProduct(idOrderItem: Int, rate: Int): BaseResponse<OrderItemDetail>
+
+    suspend fun updateProduct(request: RequestProduct, list: List<MultipartBody.Part>): BaseResponse<Product>
+
+    suspend fun getListOrderItem(idSeller: Int): BaseResponse<List<OrderItemSellerResponse>>
 }
