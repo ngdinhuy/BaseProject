@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fashionapp.data.remote.request.RequestProduct
 import com.example.fashionapp.model.CategoryModel
+import com.example.fashionapp.utils.Event
 import com.example.fashionapp.utils.Prefs
 import com.example.fashionapp.utils.makeToast
 import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
@@ -22,7 +23,9 @@ import javax.inject.Inject
 class AddProductViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context
-): ViewModel() {
+) : ViewModel() {
+    var idProduct = 0
+    var isAddProduct = true
     val listCategory = ArrayList<String>()
     val name = MutableLiveData<String>("")
     val description = MutableLiveData<String>("")
@@ -34,12 +37,37 @@ class AddProductViewmodel @Inject constructor(
     var typeInt = 0
 
     var listImage = ArrayList<String>()
-    fun getListCategory(){
+    var mutableListImage = MutableLiveData<ArrayList<String>>()
+
+    var backEvent =  MutableLiveData<Event<Unit>>()
+    fun getInfoProduct() {
+        if (idProduct != 0) {
+            viewModelScope.launch {
+                responsitoryImpl.getProductById(idProduct).apply {
+                    if (errors.isEmpty()) {
+                        name.value = dataResponse.name ?: ""
+                        description.value = dataResponse.description ?: ""
+                        price.value = (dataResponse.price ?: "").toString()
+                        discount.value = dataResponse.discount.toString()
+                        quantity.value = dataResponse.quantity.toString()
+                        mutableListImage.value = ArrayList((dataResponse.image ?: listOf()))
+                        typeInt = dataResponse.idCategory ?: 0
+                        type.value = dataResponse.categoryName ?: ""
+                    } else {
+                        context.makeToast(errors[0])
+                    }
+                }
+            }
+        }
+    }
+
+    fun getListCategory() {
         viewModelScope.launch {
             responsitoryImpl.getAllCategories().apply {
-                if (errors.isEmpty()){
+                if (errors.isEmpty()) {
                     dataResponse.forEach {
                         listCategory.add(it.title)
+                        getInfoProduct()
                     }
                 } else {
                     context.makeToast(errors[0])
@@ -48,39 +76,63 @@ class AddProductViewmodel @Inject constructor(
         }
     }
 
-    fun setUpType(idType:Int){
+    fun setUpType(idType: Int) {
         typeInt = idType
         type.value = listCategory[idType]
     }
 
-    fun saveProduct(){
+    fun saveProduct() {
         val idUser = Prefs.newInstance(context).getId()
-        val requestProduct = RequestProduct(
-            idUser.toString(),
-            name.value?: "",
-            description.value?: "",
-            quantity.value?:"",
-            price.value?:"",
-            discount.value?:"",
-            typeInt.toString()
-            )
+
 
         val listMultipart = ArrayList<MultipartBody.Part>()
         listImage.forEach {
             val file = File(it)
             val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-            val imagePart = MultipartBody.Part.createFormData("multipartFiles",file.name, requestBody)
+            val imagePart = MultipartBody.Part.createFormData("multipartFiles", file.name, requestBody)
             listMultipart.add(imagePart)
         }
-
+        typeInt++
         viewModelScope.launch {
-            responsitoryImpl.insertProduct(requestProduct, listMultipart).apply {
-                if (errors.isEmpty()){
-                    context.makeToast("Success")
-                } else {
-                    context.makeToast(errors[0])
+            if (isAddProduct) {
+                val requestProduct = RequestProduct(
+                    idSeller = idUser.toString(),
+                    name = name.value ?: "",
+                    description = description.value ?: "",
+                    quantity = quantity.value ?: "",
+                    price = price.value ?: "",
+                    discount = discount.value ?: "",
+                    idCategory = typeInt.toString()
+                )
+                responsitoryImpl.insertProduct(requestProduct, listMultipart).apply {
+                    if (errors.isEmpty()) {
+                        context.makeToast("Success")
+                        backEvent.value = Event(Unit)
+                    } else {
+                        context.makeToast(errors[0])
+                    }
+                }
+            } else {
+                val updateRequest = RequestProduct(
+                    name = name.value ?: "",
+                    description = description.value ?: "",
+                    quantity = quantity.value ?: "",
+                    price = price.value ?: "",
+                    discount = discount.value ?: "",
+                    idCategory = typeInt.toString(),
+                    id = idProduct
+                )
+                responsitoryImpl.updateProduct(request = updateRequest, listMultipart).apply {
+                    if (errors.isEmpty()){
+                        context.makeToast("Success")
+                        backEvent.value = Event(Unit)
+                    } else {
+                        context.makeToast(errors[0])
+                    }
                 }
             }
+
         }
+
     }
 }

@@ -44,7 +44,7 @@
                 android:text="Add"
                 android:textStyle="bold"
                 android:onClick="@{() -> viewmodel.saveProduct()}"
-                android:textSize="@dimen/commin_size_16dp"
+                android:textSize="@dimen/text_size_14sp"
                 android:layout_gravity="end|center_vertical"
                 android:textColor="@color/color_0e89f5"
                 android:layout_marginEnd="@dimen/commin_size_16dp"/>
@@ -204,7 +204,7 @@
                             android:layout_marginStart="10dp"
                             android:background="@drawable/bg_round_0e89f5_23b5f9_opacity_20"
                             android:padding="@dimen/common_size_8dp"
-                            android:src="@drawable/icon_comment_fill" />
+                            android:src="@drawable/ic_price" />
 
                         "<EditText
                             android:id="@+id/etPrice"
@@ -245,7 +245,7 @@
                             android:layout_marginStart="10dp"
                             android:background="@drawable/bg_round_0e89f5_23b5f9_opacity_20"
                             android:padding="@dimen/common_size_8dp"
-                            android:src="@drawable/icon_comment_fill" />
+                            android:src="@drawable/ic_discount" />
 
                         <EditText
                             android:id="@+id/etNickname"
@@ -288,7 +288,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@drawable/bg_round_0e89f5_23b5f9_opacity_20"
                         android:padding="@dimen/common_size_8dp"
-                        android:src="@drawable/icon_comment_fill" />
+                        android:src="@drawable/ic_quantity" />
 
                     <EditText
                         android:id="@+id/etQuantity"
@@ -389,7 +389,7 @@
                             android:layout_marginStart="@dimen/commin_size_10dp"
                             android:background="@drawable/bg_round_0e89f5_23b5f9_opacity_20"
                             android:padding="@dimen/common_size_8dp"
-                            android:src="@drawable/icon_comment_fill" />
+                            android:src="@drawable/ic_image" />
 
                         <TextView
                             android:id="@+id/tv_image"

@@ -20,6 +20,7 @@ class SellerViewmodel @Inject constructor(
     val goToSplashEvent = MutableLiveData<Event<Unit>>()
     val goToSettingEvent = MutableLiveData<Event<Unit>>()
     val goToChatListEvent = MutableLiveData<Event<Unit>>()
+    val goToListOrderEvent = MutableLiveData<Event<Unit>>()
 
     fun goToDetailScreen(product: Product){
         goToDetailScreenEvent.value = Event(product)
@@ -39,5 +40,9 @@ class SellerViewmodel @Inject constructor(
 
     fun goToChatList(){
         goToChatListEvent.value = Event(Unit)
+    }
+
+    fun goToListOrderSeller(){
+        goToListOrderEvent.value = Event(Unit)
     }
 }

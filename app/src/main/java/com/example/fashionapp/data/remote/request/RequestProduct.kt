@@ -1,12 +1,13 @@
 package com.example.fashionapp.data.remote.request
 
 class RequestProduct(
-    val idSeller:String,
-    val name: String,
-    val description: String,
-    val quantity: String,
-    val price: String,
-    val discount: String,
-    val idCategory: String
+    val idSeller:String? = null,
+    val name: String? = null,
+    val description: String? =null,
+    val quantity: String? = null,
+    val price: String? = null,
+    val discount: String? = null,
+    val idCategory: String? = null,
+    val id: Int? = 0,
 ) {
 }

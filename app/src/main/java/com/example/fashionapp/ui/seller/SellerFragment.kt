@@ -60,6 +60,11 @@ class SellerFragment : Fragment() {
             val action = SellerFragmentDirections.actionSellerFragmentToFavoriteFragment2()
             findNavController().navigate(action)
         })
+
+        viewmodel.goToListOrderEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = SellerFragmentDirections.actionSellerFragmentToListOrderSellerFragment()
+            findNavController().navigate(action)
+        })
     }
 
     private fun setUpNavigation() {

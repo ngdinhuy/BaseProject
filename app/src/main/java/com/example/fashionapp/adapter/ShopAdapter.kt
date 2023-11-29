@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.example.fashionapp.Define
 import com.example.fashionapp.R
 import com.example.fashionapp.Role
@@ -53,6 +55,8 @@ class ShopAdapter(
             Glide.with(context)
                 .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_camera))
                 .load(list[position].image?.get(0) ?: "")
+                .signature(ObjectKey(System.currentTimeMillis().toString()))
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(viewHoder.binding.ivItem)
             viewHoder.binding.clItem.setOnClickListener {
                 goToDetailEvent?.goToDetail(list[position])
@@ -63,6 +67,8 @@ class ShopAdapter(
             Glide.with(context)
                 .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_camera))
                 .load(list[position].image?.get(0) ?: "")
+                .signature(ObjectKey(System.currentTimeMillis().toString()))
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(viewHoder.binding.ivItem)
             viewHoder.binding.clItem.setOnClickListener {
                 goToDetailEvent?.goToDetail(list[position])

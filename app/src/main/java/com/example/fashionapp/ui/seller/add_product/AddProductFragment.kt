@@ -12,11 +12,15 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fashionapp.Define
 import com.example.fashionapp.component.ClickButtonEvent
 import com.example.fashionapp.component.DialogNumberPicker
 import com.example.fashionapp.databinding.FragmentSellerAddProductBinding
+import com.example.fashionapp.utils.EventObserver
 import com.example.fashionapp.utils.Utils
 import com.example.fashionapp.utils.makeToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddProductFragment: Fragment(), ClickButtonEvent {
     lateinit var databinding : FragmentSellerAddProductBinding
     val viewmodel : AddProductViewmodel by viewModels()
+    val navArgs : AddProductFragmentArgs by navArgs()
     val imageProductAdapter : ImageProductAdapter by lazy {
         ImageProductAdapter(requireContext(), viewmodel.listImage) {
             if (viewmodel.listImage.size > it) {
@@ -37,20 +42,29 @@ class AddProductFragment: Fragment(), ClickButtonEvent {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         databinding = FragmentSellerAddProductBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
-            viewmodel = this@AddProductFragment.viewmodel
+            viewmodel = this@AddProductFragment.viewmodel.apply {
+                idProduct = navArgs.idProduct
+            }
         }
         return databinding.root
     }
 
     override fun onResume() {
         super.onResume()
+//        viewmodel.getInfoProduct()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewmodel.getListCategory()
+        setUpView()
         setUpEvent()
         setUpAdapter()
+    }
+
+    private fun setUpView() {
+        viewmodel.isAddProduct= navArgs.idProduct == 0
+        databinding.tvSave.text = if (viewmodel.isAddProduct) "ADD" else "SAVE"
     }
 
     private fun setUpAdapter() {
@@ -88,6 +102,9 @@ class AddProductFragment: Fragment(), ClickButtonEvent {
             }
         }
 
+        viewmodel.backEvent.observe(viewLifecycleOwner, EventObserver{
+            findNavController().popBackStack()
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

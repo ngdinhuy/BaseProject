@@ -173,4 +173,16 @@ interface ApiService {
         @Field("id_order_item") idOrderItem: Int,
         @Field("rate") rate: Int
     ): BaseResponse<OrderItemDetail>
+
+    @Multipart
+    @POST("product/update")
+    suspend fun updateProduct(
+        @Part("requestProduct") requestProduct: RequestProduct,
+        @Part multipartFiles: List<MultipartBody.Part>
+    ): BaseResponse<Product>
+
+    @GET("order_item/list_1")
+    suspend fun getListOrderItemSeller(
+        @Query("idSeller") idSeller : Int
+    ): BaseResponse<List<OrderItemSellerResponse>>
 }

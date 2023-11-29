@@ -28,15 +28,15 @@ class ProfileViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext val context: Context,
     val myResponsitory: MyResponsitory
-): ViewModel(), ClickEvent, WithdrawEvent {
-    lateinit var fashionViewmodel : FashionViewmodel
-    var sellerViewmodel : SellerViewmodel? = null
+) : ViewModel(), ClickEvent, WithdrawEvent {
+    lateinit var fashionViewmodel: FashionViewmodel
+    var sellerViewmodel: SellerViewmodel? = null
     val userInfoResponse = MutableLiveData<UserInfoResponse>()
     val clickChangePasswordEvent = MutableLiveData<Event<Unit>>()
 
 
-    fun logout(){
-        if (Prefs.newInstance(context).getRole() == Role.CUSTOMER){
+    fun logout() {
+        if (Prefs.newInstance(context).getRole() == Role.CUSTOMER) {
             fashionViewmodel.logout()
         } else {
             sellerViewmodel?.let {
@@ -45,11 +45,17 @@ class ProfileViewmodel @Inject constructor(
         }
     }
 
-    fun goToMyOrder(){
-        fashionViewmodel.goToMyOrder()
+    fun goToMyOrder() {
+        if (Prefs.newInstance(context).getRole() == Role.CUSTOMER) {
+            fashionViewmodel.goToMyOrder()
+        } else {
+            sellerViewmodel?.let {
+                it.goToListOrderSeller()
+            }
+        }
     }
 
-    fun goToSetting(){
+    fun goToSetting() {
         if (Prefs.newInstance(context).getRole() == Role.CUSTOMER) {
             fashionViewmodel.goToSetting()
         } else {
@@ -57,11 +63,11 @@ class ProfileViewmodel @Inject constructor(
         }
     }
 
-    fun getInfoUser(){
+    fun getInfoUser() {
         val idUser = Prefs.newInstance(context).getId()
         viewModelScope.launch {
             responsitoryImpl.getUserInfo(idUser).apply {
-                if (this.errors.isEmpty()){
+                if (this.errors.isEmpty()) {
                     userInfoResponse.value = this.dataResponse ?: UserInfoResponse()
                 } else {
                     context.makeToast(errors[0])
@@ -70,7 +76,7 @@ class ProfileViewmodel @Inject constructor(
         }
     }
 
-    fun clickChangePassword(){
+    fun clickChangePassword() {
         clickChangePasswordEvent.value = Event(Unit)
     }
 
@@ -78,7 +84,7 @@ class ProfileViewmodel @Inject constructor(
         updatePassword(oldPassword, newPassword)
     }
 
-    private fun updatePassword(oldPassword: String, newPassword: String){
+    private fun updatePassword(oldPassword: String, newPassword: String) {
         val idUser = Prefs.newInstance(context).getId()
         viewModelScope.launch {
             viewModelScope.launch {
@@ -103,8 +109,8 @@ class ProfileViewmodel @Inject constructor(
         viewModelScope.launch {
             val idUser = Prefs.newInstance(context).getId()
             responsitoryImpl.sellerWithdraw(idUser, money.toDouble(), mailPaypal, password, isSaveAccount).apply {
-                if (errors.isEmpty()){
-                    userInfoResponse.value = dataResponse?: UserInfoResponse()
+                if (errors.isEmpty()) {
+                    userInfoResponse.value = dataResponse ?: UserInfoResponse()
                     context.makeToast("Withdraw is success")
                 } else {
                     context.makeToast(errors[0])

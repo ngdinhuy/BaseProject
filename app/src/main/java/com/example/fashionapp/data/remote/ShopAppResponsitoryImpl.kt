@@ -151,4 +151,12 @@ class ShopAppResponsitoryImpl @Inject constructor(
     override suspend fun rateProduct(idOrderItem: Int, rate: Int): BaseResponse<OrderItemDetail> {
         return apiService.rateProduct(idOrderItem, rate)
     }
+
+    override suspend fun updateProduct(request: RequestProduct, list: List<MultipartBody.Part>): BaseResponse<Product> {
+        return apiService.updateProduct(request, list)
+    }
+
+    override suspend fun getListOrderItem(idSeller: Int): BaseResponse<List<OrderItemSellerResponse>> {
+        return apiService.getListOrderItemSeller(idSeller)
+    }
 }
