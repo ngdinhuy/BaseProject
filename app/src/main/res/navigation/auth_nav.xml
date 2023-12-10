@@ -198,4 +198,9 @@
         android:name="com.example.fashionapp.ui.seller.list_order.ListOrderSellerFragment"
         android:label="ListOrderSellerFragment"
         tools:layout="@layout/fragment_list_order_seller"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.fashionapp.ui.fashion.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/><action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment"/>
 </navigation>

@@ -65,4 +65,8 @@ class ShopViewmodel @Inject constructor(
         getListProduct(category, filter)
     }
 
+    fun openSearchScreen(){
+        fashionViewModel?.goToSearch()
+    }
+
 }

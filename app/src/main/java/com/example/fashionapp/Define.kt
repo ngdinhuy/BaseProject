@@ -4,8 +4,8 @@ import android.Manifest
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://10.1.30.182:8080"
-    const val SOCKET_URL = "http://10.1.30.182:8085"
+    const val BASE_URL = "http://192.168.1.6:8080"
+    const val SOCKET_URL = "http://192.168.1.6:8085"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 

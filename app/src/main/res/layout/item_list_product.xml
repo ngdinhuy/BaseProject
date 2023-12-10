@@ -21,15 +21,16 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_height="104dp">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:background="@drawable/bg_item_shop_fragment"
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:elevation="5dp"
                 android:layout_height="104dp">
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/image"
                     android:layout_width="104dp"
                     android:layout_height="104dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/radius8dpImageView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:loadImage="@{product.image[0]}"/>
@@ -101,6 +102,7 @@
             android:layout_marginBottom="-10dp"
             android:elevation="5dp"
             android:translationZ="90dp"
+            android:visibility="gone"
             >
             <ImageView
                 android:layout_width="13dp"

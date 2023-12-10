@@ -17,39 +17,45 @@ import javax.inject.Inject
 class FashionViewmodel @Inject constructor(
     val responsitoryImpl: ShopAppResponsitoryImpl,
     @ApplicationContext context: Context
-): ViewModel(){
+) : ViewModel() {
     val _isLoading = MutableLiveData<Event<Boolean>>()
-    val isLoading : LiveData<Event<Boolean>> = _isLoading
+    val isLoading: LiveData<Event<Boolean>> = _isLoading
 
     val _goToDetailEvent = MutableLiveData<Event<Product>>()
-    val goToDetailEvent : LiveData<Event<Product>> = _goToDetailEvent
+    val goToDetailEvent: LiveData<Event<Product>> = _goToDetailEvent
     val _goToListProductEvent = MutableLiveData<Event<CategoryModel>>()
-    val goToListProductEvent : LiveData<Event<CategoryModel>> = _goToListProductEvent
+    val goToListProductEvent: LiveData<Event<CategoryModel>> = _goToListProductEvent
     private val _goToMyOrderEvent = MutableLiveData<Event<Unit>>()
-    val goToMyOderEvent : LiveData<Event<Unit>> = _goToMyOrderEvent
+    val goToMyOderEvent: LiveData<Event<Unit>> = _goToMyOrderEvent
     private val _goToSettingEvent = MutableLiveData<Event<Unit>>()
-    val goToSettingEvent : LiveData<Event<Unit>> = _goToSettingEvent
+    val goToSettingEvent: LiveData<Event<Unit>> = _goToSettingEvent
     private val _goToChatEvent = MutableLiveData<Event<ChatListResponse>>()
-    val goToChatEvent : LiveData<Event<ChatListResponse>> = _goToChatEvent
+    val goToChatEvent: LiveData<Event<ChatListResponse>> = _goToChatEvent
+    private val _goToSearchEvent = MutableLiveData<Event<Unit>>()
+    val goToSearchEvent: LiveData<Event<Unit>> = _goToSearchEvent
 
     var filter = 0
 
     private val _logoutEvent = MutableLiveData<Event<Unit>>()
-    val logoutEvent : LiveData<Event<Unit>> = _logoutEvent
+    val logoutEvent: LiveData<Event<Unit>> = _logoutEvent
 
-    fun logout(){
+    fun logout() {
         _logoutEvent.value = Event(Unit)
     }
 
-    fun goToMyOrder(){
+    fun goToMyOrder() {
         _goToMyOrderEvent.value = Event(Unit)
     }
 
-    fun goToSetting(){
+    fun goToSetting() {
         _goToSettingEvent.value = Event(Unit)
     }
 
-    fun goToChatDetail(chatListResponse: ChatListResponse){
+    fun goToChatDetail(chatListResponse: ChatListResponse) {
         _goToChatEvent.value = Event(chatListResponse)
+    }
+
+    fun goToSearch() {
+        _goToSearchEvent.value = Event(Unit)
     }
 }

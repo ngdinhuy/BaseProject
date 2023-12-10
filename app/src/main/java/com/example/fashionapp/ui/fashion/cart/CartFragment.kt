@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,8 @@ class CartFragment : Fragment() {
 
     fun setUpAdapter() {
         cartViewmodel.listCart.observe(viewLifecycleOwner, EventObserver {
+            databinding.ivEmptyCart.isVisible = it.isEmpty()
+            databinding.rvCart.isVisible = !it.isEmpty()
             databinding.rvCart.apply {
                 adapter = CartAdapter(
                     it,
