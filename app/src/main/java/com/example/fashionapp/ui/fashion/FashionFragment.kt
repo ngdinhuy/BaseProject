@@ -83,6 +83,11 @@ class FashionFragment : Fragment() {
             )
             findNavController().navigate(action)
         })
+
+        viewmodel.goToSearchEvent.observe(viewLifecycleOwner, EventObserver{
+            val action = FashionFragmentDirections.actionGlobalSearchFragment()
+            findNavController().navigate(action)
+        })
     }
 
     private fun setUpNavigation() {

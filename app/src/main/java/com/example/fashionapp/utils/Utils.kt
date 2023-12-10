@@ -10,10 +10,13 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.fashionapp.Define
 import java.io.ByteArrayOutputStream
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -202,7 +205,18 @@ fun Context.makeToast(text: String) {
 }
 
 fun Double.get2digit(): Double {
-    return String.format(("%.2f"), this).toDouble()
+    return try {
+        var df = DecimalFormat("#.##")
+        if (this.toString().contains(",")){
+            df = DecimalFormat("#,##")
+        }
+        df.roundingMode = RoundingMode.CEILING
+        df.format(this).toDouble()
+    } catch (e: Exception){
+        Log.e("Utils", e.message.toString())
+        this
+    }
+
 }
 
 
