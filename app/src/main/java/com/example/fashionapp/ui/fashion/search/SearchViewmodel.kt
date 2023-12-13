@@ -19,16 +19,27 @@ class SearchViewmodel @Inject constructor(
 ) : ViewModel() {
     var fullList = listOf<Product>()
     val listProduct = MutableLiveData<List<Product>>()
-
+    var idSeller = 0
     fun loadListProduct() {
         viewModelScope.launch {
-            impl.getAllProducts().apply {
-                if (errors.isEmpty()) {
-                    fullList = dataResponse
-                } else {
-                    context.makeToast(errors[0])
+            if (idSeller == 0){
+                impl.getAllProducts().apply {
+                    if (errors.isEmpty()) {
+                        fullList = dataResponse
+                    } else {
+                        context.makeToast(errors[0])
+                    }
+                }
+            } else {
+                impl.getListProductBySellerId(idSeller).apply {
+                    if (errors.isEmpty()) {
+                        fullList = dataResponse
+                    } else {
+                        context.makeToast(errors[0])
+                    }
                 }
             }
+
         }
     }
 }

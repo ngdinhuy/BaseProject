@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fashionapp.adapter.ListProductAdapter
 import com.example.fashionapp.databinding.FragmentSearchBinding
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment: Fragment() {
     lateinit var databinding: FragmentSearchBinding
     val viewmodel: SearchViewmodel by viewModels()
-
+    val navArgs : SearchFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +34,7 @@ class SearchFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewmodel.idSeller = navArgs.id
         viewmodel.loadListProduct()
         setUpEvent()
     }

@@ -55,6 +55,11 @@ class SellerShopFragment: Fragment(), HomeItemListAdapter.GoToDetailEvent {
             }
         })
 
+        databinding.tvSearch.setOnClickListener {
+            val action = SellerShopFragmentDirections.actionGlobalSearchFragment(viewmodel.idSeller)
+            findNavController().navigate(action)
+        }
+
         databinding.ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
