@@ -65,6 +65,7 @@ class AddProductFragment: Fragment(), ClickButtonEvent {
     private fun setUpView() {
         viewmodel.isAddProduct= navArgs.idProduct == 0
         databinding.tvSave.text = if (viewmodel.isAddProduct) "ADD" else "SAVE"
+        databinding.tvTitle.text = if (viewmodel.isAddProduct) "ADD A PRODUCT" else "EDIT INFORMATION"
     }
 
     private fun setUpAdapter() {

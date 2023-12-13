@@ -53,4 +53,8 @@ class Product(
     fun displayQuantity(): String{
         return "Qty: $quantity"
     }
+
+    fun displayNameSeller(): String{
+        return user?.name ?: ""
+    }
 }

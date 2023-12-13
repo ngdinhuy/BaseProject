@@ -202,5 +202,10 @@
         android:id="@+id/searchFragment"
         android:name="com.example.fashionapp.ui.fashion.search.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search"/><action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment"/>
+        tools:layout="@layout/fragment_search">
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment><action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment"/>
 </navigation>
