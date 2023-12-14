@@ -25,14 +25,15 @@ class MyOrderViewmodel @Inject constructor(
 ): ViewModel() {
     private val _listOrder = MutableLiveData<Event<List<OrderModel>>>()
     val listOrder : LiveData<Event<List<OrderModel>>> = _listOrder
-
+    val list = ArrayList<OrderModel>()
 
     fun getListOrderFromServer(){
         val idUser = Prefs.newInstance(context).getId();
         viewModelScope.launch {
             shopAppResponsitoryImpl.getUserOrder(idUser).apply {
                 if (this.errors.isEmpty()){
-                    _listOrder.value = Event(this.dataResponse ?: listOf())
+                    list.addAll(this.dataResponse)
+                    _listOrder.value = Event(list)
                 } else {
                     context.makeToast(errors[0])
                 }

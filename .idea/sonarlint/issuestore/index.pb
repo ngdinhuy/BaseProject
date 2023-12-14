@@ -93,3 +93,11 @@ Wapp/src/main/java/com/example/fashionapp/ui/fashion/profile/setting/SettingView
 Oapp/src/main/java/com/example/fashionapp/ui/fashion/profile/ProfileViewmodel.kt,9\d\9da70495b06689107b0d648063b9c895e7609837
 ~
 Napp/src/main/java/com/example/fashionapp/ui/seller/home/SellerHomeViewmodel.kt,c\e\ce21b657e51b0c7469d267fd547ad8d00e267cb2
+†
+Vapp/src/main/java/com/example/fashionapp/ui/seller/list_product/ListProductFragment.kt,6\c\6ca429a677ca87fbe3ae1df8165e53e6de55cec2
+‡
+Wapp/src/main/java/com/example/fashionapp/ui/seller/list_product/ListProductViewmodel.kt,2\4\24aade6201c4ba2da2a8ad20dd66a7ca5aabd665
+|
+Lapp/src/main/java/com/example/fashionapp/ui/fashion/search/SearchFragment.kt,1\7\17b54797f1640b42ea4399997949c7d1be8cc691
+}
+Mapp/src/main/java/com/example/fashionapp/ui/fashion/search/SearchViewmodel.kt,e\4\e4aaa89d50da7ca04aa178b4a7d93498553fa73e
