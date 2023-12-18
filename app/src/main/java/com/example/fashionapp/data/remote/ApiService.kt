@@ -19,7 +19,7 @@ interface ApiService {
     @POST("auth/login")
     suspend fun login(
         @Body loginRequest: LoginRequest
-    ): BaseResponse<UserModel>
+    ): BaseResponse<LoginResponse>
 
     @GET("product/category")
     suspend fun getProductByCategory(

@@ -20,7 +20,7 @@ class ShopAppResponsitoryImpl @Inject constructor(
         return apiService.getAllProducts()
     }
 
-    override suspend fun login(username: String, password: String): BaseResponse<UserModel> {
+    override suspend fun login(username: String, password: String): BaseResponse<LoginResponse> {
         return apiService.login(LoginRequest(username, password))
     }
 

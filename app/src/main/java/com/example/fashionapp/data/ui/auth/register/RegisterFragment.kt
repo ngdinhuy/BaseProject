@@ -35,13 +35,7 @@ class RegisterFragment: Fragment() {
 
     private fun setUpEvent() {
         registerViewmodel.loginSuccessEvent.observe(viewLifecycleOwner, EventObserver {
-            if (it == Role.SELLER){
-                val action = SplashFragmentDirections.actionGlobalSellerFragment()
-                findNavController().navigate(action)
-            } else {
-                val action = SplashFragmentDirections.actionGlobalFashionFragment()
-                findNavController().navigate(action)
-            }
+            findNavController().popBackStack()
         })
     }
 }

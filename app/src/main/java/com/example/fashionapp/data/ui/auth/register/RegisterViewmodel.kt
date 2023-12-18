@@ -57,8 +57,7 @@ class RegisterViewmodel @Inject constructor(
                     role = role.value.toString())).apply {
                 if (this.errors.isEmpty()){
                     val response = this.dataResponse
-                    Prefs.newInstance(context).setId(response.id?:0)
-                    Prefs.newInstance(context).setRole(response.role?: -1)
+                    context.makeToast("Register success")
                     loginSuccessEvent.value = Event(response.role?: -1)
                 } else {
                     context.makeToast(errors[0])

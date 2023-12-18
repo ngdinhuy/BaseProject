@@ -12,7 +12,7 @@ import okhttp3.MultipartBody
 interface ShopAppResponsitory {
     suspend fun getAllProducts(): BaseResponse<List<Product>>
 
-    suspend fun login(username: String, password: String): BaseResponse<UserModel>
+    suspend fun login(username: String, password: String): BaseResponse<LoginResponse>
 
     suspend fun getProductsByCategory(idCategory: Int, filter: Int): BaseResponse<List<Product>>
 
