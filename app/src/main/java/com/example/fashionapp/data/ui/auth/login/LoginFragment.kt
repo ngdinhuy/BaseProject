@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewmodel.goToRegisterEvent.observe(viewLifecycleOwner, Observer {
+        loginViewmodel.goToRegisterEvent.observe(viewLifecycleOwner, EventObserver {
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             findNavController().navigate(action)
         })

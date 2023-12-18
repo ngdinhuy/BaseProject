@@ -2,10 +2,12 @@ package com.example.fashionapp.di
 
 import android.content.Context
 import com.example.fashionapp.Define
+import com.example.fashionapp.utils.Prefs
 import com.example.shopapp.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -31,15 +33,22 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
+    fun provideHeaderInterceptor(@ApplicationContext context: Context):Interceptor{
+        return Interceptor{
+            val request = it.request()
+                .newBuilder()
+                .addHeader("Authorization", "Bearer "+ Prefs.newInstance(context).getToken())
+                .build()
+            it.proceed(request)
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(logging: HttpLoggingInterceptor, interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(logging)
-            .addInterceptor(Interceptor{
-                val request = it.request()
-                    .newBuilder()
-                    .build()
-                it.proceed(request)
-            })
+            .addInterceptor(interceptor)
             .connectTimeout(60, TimeUnit.SECONDS) // connect timeout
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
