@@ -96,7 +96,18 @@ class CartViewmodel @Inject constructor(
     }
 
     fun clickCheckout(){
-        _clickCheckoutEvent.value = Event(Unit)
+        var validated = false
+        val idUser = Prefs.newInstance(context).getId()
+        viewModelScope.launch {
+            responsitoryImpl.validateCartItem(idUser).apply {
+                if (errors.isEmpty()){
+                    _clickCheckoutEvent.value = Event(Unit)
+                } else {
+                    context.makeToast(errors[0])
+                    validated = false
+                }
+            }
+        }
     }
 
     fun checkout(statePayment: Int){

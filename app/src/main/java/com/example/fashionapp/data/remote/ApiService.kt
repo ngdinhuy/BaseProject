@@ -185,4 +185,9 @@ interface ApiService {
     suspend fun getListOrderItemSeller(
         @Query("idSeller") idSeller : Int
     ): BaseResponse<List<OrderItemSellerResponse>>
+
+    @GET("cart/verify_cart")
+    suspend fun verifyCartItem(
+        @Query("idUser") idUser: Int
+    ): BaseResponse<Boolean>
 }

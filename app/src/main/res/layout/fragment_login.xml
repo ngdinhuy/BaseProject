@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/common_size_8dp"
+            android:layout_marginTop="@dimen/commin_size_16dp"
             android:background="@drawable/bg_input_info"
             android:paddingVertical="5dp"
             app:boxBackgroundMode="none"
@@ -90,6 +90,7 @@
             android:layout_marginHorizontal="@dimen/margin_16dp"
             android:layout_marginTop="@dimen/margin_16dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_password">
 
@@ -136,6 +137,7 @@
             android:layout_marginTop="@dimen/commin_size_10dp"/>
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/common_size_12dp"
@@ -146,6 +148,7 @@
             app:layout_constraintBottom_toTopOf="@+id/ll_login_via_social" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_login_via_social"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
