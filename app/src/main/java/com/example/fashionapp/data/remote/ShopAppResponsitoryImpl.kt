@@ -159,4 +159,8 @@ class ShopAppResponsitoryImpl @Inject constructor(
     override suspend fun getListOrderItem(idSeller: Int): BaseResponse<List<OrderItemSellerResponse>> {
         return apiService.getListOrderItemSeller(idSeller)
     }
+
+    override suspend fun validateCartItem(idUser: Int): BaseResponse<Boolean> {
+        return apiService.verifyCartItem(idUser)
+    }
 }

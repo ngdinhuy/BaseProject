@@ -101,4 +101,6 @@ interface ShopAppResponsitory {
     suspend fun updateProduct(request: RequestProduct, list: List<MultipartBody.Part>): BaseResponse<Product>
 
     suspend fun getListOrderItem(idSeller: Int): BaseResponse<List<OrderItemSellerResponse>>
+
+    suspend fun validateCartItem(idUser: Int): BaseResponse<Boolean>
 }
