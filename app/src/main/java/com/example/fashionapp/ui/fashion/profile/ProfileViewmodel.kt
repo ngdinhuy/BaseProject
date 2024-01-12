@@ -34,7 +34,6 @@ class ProfileViewmodel @Inject constructor(
     val userInfoResponse = MutableLiveData<UserInfoResponse>()
     val clickChangePasswordEvent = MutableLiveData<Event<Unit>>()
 
-
     fun logout() {
         if (Prefs.newInstance(context).getRole() == Role.CUSTOMER) {
             fashionViewmodel.logout()

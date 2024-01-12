@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.fashionapp.R
 import com.example.fashionapp.data.ui.auth.splash.SplashFragmentDirections
 import com.example.fashionapp.databinding.FragmentFashionBinding
+import com.example.fashionapp.main.MainActivity
 import com.example.fashionapp.ui.fashion.detail_product.DetailProductFragmentDirections
 import com.example.fashionapp.ui.loading.LoadingFragmentDirections
 import com.example.fashionapp.utils.EventObserver
@@ -60,6 +61,7 @@ class FashionFragment : Fragment() {
         })
 
         viewmodel.logoutEvent.observe(viewLifecycleOwner,EventObserver{
+            (activity as? MainActivity)?.logOut()
             Prefs.newInstance(requireContext()).setToken("")
             Prefs.newInstance(requireContext()).setId(0)
             val action = SplashFragmentDirections.actionGlobalSplashFragment()

@@ -21,7 +21,7 @@
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="Fashion"
             android:textSize="@dimen/text_size_logo_app"
             android:textColor="@color/white"
             android:textStyle="bold"

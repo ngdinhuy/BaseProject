@@ -68,11 +68,15 @@ class MainActivity : AppCompatActivity() {
 
     protected override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        ZaloPaySDK.getInstance().onResult(intent)
+//        ZaloPaySDK.getInstance().onResult(intent)
     }
 
     override fun onPause() {
         super.onPause()
+        logOut()
+    }
+
+    fun logOut(){
         val myID = Prefs.newInstance(this).getId()
         if (myID ==0 ) return
         mSocket?.emit(Define.DISCONNECT, myID.toString())

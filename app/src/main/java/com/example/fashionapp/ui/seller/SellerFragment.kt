@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.fashionapp.R
 import com.example.fashionapp.databinding.FragmentSellerBinding
+import com.example.fashionapp.main.MainActivity
 import com.example.fashionapp.ui.fashion.shop.list_product.ListProductFragmentDirections
 import com.example.fashionapp.utils.EventObserver
 import com.example.fashionapp.utils.Prefs
@@ -51,6 +52,7 @@ class SellerFragment : Fragment() {
         })
 
         viewmodel.goToSplashEvent.observe(viewLifecycleOwner, EventObserver{
+            (activity as? MainActivity)?.logOut()
             Prefs.newInstance(requireContext()).setId(0)
             val action = SellerFragmentDirections.actionGlobalSplashFragment()
             findNavController().navigate(action)

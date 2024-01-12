@@ -4,8 +4,8 @@ import android.Manifest
 import com.example.fashionapp.model.Product
 
 object Define {
-    const val BASE_URL = "http://192.168.10.11:8080"
-    const val SOCKET_URL = "http://192.168.10.11:8085"
+    const val BASE_URL = "http://172.20.10.7:8080"
+    const val SOCKET_URL = "http://172.20.10.7:8085"
     const val MENS_QUOTES = "Fashions fade, style is eternal."
     const val WOMEN_QUOTES = "Elegance is elimination."
 
@@ -45,7 +45,7 @@ object Define {
     )
 
     val listMonthOfYear = listOf<String>(
-        "1/2023","2/2023","3/2023", "4/2023", "5/2023", "6/2023", "7/2023", "8/2023", "9/2023", "10/2023", "11/2023", "12/2023"
+       "4/2023", "5/2023", "6/2023", "7/2023", "8/2023", "9/2023", "10/2023", "11/2023", "12/2023", "1/2024", "2/2024", "3/2024", "4/2024"
     )
 
     //Socket event
