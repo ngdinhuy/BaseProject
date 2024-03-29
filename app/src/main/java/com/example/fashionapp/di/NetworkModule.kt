@@ -1,7 +1,7 @@
 package com.example.fashionapp.di
 
-import android.content.Context
-import com.example.fashionapp.Define
+
+import com.example.fashionapp.BuildConfig
 import com.example.shopapp.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBaseUrl() = Define.BASE_URL
+    fun provideBaseUrl() = BuildConfig.BASE_URL
 
     @Provides
     @Singleton

@@ -16,7 +16,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.fashionapp"
@@ -29,7 +29,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"http://172.20.10.2:8080/\""
+        }
         release {
+            buildConfigField "String", "BASE_URL", "\"http://172.20.10.2:8080/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -42,6 +48,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
+        buildConfig true
         dataBinding true
     }
 }
