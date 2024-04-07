@@ -1,9 +1,9 @@
-package com.example.fashionapp.main
+package com.example.baseproject.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.fashionapp.R
+import com.example.baseproject.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

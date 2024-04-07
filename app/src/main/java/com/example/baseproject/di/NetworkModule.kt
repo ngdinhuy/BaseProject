@@ -1,8 +1,8 @@
-package com.example.fashionapp.di
+package com.example.baseproject.di
 
 
-import com.example.fashionapp.BuildConfig
-import com.example.shopapp.data.remote.ApiService
+import com.example.baseproject.BuildConfig
+import com.example.baseproject.data.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

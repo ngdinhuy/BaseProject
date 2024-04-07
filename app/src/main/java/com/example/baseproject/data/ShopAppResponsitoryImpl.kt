@@ -1,7 +1,8 @@
-package com.example.shopapp.data.remote
+package com.example.baseproject.data
 
 
-import java.util.*
+import com.example.baseproject.data.ApiService
+import com.example.baseproject.data.ShopAppResponsitory
 import javax.inject.Inject
 
 class ShopAppResponsitoryImpl @Inject constructor(

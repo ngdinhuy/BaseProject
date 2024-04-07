@@ -1,4 +1,4 @@
-package com.example.fashionapp.data.ui.auth.splash
+package com.example.baseproject.ui.auth.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.fashionapp.databinding.FrgamentSplashBinding
+import com.example.baseproject.databinding.FrgamentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +30,8 @@ class SplashFragment:Fragment() {
             {
             val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                 findNavController().navigate(action)
-            },2000
+            }
+            ,2000
         )
 
     }

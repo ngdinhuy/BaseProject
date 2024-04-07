@@ -1,9 +1,8 @@
-package com.example.fashionapp.data.ui.auth.login
+package com.example.baseproject.ui.auth.login
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.shopapp.data.remote.ShopAppResponsitory
-import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
+import com.example.baseproject.data.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

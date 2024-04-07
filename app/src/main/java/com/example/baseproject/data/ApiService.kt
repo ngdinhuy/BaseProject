@@ -1,4 +1,4 @@
-package com.example.shopapp.data.remote
+package com.example.baseproject.data
 
 import retrofit2.http.*
 import java.util.*

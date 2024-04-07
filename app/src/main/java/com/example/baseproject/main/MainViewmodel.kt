@@ -1,9 +1,8 @@
-package com.example.fashionapp.main
+package com.example.baseproject.main
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.shopapp.data.remote.ShopAppResponsitoryImpl
+import com.example.baseproject.data.ShopAppResponsitoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

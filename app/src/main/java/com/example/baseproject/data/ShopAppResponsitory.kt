@@ -1,4 +1,4 @@
-package com.example.shopapp.data.remote
+package com.example.baseproject.data
 
 import java.util.*
 

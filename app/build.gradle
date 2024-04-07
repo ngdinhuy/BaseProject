@@ -19,7 +19,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.fashionapp"
+        applicationId "com.example.baseproject"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -68,8 +68,8 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     //glide
-    implementation 'com.github.bumptech.glide:glide:4.15.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     // retrofit
     // https://github.com/square/retrofit
