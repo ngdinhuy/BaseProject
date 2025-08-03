@@ -7,24 +7,35 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.example.baseproject.base.BaseFragment
 import com.example.baseproject.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment:Fragment() {
+class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewmodel>() {
     private lateinit var databinding : FragmentLoginBinding
-    val loginViewmodel : LoginViewmodel by viewModels()
-    val navArgs by navArgs<LoginFragmentArgs>()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        databinding = FragmentLoginBinding.inflate(inflater, container, false)
-        return databinding.root
-    }
+    val viewmodel : LoginViewmodel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun provideViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentLoginBinding {
+        return FragmentLoginBinding.inflate(inflater, container, false)
+    }
+
+    override fun provideViewModel(): LoginViewmodel {
+        return viewmodel
+    }
+
+    override fun setUpView() {
+
+    }
+
+    override fun setUpEvent() {
+        super.setUpEvent()
     }
 }

@@ -20,7 +20,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBaseUrl() = BuildConfig.BASE_URL
+    fun provideBaseUrl() = "${BuildConfig.BASE_URL}"
 
     @Provides
     @Singleton
@@ -53,5 +53,4 @@ object NetworkModule {
     fun provideMovieAppService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
-
 }

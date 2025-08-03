@@ -9,7 +9,7 @@
         android:id="@+id/splashFragment"
         android:name="com.example.baseproject.ui.auth.splash.SplashFragment"
         android:label="SplashFragment"
-        tools:layout="@layout/frgament_splash"
+        tools:layout="@layout/fragment_splash"
         >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"

@@ -3,6 +3,7 @@ buildscript {
         repositories {
             google()
             mavenCentral()
+            maven { url 'https://jitpack.io' }
         }
     }
 }
@@ -11,17 +12,17 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
-    id 'com.google.devtools.ksp' version '1.6.21-1.0.6'
+    id 'com.google.devtools.ksp'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
-    compileSdk 33
-
+    compileSdk 35
+    namespace 'com.example.baseproject'
     defaultConfig {
         applicationId "com.example.baseproject"
         minSdk 21
-        targetSdk 33
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -64,8 +65,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //dagger-hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "com.google.dagger:hilt-android:2.48"
+    ksp "com.google.dagger:hilt-compiler:2.48"
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
@@ -84,7 +85,6 @@ dependencies {
     def room_version = "2.4.2"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
