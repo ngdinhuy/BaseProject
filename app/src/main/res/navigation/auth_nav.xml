@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/imagesFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -25,5 +25,23 @@
             android:name="name"
             app:argType="string"
             android:defaultValue='' />
+    </fragment>
+    <fragment
+        android:id="@+id/imagesFragment"
+        android:name="com.example.baseproject.ui.auth.images.ImagesFragment"
+        android:label="ImagesFragment"
+        tools:layout="@layout/fragment_images">
+        <action
+            android:id="@+id/action_imagesFragment_to_detailImageFragment"
+            app:destination="@id/detailImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailImageFragment"
+        android:name="com.example.baseproject.ui.auth.detail_image.DetailImageFragment"
+        android:label="DetailImageFragment"
+        tools:layout="@layout/fragment_detail_image">
+        <argument
+            android:name="idImage"
+            app:argType="long" />
     </fragment>
 </navigation>

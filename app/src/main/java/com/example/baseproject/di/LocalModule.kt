@@ -1,6 +1,7 @@
 package com.example.baseproject.di
 
 import android.content.Context
+import com.example.baseproject.helpers.ImagesHelper
 import com.example.baseproject.utils.SharedHelper
 import dagger.Module
 import dagger.Provides
@@ -16,5 +17,7 @@ class LocalModule {
     @Singleton
     fun provideSharedHelper(@ApplicationContext context: Context) = SharedHelper(context)
 
-
+    @Provides
+    @Singleton
+    fun provideImagesHelper(@ApplicationContext context: Context) = ImagesHelper(context)
 }

@@ -1,12 +1,14 @@
 package com.example.baseproject.binding
 
 import android.graphics.Bitmap
+import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -80,5 +82,11 @@ object Databinding {
         } else {
             this.setTypeface(null, Typeface.NORMAL)
         }
+    }
+
+    @BindingAdapter("app:tintColor")
+    @JvmStatic
+    fun ImageView.setImageViewTint(@ColorRes color: Int) {
+        this.setColorFilter(color, PorterDuff.Mode.SRC_IN)
     }
 }
