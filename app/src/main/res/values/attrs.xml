@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomDotsIndicator">
+        <attr name="cdi_default_dot_height" format="dimension" />
+        <attr name="cdi_default_dot_width" format="dimension" />
+        <attr name="cdi_selected_dot_height" format="dimension" />
+        <attr name="cdi_selected_dot_witdth" format="dimension" />
+        <attr name="cdi_dot_spacing" format="dimension" />
+        <attr name="cdi_default_dot_color" format="color" />
+        <attr name="cdi_selected_dot_color" format="color" />
+        <attr name="cdi_is_show_animation" format="boolean" />
+        <attr name="cdi_max_visible_dots" format="integer" />
+    </declare-styleable>
+</resources>
