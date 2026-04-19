@@ -9,12 +9,14 @@ import kotlinx.coroutines.flow.StateFlow
 
 
 abstract class BaseViewmodel: ViewModel() {
-    val isLoading = MutableStateFlow<Boolean> (false)
+    private val _isLoading = MutableStateFlow<Boolean> (false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
     fun showLoading() {
-        isLoading.value = true
+        _isLoading.value = true
     }
 
     fun hideLoading() {
-        isLoading.value = false
+        _isLoading.value = false
     }
 }

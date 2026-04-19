@@ -34,7 +34,7 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashViewmodel>() {
     override fun setUpEvent() {
         Handler().postDelayed(
             {
-                val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+                val action = SplashFragmentDirections.actionSplashFragmentToTestFragment()
                 findNavController().navigate(action)
             }
             ,2000

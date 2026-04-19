@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_app_color">#F9F9F9</color>
+    <color name="main_primary">#369BE4</color>
+    <color name="disable">#BDBDBD</color>
 </resources>
