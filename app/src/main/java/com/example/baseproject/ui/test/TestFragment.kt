@@ -67,5 +67,7 @@ class TestFragment : BaseFragment<FragmentTestBinding, TestViewmodel>() {
 
     override fun setUpEvent() {
         super.setUpEvent()
+
+        viewmodel.initDecryptHelper()
     }
 }

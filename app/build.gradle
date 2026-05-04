@@ -21,12 +21,22 @@ android {
     namespace 'com.example.baseproject'
     defaultConfig {
         applicationId "com.example.baseproject"
-        minSdk 21
+        minSdk 23
         targetSdk 35
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
     }
 
     buildTypes {
@@ -51,6 +61,13 @@ android {
     buildFeatures {
         buildConfig true
         dataBinding true
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.22.1"
+        }
     }
 }
 
