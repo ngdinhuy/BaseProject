@@ -1,7 +1,8 @@
 package com.example.baseproject.di
 
 import android.content.Context
-import com.example.baseproject.utils.SharedHelper
+import com.example.baseproject.helper.DecryptHelper
+import com.example.baseproject.helper.SharedHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,7 @@ class LocalModule {
     @Singleton
     fun provideSharedHelper(@ApplicationContext context: Context) = SharedHelper(context)
 
-
+    @Provides
+    @Singleton
+    fun provideDecryptHelper() = DecryptHelper()
 }
