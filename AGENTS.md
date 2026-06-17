@@ -7,6 +7,7 @@
 
 ## Build & Verification
 Use the Gradle wrapper. No CI or pre-commit hooks are configured.
+**Do NOT run Gradle commands.** The user builds and tests manually.
 
 ```bash
 ./gradlew assembleDebug      # debug APK

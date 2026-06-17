@@ -9,7 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.example.baseproject.base.BaseFragment
 import com.example.baseproject.databinding.FragmentCameraBinding
-import com.example.baseproject.utils.CheckPermissionHelper
+import com.example.baseproject.helper.CheckPermissionHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
