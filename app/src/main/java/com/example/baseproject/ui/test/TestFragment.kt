@@ -1,9 +1,7 @@
 package com.example.baseproject.ui.test
 
 import android.graphics.Color
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -14,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TestFragment : BaseFragment<FragmentTestBinding, TestViewmodel>() {
 
-    private val viewmodel: TestViewmodel by viewModels()
+    private val testViewmodel: TestViewmodel by viewModels()
     private lateinit var pagerAdapter: TestPagerAdapter
 
     private val testPages = listOf(
@@ -27,10 +25,6 @@ class TestFragment : BaseFragment<FragmentTestBinding, TestViewmodel>() {
         TestPagerItem("Page 7", Color.parseColor("#E91E63"))
     )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun provideViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -39,7 +33,7 @@ class TestFragment : BaseFragment<FragmentTestBinding, TestViewmodel>() {
     }
 
     override fun provideViewModel(): TestViewmodel {
-        return viewmodel
+        return testViewmodel
     }
 
     override fun setUpView() {
@@ -48,26 +42,26 @@ class TestFragment : BaseFragment<FragmentTestBinding, TestViewmodel>() {
 
     private fun setupViewPager() {
         pagerAdapter = TestPagerAdapter(testPages)
-        binding!!.viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
 
         updatePageInfo(0)
 
-        binding!!.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 updatePageInfo(position)
             }
         })
-        binding!!.dotsIndicator.attachViewpager(binding!!.viewPager)
+        binding.dotsIndicator.attachViewpager(binding.viewPager)
     }
 
     private fun updatePageInfo(position: Int) {
-        binding!!.tvPageInfo.text = "Page ${position + 1} / ${testPages.size}"
+        binding.tvPageInfo.text = "Page ${position + 1} / ${testPages.size}"
     }
 
     override fun setUpEvent() {
         super.setUpEvent()
 
-        viewmodel.initDecryptHelper()
+        testViewmodel.initDecryptHelper()
     }
 }
